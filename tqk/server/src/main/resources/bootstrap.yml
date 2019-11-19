@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: tqk-web
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: tqk-config
+      profile: 'dev'
+    alibaba:
+      seata:
+        tx-service-group: my_tqk_group

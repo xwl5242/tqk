@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="828b97f4-9fcc-462e-b500-814e98353dbd" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/server/target/" />
+    <ignored path="$PROJECT_DIR$/common/target/" />
+    <ignored path="$PROJECT_DIR$/config/target/" />
+    <ignored path="$PROJECT_DIR$/coupon/target/" />
+    <ignored path="$PROJECT_DIR$/eureka/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="288" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/base/BaseEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbGoodsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="54" column="14" lean-forward="true" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>item</find>
+      <find>click</find>
+      <find>url</find>
+      <find>save</find>
+      <find>short</find>
+      <find>startJob</find>
+      <find>ERR</find>
+      <find>shortTitle</find>
+      <find>TbItemServiceI</find>
+      <find>quartz</find>
+      <find>update</find>
+      <find>volu</find>
+      <find>small</find>
+      <find>couponStart</find>
+      <find>userTyp</find>
+      <find>zkFinal</find>
+      <find>free</find>
+      <find>seller</find>
+      <find>white</find>
+      <find>filter</find>
+      <find>buildHttpClient</find>
+      <find>is</find>
+      <find>Integer</find>
+      <find>itemId</find>
+      <find>up</find>
+      <find>upper</find>
+      <find>getReversePrice</find>
+      <find>setReservePrice</find>
+      <find>reserve</find>
+      <find>reservePrice</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>Long</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/top/BaseTBShop.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/SSLClient.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/HttpUtil.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/HttpsUtil.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/HTTPUtils.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/TestHttpUtil.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/top/TbGoodDetailUtil.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/top/TbkConfiguration.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/top/TbkShop.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/HttpUtils.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/top/TbkUtil.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/top/TbkConfig.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/entity/TbItem.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/mapper/TbJuItem.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/mapper/TbJuItemMapper.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/mapper/TbJuTqgMapper.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/mapper/TbJuTqgItemMapper.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbItemController.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/service/TbJuItemService.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/service/TbJuTqgItemService.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/quanchong/server/job/TbGoodsJob.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/service/impl/TbJuTqgItemServiceImpl.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/DateUtils.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbJuTqgItemController.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/quanchong/server/feign/TbJuItemFeignClient.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/quanchong/server/feign/TbJuTqgItemFeignClient.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/quanchong/server/job/TbJuGoodsJob.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/StringUtils.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/entity/TbJuTqgItem.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/TqkCommonApplication.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/StringUtil.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/top/TbkService.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbJuItemController.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/entity/TbJuItem.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/service/impl/TbJuItemServiceImpl.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Ye.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Sun.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Zi.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Fu.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Test.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/config/DataSourceConfiguration.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/resources/bootstrap-tbk.yml" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkConsts.java" />
+        <option value="$PROJECT_DIR$/common/pom.xml" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkConfig.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkUtil.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkGood.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkService.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbCouponMaterialController.java" />
+        <option value="$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbGoodsController.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/quanchong/common/base/BaseEntity.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="197" />
+    <option name="y" value="117" />
+    <option name="width" value="1518" />
+    <option name="height" value="836" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="tqk" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tqk" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tqk" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tqk" type="462c0819:PsiDirectoryNode" />
+              <item name="coupon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tqk" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tqk" type="462c0819:PsiDirectoryNode" />
+              <item name="coupon" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tqk" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tqk" type="462c0819:PsiDirectoryNode" />
+              <item name="coupon" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tqk" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tqk" type="462c0819:PsiDirectoryNode" />
+              <item name="coupon" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tqk" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tqk" type="462c0819:PsiDirectoryNode" />
+              <item name="coupon" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="coupon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tqk" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tqk" type="462c0819:PsiDirectoryNode" />
+              <item name="coupon" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="coupon" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.quanchong.coupon.service.impl" />
+      <recent name="com.quanchong.coupon.service" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.quanchong.server" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.quanchong.server.config" />
+      <recent name="com.quanchong.server.feign" />
+      <recent name="com.quanchong.common.entity" />
+      <recent name="com.quanchong.coupon.service.impl" />
+      <recent name="com.quanchong.coupon.entity" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\tqk\tqk\coupon\src\main\java\com\quanchong\coupon" />
+      <recent name="D:\tqk\tqk\common\src\main\resources\lib" />
+      <recent name="D:\tqk\tqk\server\src\main\resources" />
+      <recent name="D:\tqk\tqk\coupon\src\main\resources" />
+      <recent name="D:\tqk\tqk\common\src\main\java\com\quanchong\common\entity" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+    <option name="contentProportion" value="0.1545946" />
+  </component>
+  <component name="RunManager" selected="Application.Test">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.quanchong.server.Test" />
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.quanchong.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TqkConfigApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="config" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.quanchong.config.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.quanchong.config.TqkConfigApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TqkCouponApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="coupon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.quanchong.coupon.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.quanchong.coupon.TqkCouponApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TqkEurekaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="eureka" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.quanchong.eureka.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.quanchong.eureka.TqkEurekaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TqkServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.quanchong.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.quanchong.server.TqkServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.TqkCouponApplication" />
+        <item itemvalue="Spring Boot.TqkConfigApplication" />
+        <item itemvalue="Spring Boot.TqkEurekaApplication" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="Spring Boot.TqkServerApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="828b97f4-9fcc-462e-b500-814e98353dbd" name="Default Changelist" comment="" />
+      <created>1572336077499</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572336077499</updated>
+      <workItem from="1572336081872" duration="2870000" />
+      <workItem from="1572338959277" duration="2667000" />
+      <workItem from="1572395643245" duration="1809000" />
+      <workItem from="1572401462371" duration="9671000" />
+      <workItem from="1572416098707" duration="11919000" />
+      <workItem from="1572482941650" duration="9432000" />
+      <workItem from="1572492455743" duration="17903000" />
+      <workItem from="1572566998656" duration="23047000" />
+      <workItem from="1572827570885" duration="8558000" />
+      <workItem from="1572839233090" duration="7321000" />
+      <workItem from="1572849300506" duration="10156000" />
+      <workItem from="1572914490794" duration="22924000" />
+      <workItem from="1573001433555" duration="5235000" />
+      <workItem from="1573020492056" duration="12326000" />
+      <workItem from="1573090762337" duration="19821000" />
+      <workItem from="1573190946972" duration="20000" />
+      <workItem from="1573191088917" duration="7358000" />
+      <workItem from="1573440786198" duration="9786000" />
+      <workItem from="1573518483963" duration="5908000" />
+      <workItem from="1573606471673" duration="28301000" />
+      <workItem from="1573692977001" duration="5259000" />
+      <workItem from="1573780917833" duration="2865000" />
+      <workItem from="1574036398509" duration="6162000" />
+      <workItem from="1574124631565" duration="6671000" />
+      <workItem from="1574142598006" duration="7603000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="RedisTemplateTest - 2019.10.31 at 10h 48m 46s.xml">
+      <configuration name="RedisTemplateTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RedisTemplateTest_test - 2019.10.31 at 10h 49m 38s.xml">
+      <configuration name="RedisTemplateTest.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TqkServerAppTest - 2019.10.31 at 10h 51m 37s.xml">
+      <configuration name="TqkServerAppTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TqkServerAppTest_test - 2019.10.31 at 10h 53m 50s.xml">
+      <configuration name="TqkServerAppTest.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TqkServerAppTest - 2019.10.31 at 11h 01m 47s.xml">
+      <configuration name="TqkServerAppTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TqkServerAppTest_test - 2019.10.31 at 11h 03m 04s.xml">
+      <configuration name="TqkServerAppTest.test" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="245592000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1656017" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3495671" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36580086" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.32900432" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32900432" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32900432" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="14" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="15" visible="true" weight="0.32792208" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24973376" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
+      <window_info anchor="right" id="Coverage" order="10" side_tool="true" weight="0.32960597" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="jobInstance.getClass().getName()" language="JAVA" />
+        <watch expression="nTbkShop.getUserId()==sellerId" />
+      </configuration>
+      <configuration name="Application">
+        <watch expression="this.getClass()" language="JAVA" />
+        <watch expression="o.getClass()" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/tqk$TqkServerAppTest_test.ic" NAME="TqkServerAppTest.test Coverage Results" MODIFIED="1572490963443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.quanchong.server.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/tqk$RedisTemplateTest_test.ic" NAME="RedisTemplateTest.test Coverage Results" MODIFIED="1572490163912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/tqk$TqkServerAppTest.ic" NAME="TqkServerAppTest Coverage Results" MODIFIED="1572490877964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>o.getClass()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>this.getClass()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>jobInstance.getClass().getName()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-extension/3.2.0/mybatis-plus-extension-3.2.0.jar!/com/baomidou/mybatisplus/extension/service/impl/ServiceImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="191" column="55" selection-start-line="191" selection-start-column="49" selection-end-line="191" selection-end-column="55" />
+          <folding>
+            <element signature="e#7223#7224#0" expanded="true" />
+            <element signature="e#7296#7297#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/service/impl/TbJuTqgItemServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/DateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="96" column="41" lean-forward="true" selection-start-line="96" selection-start-column="41" selection-end-line="96" selection-end-column="41" />
+          <folding>
+            <element signature="e#2663#2664#0" expanded="true" />
+            <element signature="e#2712#2713#0" expanded="true" />
+            <element signature="e#2777#2778#0" expanded="true" />
+            <element signature="e#2825#2826#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbJuTqgItemController.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/quanchong/server/feign/TbJuItemFeignClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/quanchong/server/feign/TbJuTqgItemFeignClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.0.8.RELEASE/spring-core-5.0.8.RELEASE.jar!/org/springframework/util/StringUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="603" column="36" selection-start-line="603" selection-start-column="36" selection-end-line="603" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/common/src/main/resources/lib/taobao.jar!/com/taobao/api/response/TbkJuTqgGetResponse.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="359" column="24" selection-start-line="359" selection-start-column="4" selection-end-line="359" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/TqkCommonApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/common/src/main/resources/lib/taobao.jar!/com/taobao/api/response/TbkDgOptimusMaterialResponse.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="147" column="35" selection-start-line="147" selection-start-column="23" selection-end-line="147" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/util/StringUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/entity/TbJuTqgItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="112" column="18" selection-start-line="112" selection-start-column="18" selection-end-line="112" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#727#728#0" expanded="true" />
+            <element signature="e#763#764#0" expanded="true" />
+            <element signature="e#791#792#0" expanded="true" />
+            <element signature="e#823#824#0" expanded="true" />
+            <element signature="e#851#852#0" expanded="true" />
+            <element signature="e#893#894#0" expanded="true" />
+            <element signature="e#927#928#0" expanded="true" />
+            <element signature="e#1106#1107#0" expanded="true" />
+            <element signature="e#1135#1136#0" expanded="true" />
+            <element signature="e#1177#1178#0" expanded="true" />
+            <element signature="e#1213#1214#0" expanded="true" />
+            <element signature="e#1430#1431#0" expanded="true" />
+            <element signature="e#1465#1466#0" expanded="true" />
+            <element signature="e#1521#1522#0" expanded="true" />
+            <element signature="e#1569#1570#0" expanded="true" />
+            <element signature="e#1605#1606#0" expanded="true" />
+            <element signature="e#1637#1638#0" expanded="true" />
+            <element signature="e#1687#1688#0" expanded="true" />
+            <element signature="e#1729#1730#0" expanded="true" />
+            <element signature="e#1763#1764#0" expanded="true" />
+            <element signature="e#1793#1794#0" expanded="true" />
+            <element signature="e#1839#1840#0" expanded="true" />
+            <element signature="e#1877#1878#0" expanded="true" />
+            <element signature="e#1909#1910#0" expanded="true" />
+            <element signature="e#1939#1940#0" expanded="true" />
+            <element signature="e#1983#1984#0" expanded="true" />
+            <element signature="e#2021#2022#0" expanded="true" />
+            <element signature="e#2057#2058#0" expanded="true" />
+            <element signature="e#2091#2092#0" expanded="true" />
+            <element signature="e#2049#2050#0" expanded="true" />
+            <element signature="e#2078#2079#0" expanded="true" />
+            <element signature="e#2122#2123#0" expanded="true" />
+            <element signature="e#2158#2159#0" expanded="true" />
+            <element signature="e#2197#2198#0" expanded="true" />
+            <element signature="e#2232#2233#0" expanded="true" />
+            <element signature="e#2288#2289#0" expanded="true" />
+            <element signature="e#2336#2337#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/top/TbkGood.java" />
+    <entry file="file://$PROJECT_DIR$/config/src/main/java/com/quanchong/config/TqkConfigApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/quanchong/server/job/TbJuGoodsJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-22">
+          <caret line="11" column="46" lean-forward="true" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.2.0/mybatis-plus-core-3.2.0.jar!/com/baomidou/mybatisplus/core/conditions/interfaces/Func.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="104" column="20" selection-start-line="104" selection-start-column="13" selection-end-line="104" selection-end-column="20" />
+          <folding>
+            <element signature="e#2887#2888#0" expanded="true" />
+            <element signature="e#2941#2942#0" expanded="true" />
+            <element signature="e#3010#3011#0" expanded="true" />
+            <element signature="e#3072#3073#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-extension/3.2.0/mybatis-plus-extension-3.2.0.jar!/com/baomidou/mybatisplus/extension/service/additional/AbstractChainWrapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="149" column="30" lean-forward="true" selection-start-line="149" selection-start-column="30" selection-end-line="149" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbItemController.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-extension/3.2.0/mybatis-plus-extension-3.2.0.jar!/com/baomidou/mybatisplus/extension/service/IService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="98" column="13" selection-start-line="98" selection-start-column="13" selection-end-line="98" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.2.0/mybatis-plus-core-3.2.0.jar!/com/baomidou/mybatisplus/core/enums/WrapperKeyword.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.2.0/mybatis-plus-core-3.2.0.jar!/com/baomidou/mybatisplus/core/conditions/AbstractWrapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1887">
+          <caret line="170" column="54" lean-forward="true" selection-start-line="170" selection-start-column="54" selection-end-line="170" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/top/TbkService.java" />
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/entity/TbJuItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/service/TbJuItemService.java" />
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/service/impl/TbJuItemServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbJuItemController.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Sun.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Zi.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Ye.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Fu.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/quanchong/server/Test.java" />
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/TqkCouponApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="12" column="96" selection-start-line="12" selection-start-column="90" selection-end-line="12" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eureka/src/main/java/com/quanchong/eureka/TqkEurekaApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#350#351#0" expanded="true" />
+            <element signature="e#421#422#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkConfiguration.java" />
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/config/DataSourceConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/resources/bootstrap-tbk.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="42" lean-forward="true" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="788">
+          <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.16.22/lombok-1.16.22.jar!/lombok/extern/slf4j/Slf4j.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1804">
+          <caret line="90" column="34" lean-forward="true" selection-start-line="90" selection-start-column="34" selection-end-line="90" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkGood.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkConsts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbCouponMaterialController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbMenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbNavController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbOfficialActivityController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbSearchRecommendController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/top/TbkService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3463">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/quanchong/common/base/BaseEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coupon/src/main/java/com/quanchong/coupon/controller/TbGoodsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="54" column="14" lean-forward="true" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: tqk-web
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: tqk-config
+      profile: '@spring.profile@'
+    alibaba:
+      seata:
+        tx-service-group: my_tqk_group
+  profiles:
+    include: tbk
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://tqk-eureka:8761/eureka/
+server:
+  port: 8085
+logging:
+  level:
+    com:
+      quanchong:
+        coupon:
+          mapper: debug

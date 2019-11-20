@@ -1,5 +1,9 @@
-package com.quanchong.coupon.top;
+package com.quanchong.common.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.quanchong.common.base.BaseEntity;
 import lombok.Data;
 
@@ -9,7 +13,10 @@ import java.util.Map;
  * 淘宝商品
  */
 @Data
-public class TbkGood extends BaseEntity {
+@TableName("tb_good")
+public class TbGood extends BaseEntity {
+    @TableId(type = IdType.UUID)
+    private String id;
     private String itemId; // 商品id
     private String materialId; // 物料id
     private String title; // 商品title
@@ -33,5 +40,6 @@ public class TbkGood extends BaseEntity {
     private String shopTitle; // 商品名称
     private String couponInfo; // 优惠券信息
     private String couponShareUrl; // 优惠券分享地址
+    @TableField(exist = false)
     private Map<String, Object> extraMap; // 商品额外信息 shop：店铺信息， pictDetail：图片详情
 }

@@ -2,17 +2,17 @@
 <template>
   <div id="dtk_mian">
     <div class="year-bg">
-      <img src="../../../static/www/images/list/banner.png" width="526" height="84" alt="" class="zs_banner ">
+      <img src="../../static/images/p/list_banner.png" width="526" height="84" alt="" class="list_banner ">
       <div class="list-content">
-        <span class="top_bg"></span>
-        <div class="top_block">
+        <span class="list_top_bg"></span>
+        <div class="list_top_block">
           <div class="link_block_fixed">
             <iconBanner @reIconBanner="reIconBanner" :type="reqType" :value="isKW?'13366':$route.params.value"/>
           </div>
-          <div class="top-block">
+          <div class="list_top_block">
             <p class="tit">
               <i class="iconfont icon-hot"></i>
-              <img src="../../../static/www/images/list/rqbk.png" width="135" height="28" alt="">
+              <img src="../../static/images/p/rqbk.png" width="135" height="28" alt="">
             </p>
             <div class="goods-list">
               <ul>
@@ -82,9 +82,9 @@
 </template>
 
 <script>
-import * as listApi from '../../api/list'
-import myPager from '../../components/www/pager'
-import iconBanner from '../../components/www/iconBanner'
+import * as listApi from '../api/list'
+import myPager from '../components/pager'
+import iconBanner from '../components/pc/iconBanner'
 export default {
   name: "list",
   data() {
@@ -152,4 +152,5 @@ export default {
 </script>
 
 <style scoped>
+  @import "../../static/css/list.css";
 </style>

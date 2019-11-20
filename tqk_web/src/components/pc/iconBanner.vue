@@ -111,34 +111,33 @@ list页面内容中"图标导航"组件
     bottom: -15px;
   }
   .sb_ico__0 {
-    content:url(../../../static/www/images/list/topico__0.png);
+    content:url(../../../static/images/p/topico__0.png);
   }
   .sb_ico__1 {
-    content:url(../../../static/www/images/list/topico__1.png);
+    content:url(../../../static/images/p/topico__1.png);
   }
   .sb_ico__2 {
-    content:url(../../../static/www/images/list/topico__2.png);
+    content:url(../../../static/images/p/topico__2.png);
   }
   .sb_ico__3 {
-    content:url(../../../static/www/images/list/topico__3.png);
+    content:url(../../../static/images/p/topico__3.png);
   }
   .sb_ico__4 {
-    content:url(../../../static/www/images/list/topico__4.png);
+    content:url(../../../static/images/p/topico__4.png);
   }
   .sb_ico__5 {
-    content:url(../../../static/www/images/list/topico__5.png);
+    content:url(../../../static/images/p/topico__5.png);
   }
   .sb_ico__6 {
-    content:url(../../../static/www/images/list/topico__6.png);
+    content:url(../../../static/images/p/topico__6.png);
   }
   .sb_ico__7 {
-    content:url(../../../static/www/images/list/topico__7.png);
+    content:url(../../../static/images/p/topico__7.png);
   }
   .sb_ico__8 {
-    content:url(../../../static/www/images/list/topico__8.png);
+    content:url(../../../static/images/p/topico__8.png);
   }
   .sb_ico__my {
-    content:url(../../../static/www/images/list/topico__my.png);
+    content:url(../../../static/images/p/topico__my.png);
   }
-
 </style>

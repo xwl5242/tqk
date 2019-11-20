@@ -14,8 +14,7 @@ export function getNavList() {
 }
 
 export function getTBGoods(materialId, pageNo = 1, pageSize = 20) {
-  return get('/goods/material/selection', {
-    materialId: materialId,
+  return get('/goods/'+materialId, {
     pageNo: pageNo,
     pageSize: pageSize
   })

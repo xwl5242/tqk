@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quanchong.common.entity.SysJob;
 import com.quanchong.common.util.DateUtils;
-import com.quanchong.server.feign.TbItemFeignClient;
 import com.quanchong.server.mapper.SysJobMapper;
 import com.quanchong.server.service.SysJobService;
 import org.quartz.*;
@@ -39,9 +38,6 @@ public class SysJobServiceImpl extends ServiceImpl<SysJobMapper, SysJob> impleme
 
     @Autowired
     private SysJobService sysJobService;
-
-    @Autowired
-    private TbItemFeignClient tbItemFeignClient;
 
     /**
      * 项目重启后，初始化原本已经运行的定时任务

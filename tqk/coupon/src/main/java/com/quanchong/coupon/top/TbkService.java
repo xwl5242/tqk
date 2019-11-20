@@ -114,6 +114,7 @@ public class TbkService {
         request.setMaterialId(materialId);
         request.setHasCoupon(hasCoupon);
         request.setNeedFreeShipment(freeShipment);
+        request.setAdzoneId(Long.valueOf(tbkConfig.getAdZoneId()));
         // 调用请求，获取结果
         TbkDgMaterialOptionalResponse resp = tbClient.execute(request);
         List<TbkDgMaterialOptionalResponse.MapData> list = resp.getResultList();

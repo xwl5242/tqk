@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import * as util from '../../api/util'
+import * as util from '../api/util'
 export default {
   name: "myPager",
   data() {
@@ -125,5 +125,5 @@ export default {
 </script>
 
 <style scoped>
-@import "../../../static/www/css/pager.css";
+@import "../../static/css/pager.css";
 </style>

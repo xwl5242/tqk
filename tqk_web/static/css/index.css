@@ -1054,3 +1054,24 @@ body .new_home .pager .item.more:hover {
   width: auto!important;
   height: auto!important
 }
+.icon__yf {
+  content: url("../images/p/nav_yf.png");
+}
+.icon__food {
+  content: url("../images/p/nav_food.png");
+}
+.icon__mzh {
+  content: url("../images/p/nav_mzh.png");
+}
+.icon__sofa {
+  content: url("../images/p/nav_sofa.png");
+}
+.icon__shm {
+  content: url("../images/p/nav_shm.png");
+}
+.top__1 {
+  content: url("../images/p/top_1.png");
+}
+.top__2 {
+  content: url("../images/p/top_2.png");
+}

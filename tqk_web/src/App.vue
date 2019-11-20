@@ -12,10 +12,10 @@
 
 <script>
 import {get} from './api/common'
-import tqkHeader from './components/PC/header'
-import tqkBanner from './components/PC/banner'
-import tqkFooter from './components/PC/footer'
-import floatBanner from './components/PC/floatBanner'
+import tqkHeader from './components/pc/header'
+import tqkBanner from './components/pc/banner'
+import tqkFooter from './components/pc/footer'
+import floatBanner from './components/pc/floatBanner'
 export default {
   name: 'App',
   data() {

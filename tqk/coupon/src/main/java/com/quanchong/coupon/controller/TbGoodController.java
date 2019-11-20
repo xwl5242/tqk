@@ -97,7 +97,7 @@ public class TbGoodController {
      * @return
      */
     @PostMapping("/saveBatch")
-    public boolean saveBatch(List<TbGood> tbGoodList){
+    public boolean saveBatch(@RequestBody List<TbGood> tbGoodList){
         return tbGoodService.saveBatch(tbGoodList);
     }
 
@@ -117,6 +117,7 @@ public class TbGoodController {
         page.setSize(pageSize);
         QueryWrapper<TbGood> wrapper = new QueryWrapper<>();
         wrapper.eq("material_id", materialId);
+        wrapper.orderByDesc("volume");
         IPage<TbGood> pageList = tbGoodService.page(page, wrapper);
         return pageList.getRecords();
     }

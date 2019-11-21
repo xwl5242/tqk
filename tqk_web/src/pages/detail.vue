@@ -158,7 +158,7 @@
   </div>
 </template>
 <script>
-import * as detailApi from '../../api/detail'
+import * as detailApi from '../api/detail'
 export default {
   data() {
     return {
@@ -177,7 +177,7 @@ export default {
       })
     }else{
       let id = this.$route.params.id
-      detailApi.getItemDetail(id).then((res) => {
+      detailApi.getGoodDetailById(id, true).then((res) => {
         this.prepareGood(res.data)
       })
     }

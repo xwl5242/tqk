@@ -75,7 +75,7 @@
       }
     },
     created() {
-      get('/goods/search/pc', {"keyword": "母婴", "pageNo": 1, "pageSize": 20}).then(res => {
+      get('/goods/tbk/search/pc', {"keyword": "母婴", "pageNo": 1, "pageSize": 20}).then(res => {
         this.tops = res.data
         this.goods = res.data
       })

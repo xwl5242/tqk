@@ -37,25 +37,24 @@ list页面内容中"图标导航"组件
     },
     props: {
       type: String,
-      value: String,
-      initSelIndex: {
-        type: Number,
-        default: null
-      }
+      value: String
     },
     created() {
-      if(this.initSelIndex!=null) this.bannerSel = this.initSelIndex
       get('/coupon/material/siblings?materialId='+this.value).then(res => {
         for(let cm of res.data){
           if(cm.seq !== -1){
+            console.log(cm)
             this.banners.unshift({
               id: cm.id,
               seq: cm.seq,
               text: cm.title,
               type: this.type,
-              objValue: this.value,
+              objValue: this.type==='kw'? cm.title: this.value,
               iconClass: 'sb_ico__'+cm.seq
             })
+            if(this.type === 'link' && this.value === cm.materialId) {
+              this.bannerSel = cm.seq
+            }
           }
         }
         this.banners.reverse()

@@ -225,7 +225,7 @@ public class TbkService {
      * @return
      * @throws Exception
      */
-    public Map<String, Object> extraMap(String itemId, String shopTitle, long sellerId) throws Exception{
+    public Map<String, Object> extraMap(String itemId, String shopTitle, long sellerId, boolean needPictDetail) throws Exception{
         Map<String, Object> extraMap = new HashMap<>();
         extraMap.put("shop", this.searchShop(shopTitle, sellerId));
         extraMap.put("pictDetails", TbkUtil.getTbkGoodDetail(itemId));

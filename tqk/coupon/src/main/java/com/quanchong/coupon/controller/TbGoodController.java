@@ -14,7 +14,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 淘宝客Controller
+ * 商品Controller
+ * 所有以 tbk 开头的请求为调用tbkService获取商品信息，否则为查询数据库表信息
  */
 @RestController
 @RequestMapping("/tb/goods")
@@ -35,7 +36,7 @@ public class TbGoodController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/search/pc")
+    @GetMapping("/tbk/search/pc")
     public List<TbGood> searchPC(String keyword, Long materialId, Long pageNo, Long pageSize) throws Exception{
         return tbkService.searchPC(keyword, materialId, pageNo, pageSize);
     }
@@ -49,7 +50,7 @@ public class TbGoodController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/search/wifi")
+    @GetMapping("/tbk/search/wifi")
     public List<TbGood> searchWifi(String keyword, Long materialId, Long pageNo, Long pageSize) throws Exception{
         return tbkService.searchWifi(keyword, materialId, pageNo, pageSize);
     }
@@ -62,13 +63,27 @@ public class TbGoodController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/material/selection")
+    @GetMapping("/tbk/material/selection")
     public List<TbGood> materialSelection(String materialId, Long pageNo, Long pageSize) throws Exception{
         List<TbGood> tbGoods = tbkService.materialSelection(materialId, pageNo, pageSize);
         return tbGoods.stream().map(tbGood -> {
             tbGood.setMaterialId(materialId);
             return tbGood;
         }).collect(Collectors.toList());
+    }
+
+    /**
+     * 商品详情，根据商品id查询详情，店铺名称和卖家id查询店铺详情
+     * @param tbkGood 商品
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/tbk/detail")
+    public TbGood queryDetail(@RequestBody TbGood tbkGood) throws Exception{
+        Map<String, Object> extraMap = tbkService.extraMap(tbkGood.getItemId(),
+                tbkGood.getShopTitle(), tbkGood.getSellerId(), true);
+        tbkGood.setExtraMap(extraMap);
+        return tbkGood;
     }
 
     /**
@@ -111,7 +126,7 @@ public class TbGoodController {
      */
     @GetMapping("/{materialId}")
     public List<TbGood> queryByMaterialId(@PathVariable("materialId") String materialId,
-                                          @RequestParam("pageNo") Long pageNo, @RequestParam("pageSize") Long pageSize) throws Exception{
+                                          @RequestParam("pageNo") Long pageNo, @RequestParam("pageSize") Long pageSize) {
         Page<TbGood> page = new Page<>();
         page.setCurrent(pageNo);
         page.setSize(pageSize);
@@ -123,17 +138,18 @@ public class TbGoodController {
     }
 
     /**
-     * 商品详情，根据商品id查询详情，店铺名称和卖家id查询店铺详情
-     * @param tbkGood 商品
+     * 根据主键查询商品详情
+     * @param id 主键
+     * @param needPicts 是否需要查询商品的图片详情
      * @return
-     * @throws Exception
      */
-    @PostMapping("/detail")
-    public TbGood queryDetail(@RequestBody TbGood tbkGood) throws Exception{
-        Map<String, Object> extraMap = tbkService.extraMap(tbkGood.getItemId(), tbkGood.getShopTitle(), tbkGood.getSellerId());
-        tbkGood.setExtraMap(extraMap);
-        return tbkGood;
+    @GetMapping("/detail")
+    public TbGood queryById(@RequestParam String id, @RequestParam Boolean needPicts) throws Exception{
+        TbGood tbGood = tbGoodService.getById(id);
+        Map<String, Object> extraMap = tbkService.extraMap(tbGood.getItemId(),
+                tbGood.getShopTitle(), tbGood.getSellerId(), needPicts);
+        tbGood.setExtraMap(extraMap);
+        return tbGood;
     }
-
 
 }

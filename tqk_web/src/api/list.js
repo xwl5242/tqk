@@ -1,7 +1,7 @@
 import {get} from './common'
 
 function getItemListByKeyword(keyword, pageNo, pageSize){
-  return get('/goods/search/pc', {keyword: keyword, pageNo: pageNo, pageSize:pageSize})
+  return get('/goods/tbk/search/pc', {keyword: keyword, pageNo: pageNo, pageSize:pageSize})
 }
 
 function getItemListByMaterial(material, pageNo, pageSize, order){
@@ -16,6 +16,6 @@ export function getItemList(isLink, kwOrMaterial, pageNo = 0, pageSize = 23, ord
   }
 }
 
-export function getSibingsNavList(materialId) {
-  return get('/coupon/material/sibings?materialId='+materialId)
+export function getSiblingsNavList(materialId) {
+  return get('/coupon/material/siblings?materialId='+materialId)
 }

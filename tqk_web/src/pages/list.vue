@@ -110,7 +110,7 @@ export default {
       let isLink = false
       let kwOrMaterial = ''
       if(subBanner!==undefined){
-        isLink = subBanner.type == 'link'
+        isLink = subBanner.type === 'link'
         kwOrMaterial = subBanner.objValue
       }else{
         isLink = !this.isKW
@@ -141,6 +141,7 @@ export default {
       this.getItemList(pn, this.curSubBanner, false)
     },
     reIconBanner(clickedBanner) {
+      console.log(clickedBanner)
       this.getItemList(1, clickedBanner, true)
     }
   },

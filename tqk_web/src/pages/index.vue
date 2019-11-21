@@ -254,8 +254,9 @@
       // 查询 今日大牌
       indexApi.getTBGoods(indexApi.JRDP_M_ID, 1, 4).then((res) => {
         this.jrdpGoods = res.data
-        detailApi.getItemDetail(res.data[0].id).then((res) => {
-          this.jrdpTop1Shop = res.data.shop
+        detailApi.getGoodDetailById(res.data[0].id, false).then((res) => {
+          console.log(res.data)
+          this.jrdpTop1Shop = res.data.extraMap['shop']
           this.jrdpTop1Shop['volume'] = res.data.volume
         })
       })

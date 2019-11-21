@@ -141,7 +141,6 @@ export default {
       this.getItemList(pn, this.curSubBanner, false)
     },
     reIconBanner(clickedBanner) {
-      console.log(clickedBanner)
       this.getItemList(1, clickedBanner, true)
     }
   },

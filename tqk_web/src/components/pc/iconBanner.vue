@@ -43,7 +43,6 @@ list页面内容中"图标导航"组件
       get('/coupon/material/siblings?materialId='+this.value).then(res => {
         for(let cm of res.data){
           if(cm.seq !== -1){
-            console.log(cm)
             this.banners.unshift({
               id: cm.id,
               seq: cm.seq,

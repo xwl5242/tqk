@@ -255,7 +255,6 @@
       indexApi.getTBGoods(indexApi.JRDP_M_ID, 1, 4).then((res) => {
         this.jrdpGoods = res.data
         detailApi.getGoodDetailById(res.data[0].id, false).then((res) => {
-          console.log(res.data)
           this.jrdpTop1Shop = res.data.extraMap['shop']
           this.jrdpTop1Shop['volume'] = res.data.volume
         })
@@ -284,7 +283,7 @@
       },
       showDetail(id) {
         // 跳转到商品详情页
-        this.$router.push({name: 'item_detail', params: {id: id}})
+        this.$router.push({name: 'good_detail', params: {id: id}})
       },
       showMore(materialId) {
         this.$router.push({name: 'list', params: {type: 'link', value: materialId}})

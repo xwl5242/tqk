@@ -57,7 +57,7 @@ public class TbkUtil {
                                 }
                             }
                             pictUrlList.stream().sorted(Comparator.comparing(s -> s.substring(0, s.indexOf('@'))));
-                            map.put("itemImgs", pictUrlList);
+                            map.put("imgs", pictUrlList);
                         }
                     }
                     // 获取商品所属店铺

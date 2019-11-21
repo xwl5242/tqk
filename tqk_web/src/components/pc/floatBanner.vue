@@ -53,7 +53,6 @@
     },
     updated() {
       let cur = localStorage.getItem('curFloatNav')
-      console.log(cur)
       this.curFloatNav = cur? cur: '13366'
     }
   }

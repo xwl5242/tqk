@@ -4,14 +4,6 @@
     <div class="year-bg">
       <div class="detail_new">
         <div class="top-block">
-          <!--当前位置导航start-->
-<!--          <div class="nav-wrap">-->
-<!--            <div class="text"><a href="/">首页</a> <i></i>-->
-<!--              <a href="/index.php?r=l&amp;u=692257">领券直播</a> <i></i>-->
-<!--              <a href="/index.php?r=l&amp;cid=12&amp;u=692257">配饰</a> <i></i>-->
-<!--              <span>优惠详情</span>-->
-<!--            </div>-->
-<!--          </div>-->
           <!--当前位置导航end-->
           <div class="detail-wrap main-container">
             <!--大图显示start-->
@@ -106,7 +98,7 @@
                 </div>
               </div>
               <div class="my-ercode">
-                <img src="../../assets/ercode.png">
+                <img src="../../static/images/p/ercode.png">
                 <div><p>关注公众号，不迷路</p></div>
               </div>
               <div class="goods-desc cf">
@@ -130,7 +122,7 @@
                   <p class="iconfont icon-detail_tmall">{{curGood.shop.sellerNick}}</p>
                 </div>
                 <ul class="shop-score fr">
-                  <li v-for="evaluate in extraMap.evaluates" :key="evaluate.title">
+                  <li v-for="evaluate in curGood.evaluates" :key="evaluate.title">
                     <p>{{evaluate.title}}</p>
                     <span>{{evaluate.score}}
                     <i :class="'ico ' + (evaluate.level==0?'flat':(evaluate.level==1?'high':'low')) ">
@@ -143,7 +135,7 @@
             </div>
             <div class="goods-detail">
               <div class="tit"><span>商品详情</span></div>
-              <img class="lazy img check_img_show" v-for="iimg in extraMap.itemImgs" :key="iimg.split('@')[0]" :src="iimg.split('@')[1]"/>
+              <img class="lazy img check_img_show" v-for="iimg in curGood.imgs" :key="iimg.split('@')[0]" :src="iimg.split('@')[1]"/>
             </div>
           </div>
           <div class="cf"></div>
@@ -165,7 +157,6 @@ export default {
       curGood: {},
       pictUrl: '',
       pictUrlTemp: '',
-      extraMap: {},
       recommendGoods: [],
       showRecommendGoods: []
     }
@@ -185,10 +176,12 @@ export default {
   methods: {
     prepareGood(goods) {
       this.curGood = goods
-      this.extraMap = goods.extraMap
       let smallImages = this.curGood.smallImages
       smallImages = smallImages && smallImages.substring(1, smallImages.length - 1)
       this.curGood.smallImages = smallImages.split(',')
+      this.curGood.shop = goods.extraMap.shop
+      this.curGood.imgs = goods.extraMap.picts.imgs
+      this.curGood.evaluates = goods.extraMap.picts.evaluates
       this.pictUrl = this.pictUrlTemp = this.curGood.pictUrl
     },
     autoShowImg(imgUrl) {
@@ -207,9 +200,7 @@ export default {
 }
 </script>
 <style>
-  /*@import "../../../static/www/css/detail.css";*/
-  /*@import "../../../static/www/css/detail_new.css";*/
-  /*@import "../../../static/www/css/detail_iconfont.css";*/
+  @import "../../static/css/detail.css";
   html body {
     background-color: #fff;
   }

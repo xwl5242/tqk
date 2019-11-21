@@ -200,6 +200,7 @@
 </template>
 <script>
   import * as indexApi from '../api'
+  import * as util from '../api/util'
   import * as detailApi from '../api/detail'
   import mySwiper from '../components/swiper'
   export default {
@@ -293,12 +294,7 @@
       mySwiper
     },
     filters: {
-      volumeFormat: function(volume) {
-        if(volume!==undefined){
-          volume = parseInt(volume)
-          return `${(volume/10000).toFixed(2)}万`
-        }
-      }
+      volumeFormat: util.volumeFormat
     }
   }
 </script>

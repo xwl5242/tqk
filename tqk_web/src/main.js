@@ -3,7 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import H5App from './H5App'
-import router from './router'
+import router from './router/index'
+import H5Router from './router/h5_index'
 import {PLATFORM} from './api/common'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
@@ -12,10 +13,11 @@ Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 
 let CurApp = PLATFORM? (PLATFORM==="2"? H5App: App): App
+let CurRouter = PLATFORM? (PLATFORM==="2"? H5Router: router): router
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router: CurRouter,
   components: { App: CurApp },
   template: '<App/>'
 })

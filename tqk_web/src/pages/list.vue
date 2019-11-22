@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import * as listApi from '../api/list'
+import * as server from '../api'
 import myPager from '../components/pager'
 import iconBanner from '../components/pc/iconBanner'
 export default {
@@ -117,7 +117,7 @@ export default {
         kwOrMaterial = this.$route.params.value
       }
       // 调用服务，获取商品信息
-      listApi.getItemList(isLink, kwOrMaterial, pageNo, 23, {'volume':'desc'}).then(res => {
+      server.getGoods(isLink, kwOrMaterial, pageNo, 23).then(res => {
         if(isFirst){
           this.tops = res.data.slice(0,3)
         }

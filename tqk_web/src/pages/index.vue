@@ -199,9 +199,8 @@
   </div>
 </template>
 <script>
-  import * as indexApi from '../api'
+  import * as server from '../api'
   import * as util from '../api/util'
-  import * as detailApi from '../api/detail'
   import mySwiper from '../components/swiper'
   export default {
     data() {
@@ -229,34 +228,34 @@
     },
     created() {
       // 查询官方活动
-      indexApi.getOfficialActivity().then((res) => {
+      server.getOA(server.PLATFORM_PC).then((res) => {
         this.officialActivity = res.data
-      })
+      });
       // 查询页面顶部左侧的快速导航菜单,默认查询的为高佣的
-      indexApi.getNavList().then((res) => {
+      server.getNav(server.PLATFORM_PC).then((res) => {
         this.navList = res.data
         this.navRootList = res.data.filter((n) => {
           return n.parentId === -1
         })
-      })
+      });
       // 查询 好货精选
-      indexApi.getTBGoods(indexApi.HHJX_M_ID, 1, 40).then((res) => {
+      server.getGoodsByMaterialId(server.HHJX_M_ID, 1, 40).then((res) => {
         this.jxGoods = res.data
-      })
+      });
       // 查询 大额优惠
-      indexApi.getTBGoods(indexApi.DEYH_M_ID, 1, 40).then((res) => {
+      server.getGoodsByMaterialId(server.DEYH_M_ID, 1, 40).then((res) => {
         this.deGoods = res.data
         this.deShowGoods = this.deGoods.slice(0, 4)
-      })
+      });
       // 查询 热门精选
-      indexApi.getTBGoods(indexApi.RMYX_M_ID, 1, 8).then((res) => {
+      server.getGoodsByMaterialId(server.RMYX_M_ID, 1, 8).then((res) => {
         this.rmyxGoods = res.data
-      })
+      });
       // 查询 今日大牌
-      indexApi.getTBGoods(indexApi.JRDP_M_ID, 1, 4).then((res) => {
+      server.getGoodsByMaterialId(server.JRDP_M_ID, 1, 4).then((res) => {
         this.jrdpGoods = res.data
-        detailApi.getGoodDetailById(res.data[0].id, false).then((res) => {
-          this.jrdpTop1Shop = res.data.extraMap['shop']
+        server.getGoodDetailById(res.data[0].id, false).then((res) => {
+          this.jrdpTop1Shop = res.data.extraMap['shop'];
           this.jrdpTop1Shop['volume'] = res.data.volume
         })
       })
@@ -279,7 +278,7 @@
       },
       deChange() {
         // 大额优惠页签 "换一换" 功能
-        this.deChangeTimes = this.deChangeTimes < (this.deGoods.length / 4 - 1) ? this.deChangeTimes + 1 : 0
+        this.deChangeTimes = this.deChangeTimes < (this.deGoods.length / 4 - 1) ? this.deChangeTimes + 1 : 0;
         this.deShowGoods = this.deGoods.slice(this.deChangeTimes * 4, (this.deChangeTimes + 1) * 4)
       },
       showDetail(id) {

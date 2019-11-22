@@ -150,7 +150,7 @@
   </div>
 </template>
 <script>
-import * as detailApi from '../api/detail'
+import * as server from '../api'
 export default {
   data() {
     return {
@@ -163,12 +163,12 @@ export default {
   },
   created() {
     if(this.$route.params.id == undefined){
-      detailApi.getGoodDetail().then((res) => {
+      server.getGoodDetail().then((res) => {
         this.prepareGood(res.data)
       })
     }else{
       let id = this.$route.params.id
-      detailApi.getGoodDetailById(id, true).then((res) => {
+      server.getGoodDetailById(id, true).then((res) => {
         this.prepareGood(res.data)
       })
     }
@@ -186,15 +186,6 @@ export default {
     },
     autoShowImg(imgUrl) {
       this.pictUrlTemp = imgUrl
-    }
-  },
-  filters: {
-    dateFormat: function(dateLong) {
-      let date = new Date()
-      date.setTime(dateLong)
-
-      return `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}
-      ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`
     }
   }
 }

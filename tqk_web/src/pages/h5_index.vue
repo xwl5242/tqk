@@ -490,9 +490,8 @@
 </template>
 
 <script>
-  import * as indexApi from '../api'
+  import * as server from '../api'
   import * as util from '../api/util'
-  import RGBaster from '../api/RGBaster'
   import mySwiper from '../components/swiper'
   import h5Banner from '../components/m/h5_banner'
   import h5Header from '../components/m/h5_header'
@@ -514,7 +513,7 @@
     },
     created() {
       util.modeRem(true)
-      indexApi.getTBGoods(indexApi.HHJX_M_ID, 1, 40).then(res=>{
+      server.getGoodsByMaterialId(server.HHJX_M_ID, 1, 40).then(res=>{
         this.leftGoods = res.data.filter((arr, index)=>index%2===1)
         this.rightGoods = res.data.filter((arr, index)=>index%2===0)
       })
@@ -534,7 +533,7 @@
         if(scrollTop+clientHeight >= scrollHeight-30){
           if(this.needLoadGoods.length === 0){
             this.loadedPageNo = this.loadedPageNo + 1
-            indexApi.getTBGoods(indexApi.HHJX_M_ID, this.loadedPageNo, 40).then(res=>{
+            server.getGoodsByMaterialId(server.HHJX_M_ID, this.loadedPageNo, 40).then(res=>{
               this.needLoadGoods = res.data
             })
           }else{
@@ -543,18 +542,8 @@
           }
         }
       },
-      getRGBA(imgElement, setRGBASelector) {
-        RGBaster.colors(imgElement, {
-          exclude: [ 'rgb(255,255,255)', 'rgb(0,0,0)' ,'rgb(254,254,254)','rgb(254,255,255)'],
-          paletteSize: 15,
-          success: function(payload) {
-            let dominant = payload.dominant;
-            document.querySelectorAll(setRGBASelector).forEach(value => value.setAttribute('style', 'background:'+dominant+';border-color:'+dominant+';'))
-          }
-        });
-      },
       slideChange(img) {
-        this.getRGBA(img, "header,.layout > div, #swiper_nav div, #swiper_nav a, .main-banner-bg, .banner-arc")
+        util.renderRGB(img, "header,.layout > div, #swiper_nav div, #swiper_nav a, .main-banner-bg, .banner-arc")
       },
       gotoTop() {
         this.toTopBtnShow = false

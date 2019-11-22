@@ -62,7 +62,7 @@
 </template>
 
 <script>
-  import {get} from '../api/common'
+  import * as server from '../api'
   import myPager from '../components/pager'
   import mySwiper from '../components/swiper'
   export default {
@@ -75,7 +75,7 @@
       }
     },
     created() {
-      get('/goods/tbk/search/pc', {"keyword": "母婴", "pageNo": 1, "pageSize": 20}).then(res => {
+      server.getGoodsByKeyword("母婴", 1, 20).then(res => {
         this.tops = res.data
         this.goods = res.data
       })

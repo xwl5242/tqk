@@ -3285,13 +3285,8 @@ body .layui-layer-tips i.layui-layer-TipsB {
   color: #333
 }
 
-.icon_header .icon_search.result.active .set_tpl {
-  right: -100px;
-  opacity: 0
-}
-
 .icon_header .icon_search.result.active .sbumit {
-  right: -50px
+  right: -60px
 }
 
 .icon_header .icon_search.result.active .icon_tab {

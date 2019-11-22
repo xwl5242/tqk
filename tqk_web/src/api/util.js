@@ -12,9 +12,9 @@ export const volumeFormat = function (volume) {
 export function modeRem(isRem) {
   if(localStorage.getItem("platform") === "2") {
     // 因为前端样式单位使用的是rem,需要设置<html>标签的font-size
-    document.documentElement.style.fontSize = isRem?document.documentElement.clientWidth / 3.75 + 'px':'1px'
+    document.documentElement.style.fontSize = isRem?document.documentElement.clientWidth / 3.75 + 'px':'10px'
     window.onresize = function(){
-      document.documentElement.style.fontSize = isRem?document.documentElement.clientWidth / 3.75 + 'px':'1px'
+      document.documentElement.style.fontSize = isRem?document.documentElement.clientWidth / 3.75 + 'px':'10px'
     }
   }
 }

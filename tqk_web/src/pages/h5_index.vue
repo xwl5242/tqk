@@ -462,7 +462,7 @@
               <ul v-for="goods in [leftGoods,rightGoods]">
                 <li v-for="good in goods"
                     :key="good.id" class="find_product_list">
-                  <a href="">
+                  <a @click.prevent="showDetail(good)">
                     <div class="find_product_list_img ui-act-label">
                       <img :src="good.pictUrl" style="background: rgb(245, 245, 245); display: inline;">
                     </div>
@@ -559,6 +559,9 @@
       gotoTop() {
         this.toTopBtnShow = false
         scrollTo(0,0);
+      },
+      showDetail() {
+        this.$parent.$router.push({name:'detail'})
       }
     },
     filters: {

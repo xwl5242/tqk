@@ -4,8 +4,11 @@
     <div class="header_pr banner-color">
       <header class="index_header banner-color">
         <a href="">
-          <div class="wap_search">
-            <span class="palaceholder"><i class="iconfont icon-search"></i>输入商品名或粘贴宝贝标题搜索</span>
+          <div class="wap_search" @click.prevent="$router.push('/search')">
+            <span class="palaceholder">
+              <i class="iconfont icon-search"></i>
+              输入商品名或粘贴宝贝标题搜索
+            </span>
           </div>
         </a>
         <div class="sigin" style="display: none;">

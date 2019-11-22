@@ -5,9 +5,13 @@
   </div>
 </template>
 <script>
+  import * as util from './api/util'
   import h5BotTab from './components/m/h5_botTab'
   export default {
     name: "H5App",
+    created() {
+      util.modeRem(false)
+    },
     components: {
       h5BotTab: h5BotTab
     }

@@ -19,7 +19,7 @@ list页面内容中"图标导航"组件
 </template>
 
 <script>
-  import {get} from '../../api/common'
+  import * as server from '../../api'
   export default {
     name: "iconBanner",
     data() {
@@ -40,7 +40,7 @@ list页面内容中"图标导航"组件
       value: String
     },
     created() {
-      get('/coupon/material/siblings?materialId='+this.value).then(res => {
+      server.getSiblingsNavList(this.value).then(res => {
         for(let cm of res.data){
           if(cm.seq !== -1){
             this.banners.unshift({

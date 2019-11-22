@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {get} from '../../api/common'
+import * as server from '../../api'
 export default {
   name: "tqkHeader",
   data() {
@@ -38,7 +38,7 @@ export default {
     }
   },
   created() {
-    get('/search/recommend/list').then(res => this.searchRecommends = res.data)
+    server.getSR().then(res => this.searchRecommends = res.data)
   },
   methods: {
     quickSearch(kw) {

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {get} from './api/common'
+import * as server from './api'
 import tqkHeader from './components/pc/header'
 import tqkBanner from './components/pc/banner'
 import tqkFooter from './components/pc/footer'
@@ -25,13 +25,13 @@ export default {
     }
   },
   created() {
-    get('/menu/list/0').then(res => this.menus = res.data)
+    server.getMenus(server.PLATFORM_PC).then(res => this.menus = res.data);
     window.addEventListener("scroll", this.handleScroll)
   },
   methods: {
     handleScroll() {
-      let scrollTop = window.pageXOffset || document.documentElement.scrollTop || document.body.scrollTop
-      let offsetTop = document.querySelector('#baner').offsetTop
+      let scrollTop = window.pageXOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      let offsetTop = document.querySelector('#baner').offsetTop;
       this.floatNavShow = scrollTop > offsetTop
     },
     search(keywords) {

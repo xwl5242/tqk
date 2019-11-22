@@ -55,12 +55,38 @@ export function getOA(platform) {
 }
 
 /**
+ * 获取搜索推荐
+ * @returns {AxiosPromise}
+ */
+export function getSR() {
+  return get('/search/recommend/list')
+}
+
+/**
  * 获取导航nav
  * @param platform 平台
  * @returns {AxiosPromise}
  */
 export function getNav(platform) {
   return get('/nav/list/' + platform)
+}
+
+/**
+ * 获取菜单
+ * @param platform 平台
+ * @returns {AxiosPromise}
+ */
+export function getMenus(platform) {
+  return get('/menu/list/' + platform)
+}
+
+/**
+ * 获取优惠券和物料关系
+ * @param pid 父id
+ * @returns {AxiosPromise}
+ */
+export function getCouponMaterialByPid(pid) {
+  return get('/coupon/material/' + pid)
 }
 
 /**

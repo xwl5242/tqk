@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import {get} from '../../api/common'
+  import * as server from '../../api'
   export default {
     name: "floatBanner",
     data() {
@@ -40,7 +40,7 @@
       }
     },
     created() {
-      get('/coupon/material/2').then(res => this.navs = res.data)
+      server.getCouponMaterialByPid(2).then(res => this.navs = res.data)
     },
     methods: {
       goNav(materialId) {

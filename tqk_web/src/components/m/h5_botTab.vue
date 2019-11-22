@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import {get} from '../../api/common'
+  import * as server from '../../api'
   export default {
     name: "h5BotTab",
     data() {
@@ -24,7 +24,7 @@
       }
     },
     created() {
-      get('/menu/list/1').then(res => this.menus = res.data)
+      server.getMenus(server.PLATFORM_WIFI).then(res => this.menus = res.data)
     },
     methods: {
       changeTab(menu) {

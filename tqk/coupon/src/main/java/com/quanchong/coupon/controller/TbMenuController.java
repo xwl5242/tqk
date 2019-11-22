@@ -4,6 +4,7 @@ import com.quanchong.common.entity.TbMenu;
 import com.quanchong.coupon.service.TbMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,10 +18,10 @@ public class TbMenuController {
     @Autowired
     private TbMenuService tbMenuService;
 
-    @GetMapping("/list")
-    public List<TbMenu> list(){
+    @GetMapping("/list/{menuType}")
+    public List<TbMenu> list(@PathVariable String menuType){
         return tbMenuService.list().stream()
-                .filter(tbMenu -> tbMenu.getDelFlag().equals("0"))
+                .filter(tbMenu -> tbMenu.getDelFlag().equals("0") && tbMenu.getMenuType().equals(menuType))
                 .collect(Collectors.toList());
     }
 }

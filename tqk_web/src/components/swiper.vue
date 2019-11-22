@@ -121,6 +121,7 @@
         }
       },
       created() {
+        let that = this
         Object.assign(this.pagination_, this.pagination)
         Object.assign(this.navigation_, this.navigation)
         if(this.pagination_.isShow){
@@ -145,6 +146,12 @@
         this.options['loop'] = this.loop
         this.options['initialSlide'] = this.initialSlide
         Object.assign(this.options, this.option)
+        this.options['on'] = {
+          'slideChange': function(){
+            let slideImg = this.slides[this.activeIndex].getElementsByTagName("img")[0]
+            that.$emit('slideChange', slideImg)
+          }
+        }
       },
       methods: {
       }

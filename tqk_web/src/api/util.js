@@ -8,3 +8,13 @@ export const volumeFormat = function (volume) {
     return `${(volume/10000).toFixed(2)}万`
   }
 }
+
+export function modeRem(isRem) {
+  if(localStorage.getItem("platform") === "2") {
+    // 因为前端样式单位使用的是rem,需要设置<html>标签的font-size
+    document.documentElement.style.fontSize = isRem?document.documentElement.clientWidth / 3.75 + 'px':'1px'
+    window.onresize = function(){
+      document.documentElement.style.fontSize = isRem?document.documentElement.clientWidth / 3.75 + 'px':'1px'
+    }
+  }
+}

@@ -25,7 +25,7 @@ export default {
     }
   },
   created() {
-    get('/menu/list').then(res => this.menus = res.data)
+    get('/menu/list/0').then(res => this.menus = res.data)
     window.addEventListener("scroll", this.handleScroll)
   },
   methods: {

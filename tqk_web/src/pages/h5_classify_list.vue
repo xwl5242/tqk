@@ -1,9 +1,10 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
+    <!-- 页面顶部title和菜单 -->
     <div class="main-title clearfix theme-bg-color-1">
       <a @click.prevent="$router.push('/')" class="main-back"></a>
       <div class="menu-detail">
-        <span>{{pTitle}}</span>
+        <span>{{selectedBanner.text}}</span>
       </div>
       <a class="mui-action-menu main-more" @click.prevent="topMenuShow = !topMenuShow"></a>
     </div>
@@ -15,23 +16,30 @@
           <li><a @click.prevent="$router.push('/')"><i class="iconfontv2 icon-detail_home"></i>首页</a></li>
           <li><a @click.prevent="$router.push('/search')"><i class="iconfontv2 icon-detail_search"></i>搜索</a></li>
           <li><a @click.prevent="$router.push('/mine')"><i class="iconfontv2 icon-gerenzhongxin"></i>我的</a></li>
-<!--          <li><a><i class="iconfontv2 icon-detail_servicer"></i>客服</a></li>-->
-<!--          <li><a><i class="iconfontv2 icon-datail_feedback"></i>反馈</a></li>-->
         </ul>
       </div>
     </nav>
     <!-- 主界面具体展示内容 -->
     <div class="icon_nav_tab">
-      <mySwiper :swiperData="banners" :navigation="{isShow:false}" :autoplay="false" :slidesPerView="5" :clearDefaultSlideClass="true">
+      <mySwiper ref="banner" :swiperData="banners" :navigation="{isShow:false}"
+                :autoplay="false" :slidesPerView="5" :clearDefaultSlideClass="true">
         <template v-slot:default="slotProps">
-          <div :class="'tab_def_list'+(slotProps.item.title===pTitle?' active':'')">
-            <a>{{slotProps.item.title}}</a>
+          <div :class="'tab_def_list'+(slotProps.item.text===selectedBanner.text?' active':'')">
+            <a>{{slotProps.item.text}}</a>
           </div>
         </template>
       </mySwiper>
     </div>
-    <div class="icon_nav_tab_bg" style="height: 88px;"></div>
-    <div class="cat_tab_list "><ul><li data-dtk-satc="{desc:&quot;5_8241_0&quot;,name:&quot;SecondCidEvent&quot;}" style="" class="cat-item "><a href="/index.php?r=class/sub&amp;cid=8241"><img class="lazy" src="https://img.alicdn.com/imgextra/i3/2053469401/O1CN01Hg5NfF2JJhyIj3jdU_!!2053469401.png" data-original="https://img.alicdn.com/imgextra/i3/2053469401/O1CN01Hg5NfF2JJhyIj3jdU_!!2053469401.png" alt="" style="background: rgb(245, 245, 245); display: block;"><span>运动鞋</span></a></li><li data-dtk-satc="{desc:&quot;5_113826_1&quot;,name:&quot;SecondCidEvent&quot;}" style="" class="cat-item "><a href="/index.php?r=class/sub&amp;cid=113826"><img class="lazy" src="https://img.alicdn.com/imgextra/i2/2053469401/O1CN019lkPCm2JJhyI1b1Rr_!!2053469401.png" data-original="https://img.alicdn.com/imgextra/i2/2053469401/O1CN019lkPCm2JJhyI1b1Rr_!!2053469401.png" alt="" style="background: rgb(245, 245, 245); display: block;"><span>休闲鞋</span></a></li><li data-dtk-satc="{desc:&quot;5_113825_2&quot;,name:&quot;SecondCidEvent&quot;}" style="" class="cat-item "><a href="/index.php?r=class/sub&amp;cid=113825"><img class="lazy" src="https://img.alicdn.com/imgextra/i2/2053469401/O1CN01vD6ksa2JJhyH81jRB_!!2053469401.png" data-original="https://img.alicdn.com/imgextra/i2/2053469401/O1CN01vD6ksa2JJhyH81jRB_!!2053469401.png" alt="" style="background: rgb(245, 245, 245); display: block;"><span>小白鞋</span></a></li><li data-dtk-satc="{desc:&quot;5_89955_3&quot;,name:&quot;SecondCidEvent&quot;}" style="" class="cat-item "><a href="/index.php?r=class/sub&amp;cid=89955"><img class="lazy" src="https://img.alicdn.com/imgextra/i4/2053469401/O1CN01O8BqFZ2JJhyKsduyJ_!!2053469401.png" data-original="https://img.alicdn.com/imgextra/i4/2053469401/O1CN01O8BqFZ2JJhyKsduyJ_!!2053469401.png" alt="" style="background: rgb(245, 245, 245); display: block;"><span>帆布鞋</span></a></li><li data-dtk-satc="{desc:&quot;5_113827_4&quot;,name:&quot;SecondCidEvent&quot;}" style="" class="cat-item "><a href="/index.php?r=class/sub&amp;cid=113827"><img class="lazy" src="https://img.alicdn.com/imgextra/i3/2053469401/O1CN01WwS69I2JJhyF4tTTH_!!2053469401.png_310x310.jpg_.webp" data-original="https://img.alicdn.com/imgextra/i3/2053469401/O1CN01WwS69I2JJhyF4tTTH_!!2053469401.png_310x310.jpg_.webp" alt="" style="background: rgb(245, 245, 245); display: block;"><span>单鞋</span></a></li><li data-dtk-satc="{desc:&quot;5_113523_5&quot;,name:&quot;SecondCidEvent&quot;}" style="" class="cat-item "><a href="/index.php?r=class/sub&amp;cid=113523"><img class="lazy" src="https://img.alicdn.com/imgextra/i4/2053469401/O1CN019T4WbI2JJhyaRuysj_!!2053469401.png_310x310.jpg_.webp" data-original="https://img.alicdn.com/imgextra/i4/2053469401/O1CN019T4WbI2JJhyaRuysj_!!2053469401.png_310x310.jpg_.webp" alt="" style="background: rgb(245, 245, 245); display: block;"><span>靴子</span></a></li><li data-dtk-satc="{desc:&quot;5_113828_6&quot;,name:&quot;SecondCidEvent&quot;}" style="" class="cat-item "><a href="/index.php?r=class/sub&amp;cid=113828"><img class="lazy" src="https://img.alicdn.com/imgextra/i1/2053469401/O1CN01IKGM7R2JJhyH81vvy_!!2053469401.png_310x310.jpg_.webp" data-original="https://img.alicdn.com/imgextra/i1/2053469401/O1CN01IKGM7R2JJhyH81vvy_!!2053469401.png_310x310.jpg_.webp" alt="" style="background: rgb(245, 245, 245); display: block;"><span>高跟鞋</span></a></li><li data-dtk-satc="{desc:&quot;5_113829_7&quot;,name:&quot;SecondCidEvent&quot;}" style="" class="cat-item "><a href="/index.php?r=class/sub&amp;cid=113829"><img class="lazy" src="https://img.alicdn.com/imgextra/i2/2053469401/O1CN01Gw89hi2JJhyJSrSSe_!!2053469401.png_310x310.jpg_.webp" data-original="https://img.alicdn.com/imgextra/i2/2053469401/O1CN01Gw89hi2JJhyJSrSSe_!!2053469401.png_310x310.jpg_.webp" alt="" style="background: rgb(245, 245, 245); display: block;"><span>男鞋</span></a></li><div class="ov_h"></div></ul></div>
+    <div class="icon_nav_tab_bg" style="height: 80px;"></div>
+    <div class="cat_tab_list ">
+      <ul>
+        <li v-for="ni in navIcon[selectedBanner.text]" :key="ni.label" class="cat-item ">
+          <a>
+            <img class="lazy" :src="'../../static/images/m/nav_icon/'+ni.png" style="background: rgb(245, 245, 245); display: block;"><span>{{ni.label}}</span></a>
+        </li>
+        <div class="ov_h"></div>
+      </ul>
+    </div>
     <div class="cat_tab_list_load" style="display: none;"></div>
     <div class="order-nav order-nav-cat" style=" position: relative; top: 0; margin-top: 0;">
       <ul>
@@ -63,6 +71,7 @@
 </template>
 
 <script>
+  import navIcon from '../../static/images/m/nav_icon/map'
   import * as server from '../api'
   import * as util from '../api/util'
   import mySwiper from '../components/swiper'
@@ -70,8 +79,9 @@
     name: "h5ClassifyList",
     data() {
       return {
-        pTitle: '',
+        navIcon: navIcon,
         banners: [],
+        selectedBanner: {},
         kwOrMaterialId: '',
         topMenuShow: false,
         isLink: this.$route.params.type === 'link'
@@ -81,10 +91,27 @@
       util.modeRem(false)
       this.kwOrMaterialId = this.$route.params.value
       let materialId = this.isLink? this.kwOrMaterialId: server.HHJX_M_ID
+      // 查询同等级菜单
       server.getSiblingsNavList(materialId).then(res => {
-        this.banners = res.data
-        this.pTitle = this.isLink?this.banners.filter(b=>b.materialId===this.kwOrMaterialId)[0]['title']:this.kwOrMaterialId
+        for(let cm of res.data){
+          if(cm.seq !== -1){
+            let banner = {
+              id: cm.id,
+              seq: cm.seq+'',
+              text: cm.title,
+              type: this.$route.params.type,
+              value: this.isLink?cm.materialId:cm.title,
+            }
+            if(banner.value===this.kwOrMaterialId){
+              this.selectedBanner = banner
+            }
+            this.banners.push(banner)
+          }
+        }
       })
+    },
+    mounted() {
+      console.log(this.$refs)
     },
     components: {
       mySwiper

@@ -1,0 +1,47 @@
+{
+  "女装": [
+    {"label":"羽绒服","png":"0-1.png"},
+    {"label":"卫衣","png":"0-2.png"},
+    {"label":"毛衣","png":"0-3.png"},
+    {"label":"长裙","png":"0-4.png"},
+    {"label":"大衣","png":"0-5.png"},
+    {"label":"牛仔裤","png":"0-6.png"},
+    {"label":"休闲裤","png":"0-7.png"},
+    {"label":"衬衫","png":"0-8.png"}
+  ],
+  "美食": [
+    {"label":"早餐","png":"1-1.png"},
+    {"label":"速食","png":"1-2.png"},
+    {"label":"零食","png":"1-3.png"},
+    {"label":"糕点","png":"1-4.png"},
+    {"label":"辣条","png":"1-5.png"},
+    {"label":"坚果","png":"1-6.png"},
+    {"label":"水果","png":"1-7.png"},
+    {"label":"糖果","png":"1-8.png"}
+  ],
+  "美妆个护": [
+    {"label":"口红","png":"2-1.png"},
+    {"label":"精华液","png":"2-2.png"},
+    {"label":"洁面乳","png":"2-3.png"},
+    {"label":"美妆工具","png":"2-4.png"},
+    {"label":"隔离防晒","png":"2-5.png"},
+    {"label":"彩妆","png":"2-6.png"},
+    {"label":"身体护理","png":"2-7.png"},
+    {"label":"男士洁面","png":"2-8.png"}
+  ],
+  "鞋包配饰": [
+    {"label":"运动鞋","png":"3-1.png"},
+    {"label":"休闲鞋","png":"3-2.png"},
+    {"label":"小白鞋","png":"3-3.png"},
+    {"label":"帆布鞋","png":"3-4.png"},
+    {"label":"单鞋","png":"3-5.png"},
+    {"label":"靴子","png":"3-6.png"},
+    {"label":"高跟鞋","png":"3-7.png"},
+    {"label":"男鞋","png":"3-8.png"}
+  ],
+  "男装": [],
+  "内衣": [],
+  "家居家装": [],
+  "数码家电": [],
+  "户外运动": []
+}

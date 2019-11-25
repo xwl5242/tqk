@@ -79,10 +79,6 @@
           }
         },
         swiperData: Array,
-        initialSlide: {
-          type: Number,
-          default: 0
-        },
         autoplay: {
           type: Boolean,
           default: true
@@ -148,7 +144,6 @@
           this.options['autoplay'] = {autoplay: {delay: 800, stopOnLastSlide: false}}
         }
         this.options['loop'] = this.loop
-        this.options['initialSlide'] = this.initialSlide
         Object.assign(this.options, this.option)
         this.options['on'] = {
           'slideChange': function(){

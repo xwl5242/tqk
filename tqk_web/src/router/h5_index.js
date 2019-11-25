@@ -6,11 +6,11 @@ import collect from '@/pages/h5_collect'
 import classify from '@/pages/h5_classify'
 import search from '@/pages/h5_search'
 import detail from '@/pages/h5_detail'
+import classifyList from '@/pages/h5_classify_list'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '*',
@@ -44,6 +44,11 @@ export default new Router({
       path: '/detail',
       name: 'detail',
       component: detail
+    },
+    {
+      path: '/classify/:type/:value',
+      name: 'classifyList',
+      component: classifyList
     }
   ]
 })

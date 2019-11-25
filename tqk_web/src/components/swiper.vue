@@ -42,7 +42,7 @@
 <template>
   <div>
     <swiper :options="options" :style="containerCSS">
-      <swiper-slide v-for="item in swiperData" :key="item.id" :style="slideCSS">
+      <swiper-slide v-for="item in swiperData" :key="item.id" :style="slideCSS" :class="clearDefaultSlideClass?'swiper-slide-custom':'swiper-slide'">
         <slot :item="item"></slot>
       </swiper-slide>
       <div v-if="pagination_.isShow" class="swiper-pagination" slot="pagination"></div>
@@ -60,7 +60,7 @@
           pagination_: {
             isShow: false,
             el: '.swiper-pagination',
-            dynamicBullets: true
+            dynamicBullets: false
           },
           navigation_: {
             isShow: true,
@@ -98,6 +98,10 @@
         slideCSS: {
           type: String,
           default: ''
+        },
+        clearDefaultSlideClass: {
+          type: Boolean,
+          default: false
         },
         slidesPerView: {
           type: Number,
@@ -158,6 +162,10 @@
     }
 </script>
 <style scoped>
+  .swiper-slide-custom {
+    width: auto !important;
+    margin-right: 0px !important;
+  }
   .next-main:hover, .prev-main:hover {
     opacity: .5;
   }

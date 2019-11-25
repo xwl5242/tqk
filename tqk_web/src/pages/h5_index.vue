@@ -2,7 +2,7 @@
   <div class="new_index">
     <div class="banner-bg banner-color" >
       <h5Header/>
-      <h5Banner ref="h5Banner"/>
+      <h5Banner ref="h5Banner" @goClassifyList="goClassifyList"/>
     </div>
     <div class="main">
       <div>
@@ -13,7 +13,7 @@
           <!-- banner -->
           <div class="main_module_layout">
             <div data-modelsid="-1" data-promodelid="1" class="banner_swiper show_module" id="homeBanner">
-              <mySwiper :swiperData="swipers" :pagination="{isShow:true}" :navigation="{isShow:false}" @slideChange="slideChange">
+              <mySwiper :swiperData="swipers" :autoplay="true" :pagination="{isShow:true}" :navigation="{isShow:false}" @slideChange="slideChange">
                 <template v-slot:default="slotProps">
                   <img :src="slotProps.item.img">
                 </template>
@@ -507,7 +507,9 @@
         swipers: [
           {id:1, img:'https://img.alicdn.com/imgextra/i2/2053469401/O1CN01zWvohl2JJhz8nII9X_!!2053469401.jpg'},
           {id:2, img:'https://img.alicdn.com/imgextra/i1/2053469401/O1CN011zFY822JJhzEFMiIE_!!2053469401.jpg'},
-          {id:3, img:'https://img.alicdn.com/imgextra/i1/2053469401/O1CN01aC5ksE2JJhzAWiQCJ_!!2053469401.jpg'}
+          {id:3, img:'https://img.alicdn.com/imgextra/i1/2053469401/O1CN01aC5ksE2JJhzAWiQCJ_!!2053469401.jpg'},
+          {id:4, img:'https://img.alicdn.com/imgextra/i1/2053469401/O1CN01soAL0L2JJhzBuk6CO_!!2053469401.jpg'},
+          {id:5, img:'https://img.alicdn.com/imgextra/i3/2053469401/O1CN01gdHnUe2JJhzGuH9Xl_!!2053469401.jpg'}
         ]
       }
     },
@@ -520,6 +522,9 @@
     },
     mounted() {
       window.addEventListener("scroll", this.handleScroll)
+    },
+    beforeDestroy() {
+      window.removeEventListener("scroll", this.handleScroll)
     },
     methods: {
       handleScroll() {
@@ -543,11 +548,14 @@
         }
       },
       slideChange(img) {
-        util.renderRGB(img, "header,.layout > div, #swiper_nav div, #swiper_nav a, .main-banner-bg, .banner-arc")
+        util.renderRGB(img, "header,.layout > div,#swiper_nav>div>div>div>div ,#swiper_nav > a, .main-banner-bg, .banner-arc")
       },
       gotoTop() {
         this.toTopBtnShow = false
         scrollTo(0,0);
+      },
+      goClassifyList(banner) {
+        this.$parent.$router.push({name:'classifyList', params:{type: 'link', value: banner.materialId}})
       },
       showDetail() {
         this.$parent.$router.push({name:'detail'})
@@ -564,5 +572,5 @@
   }
 </script>
 <style scoped>
-  @import "../../static/css/h5_main_1.css";
+  @import "../../static/css/h5_index.css";
 </style>

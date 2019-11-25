@@ -1,4 +1,4 @@
-import RGBsater from './RGBaster'
+import ColorThief from 'colorthief/dist/color-thief.mjs'
 
 /**
  * 获取指定范围内的数字数组
@@ -43,14 +43,22 @@ export function modeRem(isRem) {
  * @param setRGBElementSelector 需要被渲染的元素的css选择器表达式
  */
 export function renderRGB(imgElement, setRGBElementSelector) {
-  RGBaster.colors(imgElement, {
-    exclude: [ 'rgb(255,255,255)', 'rgb(0,0,0)' ,'rgb(254,254,254)','rgb(254,255,255)'],
-    paletteSize: 15,
-    success: function(payload) {
-      let dominant = payload.dominant;
-      document.querySelectorAll(setRGBElementSelector).forEach(
-        value => value.setAttribute('style', 'background:'+dominant+';border-color:'+dominant+';')
-      )
-    }
+  let img = new Image()
+  img = imgElement
+  img.crossOrigin = 'Anonymous'
+  img.src = imgElement.src
+
+  img.addEventListener('load', function() {
+    const  colorThief = new ColorThief();
+    let color = colorThief.getColor(img)
+    color = rgbToHex(color[0], color[1], color[2])
+    document.querySelectorAll(setRGBElementSelector).forEach(
+      value => value.setAttribute('style', 'background:'+color+';border-color:'+color+';')
+    )
   })
 }
+
+const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
+  const hex = x.toString(16)
+  return hex.length === 1 ? '0' + hex : hex
+}).join('')

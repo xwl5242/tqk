@@ -816,7 +816,6 @@
     name: "h5Detail",
     created() {
       util.modeRem(false)
-      window.removeEventListener('scroll',function(){})
     }
   }
 </script>

@@ -32,16 +32,73 @@
   "鞋包配饰": [
     {"label":"运动鞋","png":"3-1.png"},
     {"label":"休闲鞋","png":"3-2.png"},
-    {"label":"小白鞋","png":"3-3.png"},
     {"label":"帆布鞋","png":"3-4.png"},
-    {"label":"单鞋","png":"3-5.png"},
-    {"label":"靴子","png":"3-6.png"},
     {"label":"高跟鞋","png":"3-7.png"},
-    {"label":"男鞋","png":"3-8.png"}
+    {"label":"斜挎包","png":"3-9.png"},
+    {"label":"双肩包","png":"3-10.png"},
+    {"label":"旅行箱","png":"3-11.png"},
+    {"label":"帆布包","png":"3-12.png"},
+    {"label":"耳坠","png":"3-13.png"},
+    {"label":"手表","png":"3-14.png"},
+    {"label":"项链/手链","png":"3-15.png"},
+    {"label":"戒指","png":"3-16.png"}
   ],
-  "男装": [],
-  "内衣": [],
-  "家居家装": [],
-  "数码家电": [],
-  "户外运动": []
+  "男装": [
+    {"label":"外套/夹克","png":"4-1.png"},
+    {"label":"潮流卫衣","png":"4-2.png"},
+    {"label":"T恤","png":"4-3.png"},
+    {"label":"衬衣","png":"4-4.png"},
+    {"label":"针织衫","png":"4-5.png"},
+    {"label":"休闲裤","png":"4-6.png"},
+    {"label":"运动裤","png":"4-7.png"},
+    {"label":"牛仔裤","png":"4-8.png"}
+  ],
+  "内衣": [
+    {"label":"文胸","png":"5-1.png"},
+    {"label":"女士内裤","png":"5-2.png"},
+    {"label":"睡衣/睡袍","png":"5-3.png"},
+    {"label":"男士内裤","png":"5-4.png"},
+    {"label":"袜子","png":"5-5.png"},
+    {"label":"情侣睡衣","png":"5-6.png"},
+    {"label":"丝袜","png":"5-7.png"},
+    {"label":"保暖内衣","png":"5-8.png"}
+  ],
+  "家居家装": [
+    {"label":"家庭清洁","png":"6-1.png"},
+    {"label":"沐浴乳","png":"6-2.png"},
+    {"label":"厨卫清洁","png":"6-3.png"},
+    {"label":"洗发膏","png":"6-4.png"},
+    {"label":"收纳箱","png":"6-5.png"},
+    {"label":"保温杯","png":"6-6.png"},
+    {"label":"四件套","png":"6-7.png"},
+    {"label":"靠枕/抱枕","png":"6-8.png"},
+    {"label":"卫浴用品","png":"6-9.png"},
+    {"label":"简易家具","png":"6-10.png"},
+    {"label":"墙纸","png":"6-11.png"},
+    {"label":"地毯","png":"6-12.png"}
+  ],
+  "数码家电": [
+    {"label":"耳机","png":"7-1.png"},
+    {"label":"厨房家电","png":"7-2.png"},
+    {"label":"手机壳/膜","png":"7-3.png"},
+    {"label":"充电宝","png":"7-4.png"},
+    {"label":"鼠标/键盘","png":"7-5.png"},
+    {"label":"电脑外设","png":"7-6.png"},
+    {"label":"数据线","png":"7-7.png"},
+    {"label":"日用小家电","png":"7-8.png"},
+    {"label":"手机支架","png":"7-9.png"},
+    {"label":"剃须刀","png":"7-10.png"},
+    {"label":"电吹风","png":"7-11.png"},
+    {"label":"电暖气","png":"7-12.png"}
+  ],
+  "运动户外": [
+    {"label":"休闲垂钓","png":"8-1.png"},
+    {"label":"健身设备","png":"8-2.png"},
+    {"label":"健身服装","png":"8-3.png"},
+    {"label":"球迷用品","png":"8-4.png"},
+    {"label":"户外设备","png":"8-5.png"},
+    {"label":"瑜伽器材","png":"8-6.png"},
+    {"label":"独步登山","png":"8-7.png"},
+    {"label":"跑步燃脂","png":"8-8.png"}
+  ]
 }

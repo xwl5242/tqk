@@ -13,7 +13,8 @@
           <!-- banner -->
           <div class="main_module_layout">
             <div data-modelsid="-1" data-promodelid="1" class="banner_swiper show_module" id="homeBanner">
-              <mySwiper :swiperData="swipers" :autoplay="true" :pagination="{isShow:true}" :navigation="{isShow:false}" @slideChange="slideChange">
+              <mySwiper :swiperData="swipers" :autoplay="true" :openSlideChangeListener="true"
+                        :pagination="{isShow:true}" :navigation="{isShow:false}" @slideChange="slideChange">
                 <template v-slot:default="slotProps">
                   <img :src="slotProps.item.img">
                 </template>

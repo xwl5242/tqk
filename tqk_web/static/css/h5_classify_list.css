@@ -404,6 +404,38 @@
   font-family: iconfontv2!important;
   font-size: 16px
 }
+.iconfontv2 {
+  font-family: iconfontv2!important;
+  font-size: 16px
+}
+
+.toTop,.toTop:before {
+  width: 35px;
+  height: 35px
+}
+
+.toTop {
+  background: rgba(51,51,51,.8);
+  display: none;
+  overflow: hidden;
+  line-height: 35px;
+  border-radius: 35px;
+  -moz-border-radius: 35px;
+  -webkit-border-radius: 35px;
+  -o-border-radius: 35px;
+  -ms-border-radius: 35px;
+  text-align: center;
+  position: fixed;
+  color: #fff;
+  z-index: 100;
+  right: 20px;
+  bottom: 25px
+}
+
+.toTop:before {
+  display: block;
+  content: "\e764"
+}
 
 #detail-top-menu .icon-detail_home:before {
   content: "\e630"

@@ -41,7 +41,7 @@
 -->
 <template>
   <div>
-    <swiper :options="options" :style="containerCSS">
+    <swiper ref="swiperUI" :options="options" :style="containerCSS">
       <swiper-slide v-for="item in swiperData" :key="item.id" :style="slideCSS" :class="clearDefaultSlideClass?'swiper-slide-custom':'swiper-slide'">
         <slot :item="item"></slot>
       </swiper-slide>
@@ -79,6 +79,10 @@
           }
         },
         swiperData: Array,
+        openSlideChangeListener: {
+          type: Boolean,
+          default: false
+        },
         autoplay: {
           type: Boolean,
           default: true
@@ -145,10 +149,12 @@
         }
         this.options['loop'] = this.loop
         Object.assign(this.options, this.option)
-        this.options['on'] = {
-          'slideChange': function(){
-            let slideImg = this.slides[this.activeIndex].getElementsByTagName("img")[0]
-            that.$emit('slideChange', slideImg)
+        if(this.openSlideChangeListener){
+          this.options['on'] = {
+            'slideChange': function(){
+              let slideImg = this.slides[this.activeIndex].getElementsByTagName("img")[0]
+              that.$emit('slideChange', slideImg)
+            }
           }
         }
       },

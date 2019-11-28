@@ -9,15 +9,7 @@
       <a class="mui-action-menu main-more" @click.prevent="topMenuShow = !topMenuShow"></a>
     </div>
     <nav id="detail-top-menu" :class="topMenuShow?'show':''">
-      <div class="arrow"></div>
-      <div class="mask" id="menu-mask2"></div>
-      <div class="detail-menu-content">
-        <ul class="main-detail">
-          <li><a @click.prevent="$router.push('/')"><i class="iconfontv2 icon-detail_home"></i>首页</a></li>
-          <li><a @click.prevent="$router.push('/search')"><i class="iconfontv2 icon-detail_search"></i>搜索</a></li>
-          <li><a @click.prevent="$router.push('/mine')"><i class="iconfontv2 icon-gerenzhongxin"></i>我的</a></li>
-        </ul>
-      </div>
+      <h5TitleMenu />
     </nav>
     <!-- 页面顶部title和菜单结束 -->
     <!-- 顶部nav导航和商品详细分类开始 -->
@@ -65,30 +57,30 @@
     <!-- 页面中间筛选、排序结束 -->
     <!-- 页面商品列表开始 -->
     <div class="scrollable">
-      <div class="goods-two" data-page="1" style="padding-top: 0; background: #fff;">
+      <div v-if="goods" class="goods-two" data-page="1" style="padding-top: 0; background: #fff;">
         <div class="lazy1">
-          <li class="row-s">
+          <li v-for="(good,index) in goods" :key="good.id" class="row-s" :style="index===goods.length-1?'margin-bottom: 50px':''">
             <a>
               <div class="img ui-act-label">
-                <img src=""  style="background: rgb(245, 245, 245); display: block;">
+                <img :src="good.pictUrl"  style="background: rgb(245, 245, 245); display: block;">
               </div>
             </a>
             <div class="cent">
               <a>
                 <h3 class="product_title">
 <!--                  <span class="labelTop tm">天猫</span>-->
-                  <span class="title_text">皮毛一体加绒保暖短筒雪地靴</span>
+                  <span class="title_text">{{good.title}}</span>
                 </h3>
               </a>
               <div class="product_info">
                 <a>
-                  <div class="price"><span>券后&nbsp;</span> <span class="RMB">¥</span> <span class="price_num">39.9</span></div>
+                  <div class="price"><span>折扣价&nbsp;</span> <span class="RMB">¥</span> <span class="price_num">{{good.zkFinalPrice}}</span></div>
                   <div class="label_box">
                     <span style="display:inline;" >
-                      <span class="juan"><span>劵</span>120元</span>
+                      <span class="juan"><span>劵</span>{{good.couponAmount}}元</span>
                     </span>
                   </div>
-                  <div class="salse"><span>已售7.2万</span><span>评论1.6万</span></div>
+                  <div class="salse"><span>已售{{good.volume|volumeFormat}}</span></div>
                 </a>
               </div>
             </div>
@@ -100,7 +92,7 @@
 <!--      </div>-->
     </div>
     <!-- 页面商品列表结束 -->
-    <div class="iconfontv2 toTop" style="bottom: 60px;"></div>
+    <div class="iconfont toTop" style="bottom: 60px;"></div>
   </div>
 </template>
 
@@ -109,11 +101,12 @@
   import * as server from '../api'
   import * as util from '../api/util'
   import mySwiper from '../components/swiper'
-
+  import h5TitleMenu from '../components/m/h5_titleMenu'
   export default {
     name: "h5ClassifyList",
     data() {
       return {
+        goods: [],
         navIcon: navIcon,
         banners: [],
         selectedBanner: {},
@@ -144,6 +137,7 @@
           }
         }
       })
+      server.getGoods(this.isLink, this.kwOrMaterialId, 1, 40).then(res=>this.goods=res.data)
     },
     methods: {
       bannerChange(banner) {
@@ -151,11 +145,14 @@
       }
     },
     components: {
-      mySwiper
+      mySwiper,h5TitleMenu
+    },
+    filters: {
+      volumeFormat: util.volumeFormat
     }
   }
 </script>
 
 <style scoped>
-  @import '../../static/css/h5_classify_list.css'
+  @import '../../static/css/h5_classify_list.css';
 </style>

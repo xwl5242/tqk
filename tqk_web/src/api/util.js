@@ -12,6 +12,21 @@ export function range(start, stop, step=1) {
 }
 
 /**
+ * 数组字符串转数组
+ * @param str
+ */
+export function str2Array(str, separator) {
+  separator = separator?separator:','
+  if(str.indexOf('[')==0){
+    str = str.substring(1)
+  }
+  if(str.indexOf(']')==str.length-1){
+    str = str.substring(0, str.length -1)
+  }
+  return str.split(separator)
+}
+
+/**
  * 商品销量格式化
  * @param volume 商品销量
  * @returns {string} xx万,如:8.9万
@@ -19,8 +34,17 @@ export function range(start, stop, step=1) {
 export const volumeFormat = function (volume) {
   if(volume!==undefined){
     volume = parseInt(volume)
-    return `${(volume/10000).toFixed(2)}万`
+    if(volume>=10000){
+      return `${(volume/10000).toFixed(2)}万`
+    }else{
+      return volume+''
+    }
   }
+}
+
+export const shortDateTime = function (dateTimeStr) {
+  dateTimeStr = dateTimeStr + ''
+  return dateTimeStr.slice(0,10)
 }
 
 /**

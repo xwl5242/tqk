@@ -104,8 +104,8 @@ export function getSiblingsNavList(materialId) {
  * @param needPicts 是否需要图片和店铺详情
  * @returns {AxiosPromise}
  */
-export function getGoodDetailById(id, needPicts) {
-  return get('/goods/detail', {'id': id, 'needPicts': needPicts})
+export function getGoodDetailById(id, needImgs, needRecs) {
+  return get('/goods/detail', {'id': id, 'needImgs': needImgs, 'needRecs': needRecs})
 }
 
 /**
@@ -114,4 +114,14 @@ export function getGoodDetailById(id, needPicts) {
  */
 export function getGoodDetail() {
   return post('/goods/tbk/detail', localStorage.getItem('search_good_obj'))
+}
+
+/**
+ * 获取相关商品推荐
+ * @param cat 商品类目根id
+ * @param materialId 物料id
+ * @returns {AxiosPromise}
+ */
+export function getGoodRecs(cat, materialId) {
+  return get('/goods/tbk/search/recs', {'cat': cat, 'materialId': materialId})
 }

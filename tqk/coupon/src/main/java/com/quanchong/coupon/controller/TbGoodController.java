@@ -3,9 +3,12 @@ package com.quanchong.coupon.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.quanchong.common.entity.Evaluate;
 import com.quanchong.common.entity.TbGood;
+import com.quanchong.common.util.DateUtils;
 import com.quanchong.coupon.service.TbGoodService;
 import com.quanchong.coupon.top.TbkService;
+import com.taobao.api.domain.NTbkShop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +59,19 @@ public class TbGoodController {
     }
 
     /**
+     * 查询商品相关推荐
+     * @param cat 商品类目根id
+     * @param pageNo 页码
+     * @param pageSize 页大小
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/tbk/search/recs")
+    public List<TbGood> searchRecs(String cat, Long pageNo, Long pageSize) throws Exception {
+        return tbkService.searchRecs(cat, pageNo, pageSize);
+    }
+
+    /**
      * 淘宝客物料精选
      * @param materialId
      * @param pageNo
@@ -82,7 +98,7 @@ public class TbGoodController {
     public TbGood queryDetail(@RequestBody TbGood tbkGood) throws Exception{
         Map<String, Object> extraMap = tbkService.extraMap(tbkGood.getItemId(),
                 tbkGood.getShopTitle(), tbkGood.getSellerId(), true);
-        tbkGood.setExtraMap(extraMap);
+        tbkGood.setExtra(extraMap);
         return tbkGood;
     }
 
@@ -140,15 +156,22 @@ public class TbGoodController {
     /**
      * 根据主键查询商品详情
      * @param id 主键
-     * @param needPicts 是否需要查询商品的图片详情
+     * @param needImgs 是否需要查询商品的图片详情
+     * @param needRecs 是否需要查询相关商品推荐
      * @return
      */
     @GetMapping("/detail")
-    public TbGood queryById(@RequestParam String id, @RequestParam Boolean needPicts) throws Exception{
+    public TbGood queryById(@RequestParam String id, @RequestParam Boolean needImgs, @RequestParam Boolean needRecs) throws Exception{
         TbGood tbGood = tbGoodService.getById(id);
+        tbGood.setCouponStartTime(DateUtils.formatDateTime(Long.valueOf(tbGood.getCouponStartTime())));
+        tbGood.setCouponEndTime(DateUtils.formatDateTime(Long.valueOf(tbGood.getCouponEndTime())));
         Map<String, Object> extraMap = tbkService.extraMap(tbGood.getItemId(),
-                tbGood.getShopTitle(), tbGood.getSellerId(), needPicts);
-        tbGood.setExtraMap(extraMap);
+                tbGood.getShopTitle(), tbGood.getSellerId(), needImgs);
+        tbGood.setExtra(extraMap);
+        if(needRecs){
+            List<TbGood> recs = tbkService.searchRecs(tbGood.getRootCategoryId(),1L, 10L);
+            tbGood.setRecs(recs);
+        }
         return tbGood;
     }
 

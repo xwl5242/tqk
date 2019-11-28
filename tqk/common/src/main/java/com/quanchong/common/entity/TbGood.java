@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.quanchong.common.base.BaseEntity;
+import com.taobao.api.domain.NTbkShop;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,5 +43,20 @@ public class TbGood extends BaseEntity {
     private String couponInfo; // 优惠券信息
     private String couponShareUrl; // 优惠券分享地址
     @TableField(exist = false)
-    private Map<String, Object> extraMap; // 商品额外信息 shop：店铺信息， pictDetail：图片详情
+    private NTbkShop shop;
+    @TableField(exist = false)
+    private List<Evaluate> evaluates;
+    @TableField(exist = false)
+    private List<String> imgs;
+    @TableField(exist = false)
+    private String rootCategoryId;
+    @TableField(exist = false)
+    private List<TbGood> recs;
+
+    public void setExtra(Map<String, Object> extraMap){
+        this.setShop((NTbkShop) extraMap.get("shop"));
+        this.setEvaluates((List<Evaluate>) extraMap.get("evaluates"));
+        this.setImgs((List<String>) extraMap.get("imgs"));
+        this.setRootCategoryId(extraMap.get("rootCategoryId").toString());
+    }
 }

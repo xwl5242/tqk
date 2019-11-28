@@ -151,6 +151,7 @@
 </template>
 <script>
 import * as server from '../api'
+import * as util from '../api/util'
 export default {
   data() {
     return {
@@ -168,20 +169,15 @@ export default {
       })
     }else{
       let id = this.$route.params.id
-      server.getGoodDetailById(id, true).then((res) => {
+      server.getGoodDetailById(id, true, false).then((res) => {
         this.prepareGood(res.data)
       })
     }
   },
   methods: {
-    prepareGood(goods) {
-      this.curGood = goods
-      let smallImages = this.curGood.smallImages
-      smallImages = smallImages && smallImages.substring(1, smallImages.length - 1)
-      this.curGood.smallImages = smallImages.split(',')
-      this.curGood.shop = goods.extraMap.shop
-      this.curGood.imgs = goods.extraMap.picts.imgs
-      this.curGood.evaluates = goods.extraMap.picts.evaluates
+    prepareGood(good) {
+      this.curGood = good
+      this.curGood.smallImages = util.str2Array(good.smallImages)
       this.pictUrl = this.pictUrlTemp = this.curGood.pictUrl
     },
     autoShowImg(imgUrl) {

@@ -12,8 +12,8 @@
         <div class="content">
           <!-- banner -->
           <div class="main_module_layout">
-            <div data-modelsid="-1" data-promodelid="1" class="banner_swiper show_module" id="homeBanner">
-              <mySwiper :swiperData="swipers" :autoplay="true" :openSlideChangeListener="true"
+            <div class="banner_swiper show_module" id="homeBanner">
+              <mySwiper ref="indexSwiper" :swiperData="swipers" :autoplay="true" :openSlideChangeListener="true"
                         :pagination="{isShow:true}" :navigation="{isShow:false}" @slideChange="slideChange">
                 <template v-slot:default="slotProps">
                   <img :src="slotProps.item.img">
@@ -463,7 +463,7 @@
               <ul v-for="goods in [leftGoods,rightGoods]">
                 <li v-for="good in goods"
                     :key="good.id" class="find_product_list">
-                  <a @click.prevent="showDetail(good)">
+                  <a @click.prevent="showDetail(good.id)">
                     <div class="find_product_list_img ui-act-label">
                       <img :src="good.pictUrl" style="background: rgb(245, 245, 245); display: inline;">
                     </div>
@@ -558,8 +558,8 @@
       goClassifyList(banner) {
         this.$parent.$router.push({name:'classifyList', params:{type: 'link', value: banner.materialId}})
       },
-      showDetail() {
-        this.$parent.$router.push({name:'detail'})
+      showDetail(id) {
+        this.$parent.$router.push({name:'detail', params:{id: id}})
       }
     },
     filters: {

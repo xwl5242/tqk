@@ -41,7 +41,7 @@ export default new Router({
       component: search
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'detail',
       component: detail
     },

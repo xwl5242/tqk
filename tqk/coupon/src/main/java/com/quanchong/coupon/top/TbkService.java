@@ -61,7 +61,7 @@ public class TbkService {
      */
     public List<TbGood> searchPC(String keyword, Long materialId, Long pageNo, Long pageSize) throws Exception{
         return this.search(keyword, null, pageNo, pageSize, 1L, null,
-                TbkConsts.SEARCH_SORT_TK_TOTAL_SALES_DESC, materialId, true, null);
+                TbkConsts.SEARCH_SORT_TK_TOTAL_SALES_DESC, materialId, true, null, null);
     }
 
 
@@ -76,7 +76,20 @@ public class TbkService {
      */
     public List<TbGood> searchWifi(String keyword, Long materialId, Long pageNo, Long pageSize) throws Exception{
         return this.search(keyword, null, pageNo, pageSize, 2L, null,
-                TbkConsts.SEARCH_SORT_TK_TOTAL_SALES_DESC, materialId, true, null);
+                TbkConsts.SEARCH_SORT_TK_TOTAL_SALES_DESC, materialId, true, null, null);
+    }
+
+    /**
+     * 相关推荐搜索
+     * @param cat 商品类目根id
+     * @param pageNo 页码
+     * @param pageSize 页大小
+     * @return
+     * @throws Exception
+     */
+    public List<TbGood> searchRecs(String cat, Long pageNo, Long pageSize) throws Exception {
+        return this.search(null, null, pageNo, pageSize, 1L, null,
+                TbkConsts.SEARCH_SORT_TK_TOTAL_SALES_DESC, null, true, null, cat);
     }
 
     /**
@@ -91,15 +104,21 @@ public class TbkService {
      * @param materialId 物料id
      * @param hasCoupon 是否有优惠券
      * @param freeShipment 是否包邮
+     * @param cat 商品筛选-后台类目ID。用,分割，最大10个
      * @return
      */
     public List<TbGood> search(String keyword, Long startDsr, Long pageNo, Long pageSize,
                                Long platform, Boolean isTmall, String sort, Long materialId,
-                               Boolean hasCoupon, Boolean freeShipment) throws Exception{
+                               Boolean hasCoupon, Boolean freeShipment, String cat) throws Exception{
         log.info("淘宝客物料搜索...keyword:{},startDsr:{},pageNo:{},pageSize:{},platform:{}," +
                 "isTmall:{},sort:{},materialId:{},hasCoupon:{},freeShipment:{}",keyword, startDsr,
                 pageNo, pageSize, platform, isTmall, sort, materialId, hasCoupon, freeShipment);
-        Assert.notNull(keyword, "搜索关键字不能为null");
+        if(!StringUtils.isEmpty(cat)){
+            cat = cat.contains(",")?cat:cat+",";
+            Assert.state(cat.contains(",") && cat.split(",").length<=10, "cat最大10个");
+        }else{
+            Assert.notNull(keyword, "搜索关键字不能为null");
+        }
         Assert.state(pageSize >= 1 && pageSize <= 100, "页大小范围为:1~100");
         List<TbGood> result = new ArrayList<>();
         // 创建淘宝客物料搜索请求
@@ -114,6 +133,9 @@ public class TbkService {
         request.setMaterialId(materialId);
         request.setHasCoupon(hasCoupon);
         request.setNeedFreeShipment(freeShipment);
+        if(!StringUtils.isEmpty(cat)){
+            request.setCat(cat);
+        }
         request.setAdzoneId(Long.valueOf(tbkConfig.getAdZoneId()));
         // 调用请求，获取结果
         TbkDgMaterialOptionalResponse resp = tbClient.execute(request);
@@ -228,7 +250,14 @@ public class TbkService {
     public Map<String, Object> extraMap(String itemId, String shopTitle, long sellerId, boolean needPictDetail) throws Exception{
         Map<String, Object> extraMap = new HashMap<>();
         extraMap.put("shop", this.searchShop(shopTitle, sellerId));
-        extraMap.put("picts", TbkUtil.getTbkGoodDetail(itemId));
+        if(needPictDetail){
+            Map<String, Object> imgMap = TbkUtil.getTbkGoodDetail(itemId);
+            extraMap.put("evaluates", imgMap.get("evaluates"));
+            extraMap.put("imgs", imgMap.get("imgs"));
+            extraMap.put("rootCategoryId", imgMap.get("rootCategoryId"));
+        }else{
+            extraMap.put("rootCategoryId", TbkUtil.getTbkGoodRootCategoryId(itemId));
+        }
         return extraMap;
     }
 

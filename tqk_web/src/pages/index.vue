@@ -254,7 +254,7 @@
       // 查询 今日大牌
       server.getGoodsByMaterialId(server.JRDP_M_ID, 1, 4).then((res) => {
         this.jrdpGoods = res.data
-        server.getGoodDetailById(res.data[0].id, false).then((res) => {
+        server.getGoodDetailById(res.data[0].id, false, false).then((res) => {
           this.jrdpTop1Shop = res.data.extraMap['shop'];
           this.jrdpTop1Shop['volume'] = res.data.volume
         })

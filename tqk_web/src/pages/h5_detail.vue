@@ -1,4 +1,4 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform" xmlns:v-clipboard="http://www.w3.org/1999/xhtml">
   <div>
     <div class="header_pr header_goods">
       <header class="icon_header">
@@ -20,21 +20,26 @@
     <div class="goods_shop_cart">
       <div class="cent row-s">
         <div class="col-12-2 text-center but">
-          <a href=""><p class="img"><img src="../../static/images/m/detail_tab_share.png" alt="分享"></p>分享</a>
+          <a @click.prevent="goShare">
+            <p class="img"><img src="../../static/images/m/detail_tab_share.png"></p>
+            分享
+          </a>
         </div>
         <div class="col-12-2 text-center but" style="position: relative; left: -.7rem;">
           <a><p class="img"><i class="iconfont icon-shoucang"></i></p>收藏</a>
         </div>
         <!-- 领券购买 淘口令 -->
         <div class="col-12-8">
+          <input type="hidden" v-model="tpwd">
           <div class="btn btn-primary btn-block row-s">
-            <a href="javascript:;" class="col-12-5 active intergral_qx">口令购买</a>
-            <a class="col-12-7 getGoodsLink">领券购买</a>
+            <a v-clipboard:copy="tpwd" v-clipboard:success="doCopy" class="col-12-5 active intergral_qx">口令购买</a>
+            <a class="col-12-7 getGoodsLink" :href="curGood.couponClickUrl" target="_blank">领券购买</a>
           </div>
         </div>
       </div>
       <div class="goods_shop_cart_bg "></div>
     </div>
+
     <div class="layout row" id="goodsInfo">
       <div class="goods_swiper">
         <!-- 商品图片轮播 -->
@@ -150,6 +155,7 @@
     name: "h5Detail",
     data() {
       return {
+        tpwd:'',
         curGood: {},
         showTitleMenu: false,
         showHeaderTitle: false,
@@ -158,7 +164,7 @@
     },
     created() {
       util.modeRem(false)
-      if(this.$route.params.id == undefined){
+      if(this.$route.params.id === undefined){
         server.getGoodDetail().then((res) => {
           this.prepareGood(res.data)
         })
@@ -172,13 +178,21 @@
     },
     methods: {
       prepareGood(good) {
-        console.log(good)
+        server.getTpwd(good.title, 'https:'+good.couponClickUrl).then(res=>this.tpwd=res.data)
         this.curGood = good
         this.curGood.smallImages = util.str2Array(good.smallImages)
       },
       handleScroll() {
         let scrollTop = window.pageXOffset || document.documentElement.scrollTop || document.body.scrollTop
         this.showHeaderTitle = scrollTop >= 200
+      },
+      doCopy(e) {
+        this.$layer.msg('淘口令已复制，打开【手机淘宝】即可领券购买')
+      },
+      goShare() {
+        this.curGood.tpwd = this.tpwd
+        localStorage.setItem('shareGood', JSON.stringify(this.curGood))
+        this.$router.push('/share')
       }
     },
     filters: {

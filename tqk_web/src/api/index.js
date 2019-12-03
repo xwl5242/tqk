@@ -125,3 +125,7 @@ export function getGoodDetail() {
 export function getGoodRecs(cat, materialId) {
   return get('/goods/tbk/search/recs', {'cat': cat, 'materialId': materialId})
 }
+
+export function getTpwd(text, url) {
+  return get('/goods/tbk/tpwd', {text: text, url: url})
+}

@@ -11,7 +11,10 @@
             <img src="https://cmsstatic.ffquan.cn//wap_new/user/images/integral/user.png?v=201908292038" alt="">
           </div>
           <div class="user_type">
-            <span id="user_login" class="user_login"><a href="/index.php?r=login/login">登录</a>/<a href="/index.php?r=login/register&amp;returnUrl=http%3A%2F%2Fwww.quandidi.com%2Findex.php%3Fr%3Duser%2Findex">注册</a></span>
+            <span id="user_login" class="user_login">
+              <a @click.prevent="$router.push('/login')">登录</a>
+<!--              <a>注册</a>-->
+            </span>
             <span class="user_name"></span>
           </div>
           <!-- 签到 -->

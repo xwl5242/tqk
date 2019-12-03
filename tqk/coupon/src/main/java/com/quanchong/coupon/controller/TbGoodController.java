@@ -103,6 +103,18 @@ public class TbGoodController {
     }
 
     /**
+     * 获取淘口令
+     * @param text 淘口令文本
+     * @param url 淘口令地址
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/tbk/tpwd")
+    public String TpwdCreate(String text, String url) throws Exception{
+        return tbkService.createTPwd(text, url);
+    }
+
+    /**
      * 查询总记录数count
      * @return
      */

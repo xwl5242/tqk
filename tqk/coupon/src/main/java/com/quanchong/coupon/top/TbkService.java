@@ -5,14 +5,8 @@ import com.quanchong.common.util.StringUtil;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.domain.NTbkShop;
-import com.taobao.api.request.TbkDgMaterialOptionalRequest;
-import com.taobao.api.request.TbkDgOptimusMaterialRequest;
-import com.taobao.api.request.TbkItemInfoGetRequest;
-import com.taobao.api.request.TbkShopGetRequest;
-import com.taobao.api.response.TbkDgMaterialOptionalResponse;
-import com.taobao.api.response.TbkDgOptimusMaterialResponse;
-import com.taobao.api.response.TbkItemInfoGetResponse;
-import com.taobao.api.response.TbkShopGetResponse;
+import com.taobao.api.request.*;
+import com.taobao.api.response.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -48,6 +42,31 @@ public class TbkService {
     public void init(){
         tbClient = new DefaultTaobaoClient(tbkConfig.getServerUrl(),
                 tbkConfig.getAppKey(), tbkConfig.getSecret());
+    }
+
+    /**
+     * 生成淘口令
+     * @param url 口令弹框目标页
+     * @return
+     * @throws Exception
+     */
+    public String createTPwd(String url) throws Exception{
+        return createTPwd("复制淘口令,打开淘宝APP即可查看!", url);
+    }
+
+
+    /**
+     * 生成淘口令
+     * @param text 口令弹框内容
+     * @param url 口令弹框目标页
+     * @return
+     */
+    public String createTPwd(String text, String url) throws Exception{
+        TbkTpwdCreateRequest req = new TbkTpwdCreateRequest();
+        req.setText(text);
+        req.setUrl(url);
+        TbkTpwdCreateResponse resp = tbClient.execute(req);
+        return resp.getData().getModel();
     }
 
     /**

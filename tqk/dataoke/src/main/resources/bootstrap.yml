@@ -7,11 +7,11 @@ spring:
         enabled: true
         service-id: tqk-config
       profile: '@spring.profile@'
-#    alibaba:
-#      seata:
-#        tx-service-group: my_tqk_group
+  #    alibaba:
+  #      seata:
+  #        tx-service-group: my_tqk_group
   profiles:
-    include: tbk
+    include: dataoke
 eureka:
   client:
     fetch-registry: true
@@ -19,10 +19,4 @@ eureka:
     service-url:
       defaultZone: http://tqk-eureka:8761/eureka/
 server:
-  port: 8085
-logging:
-  level:
-    com:
-      quanchong:
-        coupon:
-          mapper: debug
+  port: 8087

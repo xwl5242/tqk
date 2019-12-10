@@ -1,5 +1,5 @@
 <template>
-  <div class="ui_bot_tab">
+  <div v-if="isShow" class="ui_bot_tab">
     <div class="row-s">
       <div v-for="menu in menus" :key="menu.id" class="col-12-3 list">
         <a @click.prevent="changeTab(menu)">
@@ -26,10 +26,19 @@
     created() {
       server.getMenus(server.PLATFORM_WIFI).then(res => this.menus = res.data)
     },
+    props: {
+      isShow: {
+        type: Boolean,
+        default: true
+      }
+    },
     methods: {
       changeTab(menu) {
         this.menuSel=menu.seq
         this.$router.push(menu.menuUrl)
+      },
+      hide() {
+        this.isShow = false
       }
     }
   }

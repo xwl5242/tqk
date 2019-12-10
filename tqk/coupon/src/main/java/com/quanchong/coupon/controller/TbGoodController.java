@@ -115,6 +115,17 @@ public class TbGoodController {
     }
 
     /**
+     * 获取短连接bo
+     * @param url
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/tbk/shortUrl")
+    public String getShortUrl(String url) throws Exception {
+        return tbkService.getShortUrl(url);
+    }
+
+    /**
      * 查询总记录数count
      * @return
      */

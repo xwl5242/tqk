@@ -1,5 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="new_index">
+    <h5BotTab ref="h5BotTab"/>
     <div class="banner-bg banner-color" >
       <h5Header/>
       <h5Banner ref="h5Banner" @goClassifyList="goClassifyList"/>
@@ -496,6 +497,7 @@
   import mySwiper from '../components/swiper'
   import h5Banner from '../components/m/h5_banner'
   import h5Header from '../components/m/h5_header'
+  import h5BotTab from '../components/m/h5_botTab'
   export default {
     name: "H5Index",
     data() {
@@ -568,7 +570,8 @@
     components: {
       h5Header: h5Header,
       h5Banner: h5Banner,
-      mySwiper: mySwiper
+      mySwiper: mySwiper,
+      h5BotTab: h5BotTab
     }
   }
 </script>

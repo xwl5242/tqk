@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableEurekaClient
 @MapperScan("com.quanchong.coupon.mapper")
-@ComponentScan({"com.quanchong.common.config", "com.quanchong.common.top", "com.quanchong.coupon"})
+@ComponentScan({"com.quanchong.common.config", "com.quanchong.coupon"})
 public class TqkCouponApplication
 {
     public static void main( String[] args )

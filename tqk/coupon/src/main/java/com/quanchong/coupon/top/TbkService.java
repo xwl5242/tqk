@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 淘宝客api包装
@@ -67,6 +68,43 @@ public class TbkService {
         req.setUrl(url);
         TbkTpwdCreateResponse resp = tbClient.execute(req);
         return resp.getData().getModel();
+    }
+
+    /**
+     * 长链接转短链接
+     * @param longUrl
+     * @return
+     * @throws Exception
+     */
+    public String getShortUrl(String longUrl) throws Exception{
+        List<String> list = getShortUrls(longUrl);
+        if(null!=list && !list.isEmpty()) {
+            return list.get(0);
+        }
+        return "";
+    }
+
+    /**
+     * 长链接转短链接
+     * @param longUrls
+     * @return
+     * @throws Exception
+     */
+    public List<String> getShortUrls(String... longUrls) throws Exception {
+        TbkSpreadGetRequest req = new TbkSpreadGetRequest();
+        List<TbkSpreadGetRequest.TbkSpreadRequest> list = new ArrayList<>();
+        Stream.of(longUrls).forEach(url->{
+            TbkSpreadGetRequest.TbkSpreadRequest sr = new TbkSpreadGetRequest.TbkSpreadRequest();
+            sr.setUrl(url);
+            list.add(sr);
+        });
+        req.setRequests(list);
+        TbkSpreadGetResponse resp = tbClient.execute(req);
+        List<TbkSpreadGetResponse.TbkSpread> rList = resp.getResults();
+        if(null!=rList && !rList.isEmpty()){
+            return rList.stream().map(r->r.getContent()).collect(Collectors.toList());
+        }
+        return null;
     }
 
     /**

@@ -30,6 +30,7 @@
         <module>config</module>
         <module>coupon</module>
         <module>eureka</module>
+        <module>dataoke</module>
     </modules>
 
     <dependencyManagement>

@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-clipboard="http://www.w3.org/1999/xhtml">
   <div>
     <div class="header_pr  header_red">
       <header class="icon_header">
@@ -12,8 +12,8 @@
     <div class="goods_btn_share">
       <div class="row-s col-mar">
         <div class="col-12-6">
-          <a class="btn btn-secondary btn-block code btn-max">分享口令</a></div>
-        <div class="col-12-6"><a @click.prevent="imgShare" class="btn btn-secondary btn-block img btn-max">分享图片</a>
+          <a class="btn btn-secondary btn-block code btn-max">复制口令</a></div>
+        <div class="col-12-6"><a class="btn btn-secondary btn-block img btn-max">保存图片</a>
         </div>
       </div>
     </div>
@@ -21,6 +21,7 @@
       <div class="goods_share_hreader">
         <pre class="col-mar" style="margin-top: 1rem;">
 {{shareGood.title}}
+
 【原价】{{shareGood.reversePrice}}元
 【折扣价】{{shareGood.zkFinalPrice}}元
 【优惠券】{{shareGood.couponAmount}}元
@@ -28,91 +29,122 @@
 
 <span style="font-size: 12px;color: #acb0b5;">复制此信息打开手机淘宝即可查看并下单</span>
         </pre>
-        <div style="text-align: center;">
-          <button>复制信息</button>
-        </div>
       </div>
       <div class="item-con" id="html2Img">
         <div class="item-info-con">
-
           <a>
             <div class="shop-info">
               <img class="shop-logo" :src="shareGood.shop.pictUrl">
               <span class="shop-name">{{shareGood.shop.shopTitle}}</span>
             </div>
             <img class="item-img" :src="shareGood.pictUrl">
-            <div class="item-info">
-              <p class="title">
-                {{shareGood.title}}
-              </p>
-              <div class="price-info">
-                <div>
-                  <span class="after-price-title">用券后</span>
-                  <span class="after-price-icon">¥</span>
-                  <span class="after-price-num">99.00</span>
-                </div>
-                <div style="margin-bottom: 5px;">
-                  <span class="price">现价¥119</span>
-                  <span class="sell-num">{{shareGood.volume}}笔成交</span>
+            <div class="good-info">
+              <div class="item-info">
+                <span class="title">
+                  {{shareGood.title}}
+                </span>
+                <div class="price-info">
+                  <div>
+                    <span class="after-price-title">用券后</span>
+                    <span class="after-price-icon">¥</span>
+                    <span class="after-price-num">99.00</span>
+                  </div>
+                  <div style="margin: 5px 0;">
+                    <span class="price">现价¥119</span>
+                    <span class="sell-num">{{shareGood.volume}}笔成交</span>
+                  </div>
                 </div>
               </div>
-              <div>
-                <vue-qr :size="100" :text="shareGood.couponClickUrl" :margin="4"></vue-qr>
+              <div class="qrcode">
+                <vue-qr :size="100" :text="couponShortUrl" :margin="4"></vue-qr>
               </div>
             </div>
           </a>
         </div>
       </div>
-      <div class="goods_share_items_msgtitle">长按图片保存到相册</div>
-      <img :src="htmlUrl">
-      <div class="hr" style="height: 5px;"></div>
+      <div style="margin: 20px;">
+        <share :imageUrl="'http:'+shareGood.pictUrl"></share>
+      </div>
     </div>
   </div>
 </template>
-
 <script>
+  import * as server from '../api'
   import vueQr from 'vue-qr'
   import html2canvas from 'html2canvas'
-
+  import share from '../components/share/share'
   export default {
     name: "h5Share",
     data() {
       return {
-        htmlUrl: '',
-        shareGood: {}
+        shareImgUrl:'',
+        shareGood: {},
+        couponShortUrl: ''
       }
     },
     created() {
       this.shareGood = JSON.parse(localStorage.getItem('shareGood'))
+      server.getShortUrl('http:'+this.shareGood.couponClickUrl).then(res=>this.couponShortUrl = res.data)
     },
     methods: {
       goBack() {
         localStorage.removeItem('shareGood')
         this.$router.back()
       },
+      doCopy(e) {
+        this.$layer.msg('淘口令已复制，打开【手机淘宝】即可领券购买')
+      },
       imgShare() {
-        html2canvas(document.getElementById('html2Img'), {
-          backgroundColor: '#eeeee',
+        let html2Img = document.getElementById('html2Img')
+        html2canvas(html2Img, {
           scale: 1,
-          width: 340,
-          height: 340,
-          useCORS: true // 如果截图的内容里有图片,可能会有跨域的情况,加上这个参数,解决文件跨域问题
+          width: 375,
+          height: 580,
+          x: 0,
+          y: window.pageYOffset,
+          useCORS: true,
+          taintTest: true,
+          timeout: 500,
+          backgroundColor: null
         }).then((canvas) => {
           let url = canvas.toDataURL('image/png')
-          this.htmlUrl = url
+          let a = document.createElement('a')
+          let event = new MouseEvent('click')
+          a.download = 'goodImg.png'
+          a.href = url
+          a.dispatchEvent(event)
         })
+
       }
     },
     components: {
-      vueQr: vueQr
+      vueQr: vueQr,
+      share: share
     }
   }
 </script>
 
 <style scoped>
+  .layout {
+    height: 775px;
+  }
+  .qrcode {
+    float: right;
+    width: 30%;
+    text-align: right;
+    padding: 9px;
+    border-left: 1px dashed #fbaa58;
+  }
+  .good-info {
+    margin: 7px 0;
+    width: 99%;
+    border: 1px solid #fbaa58;
+    height: 120px;
+    border-radius: 12px;
+  }
   .item-con {
     width: 100%;
-    height: 550px;
+    height: 480px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
@@ -138,28 +170,30 @@
     margin: 5px 10px;
   }
   .item-con .item-img {
+    border-radius: 16px;
     width: 340px;
     height: 340px;
   }
   .item-con .item-info {
-    width: 50%;
+    float: left;
+    width: 60%;
     padding: 7px;
   }
   .item-con .item-info .title {
     color: #4a4a4a;
     font-size: 14px;
     line-height: 20px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    display: block;
+    /*-webkit-line-clamp: 2;*/
+    /*-webkit-box-orient: vertical;*/
     margin: 10px 0 5px 0;
   }
   .item-con .item-info .after-price-title {
-    font-size: 14px;
-    height: 18px;
-    line-height: 18px;
+    font-size: 16px;
+    height: 20px;
+    line-height: 21px;
     -webkit-transform: scale(0.72);
     transform: scale(0.72);
     -webkit-transform-origin: left 80%;
@@ -190,7 +224,7 @@
     margin-right: 8px;
   }
   .item-con .item-info .price {
-    font-size: 12px;
+    font-size: 14px;
     color: #9b9b9b;
     vertical-align: middle;
     line-height: 1.2;
@@ -200,17 +234,10 @@
   .item-con .item-info .sell-num {
     float: right;
     color: #9b9b9b;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.2;
     position: relative;
     top: 4px;
-  }
-
-  .goods_share_items_msgtitle {
-    text-align: center;
-    line-height: 36px;
-    height: 36px;
-    color: #999
   }
 
   .goods_btn_share {
@@ -222,7 +249,10 @@
     width: 100%;
     padding: 5px 0
   }
-
+  .shop-name {
+    color: #FC3F78;
+    font-weight: 600;
+  }
   .goods_btn_share .col-mar {
     margin: 0 10px
   }
@@ -240,7 +270,7 @@
     font-size: 15px
   }
 
-  .goods_share_hreader button {
+  button {
     background: none;
     border: 1px solid;
     color: #FC3F78;
@@ -248,7 +278,7 @@
     border-radius: 5px;
     height: 3rem;
     line-height: 3rem;
-    width: 50%;
+    width: 80%;
     margin: 0.5rem 0;
     position: relative;
     cursor: pointer;

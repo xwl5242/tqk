@@ -126,6 +126,21 @@ export function getGoodRecs(cat, materialId) {
   return get('/goods/tbk/search/recs', {'cat': cat, 'materialId': materialId})
 }
 
+/**
+ * 获取淘口令
+ * @param text
+ * @param url 淘口令跳转的地址
+ * @returns {AxiosPromise}
+ */
 export function getTpwd(text, url) {
   return get('/goods/tbk/tpwd', {text: text, url: url})
+}
+
+/**
+ * 获取短连接
+ * @param url
+ * @returns {AxiosPromise}
+ */
+export function getShortUrl(url) {
+  return get('/goods/tbk/shortUrl', {url: url})
 }

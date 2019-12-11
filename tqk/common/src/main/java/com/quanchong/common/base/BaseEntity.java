@@ -34,7 +34,7 @@ public class BaseEntity {
      * @return
      */
     public <T> T transforTo(Class<?> clazz, String ... keys){
-        Assert.isTrue(keys.length % 2 != 0, "keys(被转换类和要转换成类的属性对)不是偶数个,不能完全匹配！");
+        Assert.isTrue(keys.length % 2 == 0, "keys(被转换类和要转换成类的属性对)不是偶数个,不能完全匹配！");
         // 构建mapper,设置转换关系
         final Class thisClazz = this.getClass();
         Mapper mapper = DozerBeanMapperBuilder.create()

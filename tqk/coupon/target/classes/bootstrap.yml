@@ -7,9 +7,9 @@ spring:
         enabled: true
         service-id: tqk-config
       profile: '@spring.profile@'
-    alibaba:
-      seata:
-        tx-service-group: my_tqk_group
+#    alibaba:
+#      seata:
+#        tx-service-group: my_tqk_group
   profiles:
     include: tbk
 eureka:

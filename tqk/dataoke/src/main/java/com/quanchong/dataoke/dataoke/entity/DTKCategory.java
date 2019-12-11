@@ -15,7 +15,7 @@ public class DTKCategory {
     @Data
     public static class SubCategory {
         private String subcid;
-        private String scname;
+        private String subcname;
         private String scpic;
     }
 

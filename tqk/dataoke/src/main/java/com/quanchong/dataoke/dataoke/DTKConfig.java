@@ -11,5 +11,4 @@ public class DTKConfig {
     private String appKey;
     private String appSecret;
     private String pid;
-    private String version;
 }

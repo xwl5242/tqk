@@ -1,27 +1,30 @@
 package com.quanchong.dataoke.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.quanchong.dataoke.dataoke.DTKService;
+import com.quanchong.dataoke.dataoke.DTKSortEnum;
 import com.quanchong.dataoke.dataoke.entity.DTKActivity;
 import com.quanchong.dataoke.dataoke.entity.DTKCategory;
 import com.quanchong.dataoke.dataoke.entity.DTKTopic;
 import com.quanchong.dataoke.entity.DTKGood;
+import com.quanchong.dataoke.entity.DTKGoodCoupon;
 import com.quanchong.dataoke.service.DTKGoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 大淘客controller
  */
 @RestController
 @RequestMapping("/dtk")
-public class DTKController {
+public class DTKGoodController {
 
     @Autowired
     private DTKService dtkService;
@@ -56,7 +59,40 @@ public class DTKController {
      */
     @GetMapping("/topic")
     public List<DTKTopic> getTopic() throws Exception{
-        return dtkService.getTopic();
+        List<DTKTopic> topicList = dtkService.getTopic();
+        return topicList.stream().filter(dtkTopic -> dtkTopic.getBanner().size()!=0).collect(Collectors.toList());
+    }
+
+    /**
+     *
+     */
+    @PostMapping("/create_test_data")
+    public void createTestData(){
+        dtkGoodService.createTestData();
+    }
+
+    /**
+     * 根据类目id查询商品列表
+     * @param cid
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/goods/{cid}")
+    public List<DTKGood> queryByCId(@PathVariable String cid, String sort) throws Exception{
+        QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
+        wrapper.eq("cid", cid);
+        sort = StringUtils.isEmpty(sort)? DTKSortEnum.USE_COUPON_DESC.getCode() :sort;
+        if(sort.equals(DTKSortEnum.USE_COUPON_DESC.getCode())){
+            wrapper.orderByDesc("coupon_receive_num");
+        }else if(sort.equals(DTKSortEnum.CTIME_DESC.getCode())){
+            wrapper.orderByDesc("create_time");
+        }else if(sort.equals(DTKSortEnum.RESUME_DESC.getCode())){
+            wrapper.orderByDesc("month_sales");
+        }else{
+            wrapper.orderByDesc("actual_price");
+        }
+        wrapper.eq("is_expire", "0");
+        return dtkGoodService.list(wrapper);
     }
 
     /**
@@ -73,4 +109,15 @@ public class DTKController {
         IPage<DTKGood> goodPage = dtkGoodService.page(page);
         return goodPage.getRecords();
     }
+
+    /**
+     * 获取商品详情
+     * @param id 商品id
+     * @return
+     */
+    @GetMapping("/goods/detail/{id}")
+    public DTKGood queryById(@PathVariable String id) throws Exception{
+        return dtkService.getGoodDetail(id);
+    }
+
 }

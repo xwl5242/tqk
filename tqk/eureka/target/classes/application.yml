@@ -4,4 +4,4 @@ spring:
   application:
     name: tqk-eureka
   profiles:
-    active: 'dev'
+    active: '@spring.profile@'

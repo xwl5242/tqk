@@ -5,7 +5,10 @@ import com.quanchong.dataoke.dataoke.entity.*;
 import com.quanchong.dataoke.dataoke.util.BeanUtil;
 import com.quanchong.dataoke.dataoke.util.HttpUtils;
 import com.quanchong.dataoke.dataoke.util.SignMD5Util;
+import com.quanchong.dataoke.entity.DTKApi;
 import com.quanchong.dataoke.entity.DTKGood;
+import com.quanchong.dataoke.entity.DTKGoodCoupon;
+import com.quanchong.dataoke.service.DTKApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +26,9 @@ public class DTKService {
 
     @Autowired
     private DTKConfig dtkConfig;
+
+    @Autowired
+    private DTKApiService dtkApiService;
 
     /**
      * 获取商品
@@ -75,19 +81,51 @@ public class DTKService {
      * @throws Exception
      */
     public DTKGoodResp getGoods(Map<String,String> param) throws Exception{
-        String resp = execute(DTKConsts.DTK_API_GOOD_LIST, param);
+        String resp = execute(DTKConsts.DTK_API_KEY_GOODS_LIST, param);
         if(!StringUtils.isEmpty(resp)){
             return BeanUtil.jsonToBean(resp, DTKGoodResp.class);
         }
         return null;
     }
+
+    /**
+     * 获取商品详情
+     * @param id
+     * @throws Exception
+     */
+    public DTKGood getGoodDetail(String id) throws Exception{
+        Map<String,String> param = new HashMap<>();
+        param.put("id", id);
+        String resp = execute(DTKConsts.DTK_API_KEY_GOODS_DETAILS,param);
+        if(!StringUtils.isEmpty(resp)){
+            return  BeanUtil.jsonToBean(resp, DTKGood.class);
+        }
+        return null;
+    }
+
+    /**
+     * 高效转链接
+     * @param goodsId
+     * @return
+     * @throws Exception
+     */
+    public DTKGoodCoupon getPrivilegeLink(String goodsId) throws Exception {
+        Map<String,String> param = new HashMap<>();
+        param.put("goodsId", goodsId);
+        String resp = execute(DTKConsts.DTK_API_KEY_PRIVILEGE_LINK, param);
+        if(!StringUtils.isEmpty(resp)){
+            return BeanUtil.jsonToBean(resp, DTKGoodCoupon.class);
+        }
+        return null;
+    }
+
     /**
      * 超级分类
      * @return
      * @throws Exception
      */
     public List<DTKCategory> getSuperCategory() throws Exception{
-        String resp = execute(DTKConsts.DTK_API_SUPER_CATEGORY_URL,null);
+        String resp = execute(DTKConsts.DTK_API_KEY_SUPER_CATEGORY,null);
         if(!StringUtils.isEmpty(resp)){
             return BeanUtil.jsonToList(resp, DTKCategory.class);
         }
@@ -100,7 +138,7 @@ public class DTKService {
      * @throws Exception
      */
     public List<DTKActivity> getActivity() throws Exception {
-        String resp = execute(DTKConsts.DTK_API_ACTIVITY_URL, null);
+        String resp = execute(DTKConsts.DTK_API_KEY_ACTIVITY, null);
         if(!StringUtils.isEmpty(resp)){
             return BeanUtil.jsonToList(resp, DTKActivity.class);
         }
@@ -113,7 +151,7 @@ public class DTKService {
      * @throws Exception
      */
     public List<DTKTopic> getTopic() throws Exception{
-        String resp = execute(DTKConsts.DTK_API_TOPIC_URL, null);
+        String resp = execute(DTKConsts.DTK_API_KEY_TOPIC, null);
         if(!StringUtils.isEmpty(resp)){
             return BeanUtil.jsonToList(resp, DTKTopic.class);
         }
@@ -122,27 +160,25 @@ public class DTKService {
 
     /**
      * dtk Api基础调用
-     * @param apiUrl api地址
+     * @param apiKey api 标识
      * @param paramMap 接口参数
      * @return api接口结果
      * @throws Exception
      */
-    public String execute(String apiUrl, Map<String,String> paramMap) throws Exception{
+    public String execute(String apiKey, Map<String,String> paramMap) throws Exception{
         if(null==paramMap){
             paramMap = new HashMap<>();
         }
+        DTKApi dtkApi = dtkApiService.getBYApiKey(apiKey);
         // 传入默认的version 和 appKey，并做签名操作
         TreeMap<String,String> paraMap = new TreeMap<>();
-//        paraMap.put("version",dtkConfig.getVersion());
-//        paraMap.put("appKey",dtkConfig.getAppKey());
-        paraMap.put("version","v1.1.0");
-        paraMap.put("appKey","5de7822971d61");
+        paraMap.put("version",dtkApi.getApiVersion());
+        paraMap.put("appKey",dtkConfig.getAppKey());
         paraMap.putAll(paramMap);
         log.info("sign前："+paraMap);
-//        paraMap.put("sign", SignMD5Util.getSignStr(paraMap, dtkConfig.getAppSecret()));
-        paraMap.put("sign", SignMD5Util.getSignStr(paraMap, "f883be12ba21303fe6236958d3f3ea31"));
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap, dtkConfig.getAppSecret()));
         log.info("大淘客api请求参数：{}", paraMap);
-        String resp = HttpUtils.sendGet(apiUrl, paraMap);
+        String resp = HttpUtils.sendGet(dtkApi.getApiUrl(), paraMap);
         log.info("大淘客api响应结果：{}", resp);
         // 处理响应结果
         JSONObject jsonObject = JSONObject.parseObject(resp);
@@ -153,8 +189,9 @@ public class DTKService {
 
     public static void main(String[] args) throws Exception{
         DTKService service = new DTKService();
-        DTKGoodResp resp = service.getGoods(null);
-        List<DTKGood> list = new DTKGood().transforList(resp.getList(), "desc", "description");
-        System.out.println(list);
+//        DTKGoodResp resp = service.getGoods(null);
+//        List<DTKGood> list = new DTKGood().transforList(resp.getList(), "desc", "description");
+//        System.out.println(list);
+        System.out.println(service.getPrivilegeLink("545384308841"));
     }
 }

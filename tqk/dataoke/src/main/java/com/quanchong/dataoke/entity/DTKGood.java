@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.quanchong.common.base.BaseEntity;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @TableName("dtk_good")
 public class DTKGood extends BaseEntity {
@@ -63,7 +65,12 @@ public class DTKGood extends BaseEntity {
     private String yunfeixian;
     private String estimateAmount;
     private String isExpire;
-    public DTKGood(){
-        this.description = this.desc;
-    }
+    @TableField(exist = false)
+    private String detailPics;
+    @TableField(exist = false)
+    private String imgs;
+    @TableField(exist = false)
+    private String reimgs;
+    @TableField(exist = false)
+    private String shopLogo;
 }

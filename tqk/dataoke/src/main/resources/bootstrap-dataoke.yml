@@ -2,3 +2,6 @@ dataoke:
   appKey: 5de7822971d61
   appSecret: f883be12ba21303fe6236958d3f3ea31
   pid: mm_122770403_733100409_109295300261
+miniprogram:
+  appId: wxc2a9b37969814f8a
+  secret: 2ccbcd37ad47eb18ab32189480b05b82

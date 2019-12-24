@@ -12,6 +12,7 @@ import com.quanchong.dataoke.service.DTKApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
@@ -29,6 +30,52 @@ public class DTKService {
 
     @Autowired
     private DTKApiService dtkApiService;
+
+    /**
+     * 查询热搜记录
+     * @return
+     */
+    public String getHotWords() throws Exception{
+        String resp = execute(DTKConsts.DTK_API_KEY_HOT_WORDS, null);
+        if(!StringUtils.isEmpty(resp)){
+            return resp;
+        }
+        return null;
+    }
+
+    /**
+     * 超级搜索商品
+     * @param type 搜索类型，0-综合结果，1-大淘客商品，2-联盟商品
+     * @param pageId 请求页码，默认1
+     * @param pageSize 每页条数，默认20，最大100
+     * @param keyWords 关键词
+     * @param tmall 是否天猫商品，0-所有商品，默认0
+     * @param haitao 是否海淘商品，0-所有商品，默认0
+     * @param sort 排序字段，total_sales(销量),price(价格);排序 _des(降序) _asc(升序)
+     * @return
+     * @throws Exception
+     */
+    public DTKGoodResp searchFromSuperList(String type, String pageId, String pageSize,
+                                      String keyWords, String tmall, String haitao, String sort) throws Exception{
+        if(StringUtils.isEmpty(keyWords)){
+            throw new Exception("请填写搜索关键词");
+        }
+        Map<String,String> param = new HashMap<>();
+        param.put("pageSize", StringUtils.isEmpty(pageSize)?"20":pageSize);
+        param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
+        if(!StringUtils.isEmpty(sort)){
+            param.put("sort", sort);
+        }
+        param.put("type", StringUtils.isEmpty(type)?"0":type);
+        param.put("tmall", StringUtils.isEmpty(tmall)?"0":tmall);
+        param.put("haitao", StringUtils.isEmpty(haitao)?"0":haitao);
+        param.put("keyWords", keyWords);
+        String resp = execute(DTKConsts.DTK_API_KEY_LIST_SUPER_GOODS, param);
+        if(!StringUtils.isEmpty(resp)){
+            return BeanUtil.jsonToBean(resp, DTKGoodResp.class);
+        }
+        return null;
+    }
 
     /**
      * 获取商品

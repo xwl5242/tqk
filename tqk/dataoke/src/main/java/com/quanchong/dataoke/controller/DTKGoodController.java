@@ -7,6 +7,7 @@ import com.quanchong.dataoke.dataoke.DTKService;
 import com.quanchong.dataoke.dataoke.DTKSortEnum;
 import com.quanchong.dataoke.dataoke.entity.DTKActivity;
 import com.quanchong.dataoke.dataoke.entity.DTKCategory;
+import com.quanchong.dataoke.dataoke.entity.DTKGoodResp;
 import com.quanchong.dataoke.dataoke.entity.DTKTopic;
 import com.quanchong.dataoke.entity.DTKGood;
 import com.quanchong.dataoke.entity.DTKGoodCoupon;
@@ -53,7 +54,7 @@ public class DTKGoodController {
     }
 
     /**
-     *
+     * 品牌活动
      * @return
      * @throws Exception
      */
@@ -64,7 +65,17 @@ public class DTKGoodController {
     }
 
     /**
-     *
+     * 获取搜索热词
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/hotWords")
+    public String getHotWords() throws Exception{
+        return dtkService.getHotWords();
+    }
+
+    /**
+     * 测试新增商品到数据库
      */
     @PostMapping("/create_test_data")
     public void createTestData(){
@@ -77,8 +88,8 @@ public class DTKGoodController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/goods/{cid}")
-    public List<DTKGood> queryByCId(@PathVariable String cid, String sort) throws Exception{
+    @GetMapping("/goods")
+    public List<DTKGood> queryByCId(@RequestParam String cid, @RequestParam String sort) throws Exception{
         QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
         wrapper.eq("cid", cid);
         sort = StringUtils.isEmpty(sort)? DTKSortEnum.USE_COUPON_DESC.getCode() :sort;
@@ -93,6 +104,25 @@ public class DTKGoodController {
         }
         wrapper.eq("is_expire", "0");
         return dtkGoodService.list(wrapper);
+    }
+
+
+    /**
+     * 超级搜索
+     * @param pageId 页码id
+     * @param pageSize 页大小
+     * @param type 搜索类型
+     * @param keyWrods 关键词
+     * @param tmall 是否是天猫商品
+     * @param haitao 是否是海淘商品
+     * @param sort 排序
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/goods/super_search")
+    public DTKGoodResp searchFromSuperList(String type, String pageId, String pageSize,
+                                           String keyWords, String tmall, String haitao, String sort) throws Exception{
+        return dtkService.searchFromSuperList(type, pageId, pageSize, keyWords, tmall, haitao, sort);
     }
 
     /**
@@ -115,8 +145,8 @@ public class DTKGoodController {
      * @param id 商品id
      * @return
      */
-    @GetMapping("/goods/detail/{id}")
-    public DTKGood queryById(@PathVariable String id) throws Exception{
+    @GetMapping("/goods/detail")
+    public DTKGood queryById(@RequestParam String id) throws Exception{
         return dtkService.getGoodDetail(id);
     }
 

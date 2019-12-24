@@ -133,7 +133,7 @@ public class DTKGoodController {
      * @throws Exception
      */
     @GetMapping("/goods/similer")
-    public DTKGoodResp searchFromSimilerList(String itemId, String size) throws Exception{
+    public List<DTKGood> searchFromSimilerList(String itemId, String size) throws Exception{
         return dtkService.searchSimilerList(itemId, size);
     }
 

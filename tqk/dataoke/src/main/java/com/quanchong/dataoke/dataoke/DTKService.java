@@ -50,7 +50,7 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public DTKGoodResp searchSimilerList(String itemId, String size) throws Exception{
+    public List<DTKGood> searchSimilerList(String itemId, String size) throws Exception{
         if(StringUtils.isEmpty(itemId)){
             throw new Exception("请填写大淘客商品id(itemId)");
         }
@@ -59,7 +59,7 @@ public class DTKService {
         param.put("size", StringUtils.isEmpty(size)?"10":size);
         String resp = execute(DTKConsts.DTK_API_KEY_SIMILER_GOODS, param);
         if(!StringUtils.isEmpty(resp)){
-            return BeanUtil.jsonToBean(resp, DTKGoodResp.class);
+            return BeanUtil.jsonToList(resp, DTKGood.class);
         }
         return null;
     }

@@ -44,6 +44,27 @@ public class DTKService {
     }
 
     /**
+     * 相似商品推荐查询
+     * @param itemId 大淘客商品id
+     * @param size 查询结果记录数
+     * @return
+     * @throws Exception
+     */
+    public DTKGoodResp searchSimilerList(String itemId, String size) throws Exception{
+        if(StringUtils.isEmpty(itemId)){
+            throw new Exception("请填写大淘客商品id(itemId)");
+        }
+        Map<String,String> param = new HashMap<>();
+        param.put("id", itemId);
+        param.put("size", StringUtils.isEmpty(size)?"10":size);
+        String resp = execute(DTKConsts.DTK_API_KEY_SIMILER_GOODS, param);
+        if(!StringUtils.isEmpty(resp)){
+            return BeanUtil.jsonToBean(resp, DTKGoodResp.class);
+        }
+        return null;
+    }
+
+    /**
      * 超级搜索商品
      * @param type 搜索类型，0-综合结果，1-大淘客商品，2-联盟商品
      * @param pageId 请求页码，默认1

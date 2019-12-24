@@ -18,4 +18,5 @@ public class DTKConsts {
     public static final String DTK_API_KEY_GOODS_LIST_TOPIC = "goods-list-topic";
     public static final String DTK_API_KEY_HOT_WORDS = "hot-words";
     public static final String DTK_API_KEY_LIST_SUPER_GOODS = "list-super-goods";
+    public static final String DTK_API_KEY_SIMILER_GOODS = "similer-goods";
 }

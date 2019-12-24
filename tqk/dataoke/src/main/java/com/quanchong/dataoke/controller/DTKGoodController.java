@@ -112,7 +112,7 @@ public class DTKGoodController {
      * @param pageId 页码id
      * @param pageSize 页大小
      * @param type 搜索类型
-     * @param keyWrods 关键词
+     * @param keyWords 关键词
      * @param tmall 是否是天猫商品
      * @param haitao 是否是海淘商品
      * @param sort 排序
@@ -123,6 +123,18 @@ public class DTKGoodController {
     public DTKGoodResp searchFromSuperList(String type, String pageId, String pageSize,
                                            String keyWords, String tmall, String haitao, String sort) throws Exception{
         return dtkService.searchFromSuperList(type, pageId, pageSize, keyWords, tmall, haitao, sort);
+    }
+
+    /**
+     * 相似商品查询
+     * @param itemId 大淘客商品id
+     * @param size 查询结果记录数
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/goods/similer")
+    public DTKGoodResp searchFromSimilerList(String itemId, String size) throws Exception{
+        return dtkService.searchSimilerList(itemId, size);
     }
 
     /**

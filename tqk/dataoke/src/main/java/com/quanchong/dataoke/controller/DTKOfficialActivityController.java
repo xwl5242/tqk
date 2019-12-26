@@ -1,8 +1,8 @@
 package com.quanchong.dataoke.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.quanchong.common.entity.service.DTKOfficialActivity;
 import com.quanchong.common.util.DateUtils;
-import com.quanchong.dataoke.entity.DTKOfficialActivity;
 import com.quanchong.dataoke.service.DTKOfficialActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

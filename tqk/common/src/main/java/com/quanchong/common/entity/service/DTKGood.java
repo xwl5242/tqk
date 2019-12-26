@@ -47,6 +47,7 @@ public class DTKGood extends BaseEntity {
     private String shopType;
     private String haitao;
     private String goldSellers;
+    private String sellerId;
     private String shopName;
     private String shopLevel;
     private String descScore;

@@ -1,10 +1,10 @@
 package com.quanchong.dataoke.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.quanchong.common.entity.service.DTKUser;
 import com.quanchong.common.util.AESUtils;
 import com.quanchong.common.util.DateUtils;
 import com.quanchong.common.util.JwtUtils;
-import com.quanchong.dataoke.entity.DTKUser;
 import com.quanchong.dataoke.miniprogram.MiniProgramService;
 import com.quanchong.dataoke.miniprogram.entity.AuthResp;
 import com.quanchong.dataoke.service.DTKUserService;

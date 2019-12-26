@@ -1,6 +1,6 @@
 package com.quanchong.dataoke.controller;
 
-import com.quanchong.dataoke.entity.DTKGoodCoupon;
+import com.quanchong.common.entity.service.DTKGoodCoupon;
 import com.quanchong.dataoke.service.DTKGoodCouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

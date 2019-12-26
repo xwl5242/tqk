@@ -25,7 +25,7 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     @Override
     public void createTestData() {
         try{
-            GoodResp resp = dtkService.getGoods(null);
+            GoodResp resp = dtkService.goodsByMap(null);
             List<DTKGood> list = new DTKGood().transforList(resp.getList(), "desc", "description");
             saveBatch(list);
         }catch(Exception e){

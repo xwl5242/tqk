@@ -7,6 +7,7 @@ import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
 import com.quanchong.common.entity.dtkResp.GoodResp;
 import com.quanchong.common.entity.dtkResp.TopicResp;
 import com.quanchong.common.entity.service.DTKApi;
+import com.quanchong.common.entity.service.DTKBrand;
 import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.common.entity.service.DTKGoodCoupon;
 import com.quanchong.dataoke.dataoke.util.BeanUtil;
@@ -32,6 +33,25 @@ public class DTKService {
 
     @Autowired
     private DTKApiService dtkApiService;
+
+    /**
+     * 获取品牌信息
+     * @param pageId
+     * @param pageSize
+     * @return
+     * @throws Exception
+     */
+    public List<DTKBrand> brandList(String pageId, String pageSize) throws Exception{
+        Map<String,String> param = new HashMap<>();
+        param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
+        param.put("pageSize", StringUtils.isEmpty(pageSize)?"20":pageSize);
+        String resp = execute(DTKConsts.DTK_API_KEY_BRAND_LIST,param);
+        if(!StringUtils.isEmpty(resp)){
+            return BeanUtil.jsonToList(resp, DTKBrand.class);
+        }
+        return null;
+    }
+
 
     /**
      * 查询热搜记录

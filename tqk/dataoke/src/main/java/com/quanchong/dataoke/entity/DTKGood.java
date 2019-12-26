@@ -73,4 +73,6 @@ public class DTKGood extends BaseEntity {
     private String reimgs;
     @TableField(exist = false)
     private String shopLogo;
+    @TableField(exist = false)
+    private String collectId;
 }

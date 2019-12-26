@@ -1,4 +1,4 @@
-package com.quanchong.coupon.top;
+package com.quanchong.dataoke.top;
 
 import com.quanchong.common.entity.TbGood;
 import com.quanchong.common.util.StringUtil;

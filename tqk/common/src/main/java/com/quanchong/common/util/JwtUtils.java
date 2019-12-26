@@ -21,11 +21,11 @@ public class JwtUtils {
 	/**
 	 * token expire 有效期，单位秒，默认值7200s(2个小时)
 	 */
-	public static final long JWT_EXPIRE = 7200L;
+	public static final long JWT_EXPIRE = 120L;
 	/**
 	 * token appId,简单防止伪造token
 	 */
-	public static final String JWT_APPID = "mini_program_e5f7cae40cb5";
+	public static final String JWT_APPID = "mnp_e5f7cae40cb5";
 	
 	/**
 	 * 创建token
@@ -47,7 +47,7 @@ public class JwtUtils {
 		String tokenStr = builder.compact();
 		Token token = new Token();
 		token.setToken(tokenStr);
-		token.setExpire(JWT_EXPIRE);
+		token.setExpire(now+JWT_EXPIRE*1000);
 		return token;
 	}
 

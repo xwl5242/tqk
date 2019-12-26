@@ -1,4 +1,4 @@
-package com.quanchong.coupon.top;
+package com.quanchong.dataoke.top;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

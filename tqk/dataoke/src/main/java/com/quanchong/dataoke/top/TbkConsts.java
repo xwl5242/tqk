@@ -1,4 +1,4 @@
-package com.quanchong.coupon.top;
+package com.quanchong.dataoke.top;
 
 public class TbkConsts {
     /**

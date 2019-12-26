@@ -5,3 +5,9 @@ dataoke:
 miniprogram:
   appId: wxc2a9b37969814f8a
   secret: 2ccbcd37ad47eb18ab32189480b05b82
+tbk:
+  serverUrl: http://gw.api.taobao.com/router/rest
+  appKey: 27763170
+  secret: d26585b238e98bfae230a1351c1b8aad
+  adZoneId: 109295300261
+  pid: mm_122770403_733100409_109295300261

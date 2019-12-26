@@ -2,8 +2,8 @@ package com.quanchong.dataoke.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.quanchong.common.entity.service.DTKGoodCoupon;
 import com.quanchong.dataoke.dataoke.DTKService;
-import com.quanchong.dataoke.entity.DTKGoodCoupon;
 import com.quanchong.dataoke.mapper.DTKGoodCouponMapper;
 import com.quanchong.dataoke.service.DTKGoodCouponService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class DTKGoodCouponServiceImpl extends ServiceImpl<DTKGoodCouponMapper, D
         wrapper.eq("is_expire", "0");
         DTKGoodCoupon gc = dtkGoodCouponMapper.selectOne(wrapper);
         if(null == gc){
-            DTKGoodCoupon newGC = dtkService.getPrivilegeLink(itemId);
+            DTKGoodCoupon newGC = dtkService.privilegeLinkList(itemId);
             if(null != newGC){
                 int insertRet = dtkGoodCouponMapper.insert(newGC);
                 gc = insertRet==1?newGC:null;

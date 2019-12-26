@@ -1,4 +1,4 @@
-package com.quanchong.dataoke.entity;
+package com.quanchong.common.entity.service;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;

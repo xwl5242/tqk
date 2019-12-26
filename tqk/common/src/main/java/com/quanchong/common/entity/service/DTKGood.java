@@ -1,11 +1,9 @@
-package com.quanchong.dataoke.entity;
+package com.quanchong.common.entity.service;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.quanchong.common.base.BaseEntity;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @TableName("dtk_good")

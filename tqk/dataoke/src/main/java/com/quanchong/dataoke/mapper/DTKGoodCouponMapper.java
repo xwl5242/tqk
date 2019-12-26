@@ -1,7 +1,7 @@
 package com.quanchong.dataoke.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.quanchong.dataoke.entity.DTKGoodCoupon;
+import com.quanchong.common.entity.service.DTKGoodCoupon;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,9 +1,9 @@
-package com.quanchong.dataoke.dataoke.entity;
+package com.quanchong.common.entity.dtkResp;
 
 import lombok.Data;
 
 @Data
-public class DTKActivity {
+public class ActivityResp {
 
     private String activityId;
     private String activityName;

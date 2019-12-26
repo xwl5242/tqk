@@ -1,7 +1,7 @@
 package com.quanchong.dataoke.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.quanchong.dataoke.entity.DTKUser;
+import com.quanchong.common.entity.service.DTKUser;
 import org.springframework.stereotype.Repository;
 
 @Repository

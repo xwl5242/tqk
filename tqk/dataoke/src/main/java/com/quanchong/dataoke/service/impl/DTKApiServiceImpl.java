@@ -2,7 +2,7 @@ package com.quanchong.dataoke.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quanchong.dataoke.entity.DTKApi;
+import com.quanchong.common.entity.service.DTKApi;
 import com.quanchong.dataoke.mapper.DTKApiMapper;
 import com.quanchong.dataoke.service.DTKApiService;
 import org.springframework.beans.factory.annotation.Autowired;

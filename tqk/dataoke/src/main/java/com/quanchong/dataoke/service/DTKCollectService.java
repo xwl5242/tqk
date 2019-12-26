@@ -1,8 +1,8 @@
 package com.quanchong.dataoke.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.quanchong.dataoke.entity.DTKCollect;
-import com.quanchong.dataoke.entity.DTKGood;
+import com.quanchong.common.entity.service.DTKCollect;
+import com.quanchong.common.entity.service.DTKGood;
 
 import java.util.List;
 

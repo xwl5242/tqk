@@ -3,14 +3,13 @@ package com.quanchong.dataoke.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.quanchong.common.entity.dtkResp.ActivityResp;
+import com.quanchong.common.entity.dtkResp.GoodResp;
+import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
+import com.quanchong.common.entity.dtkResp.TopicResp;
+import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.dataoke.dataoke.DTKService;
 import com.quanchong.dataoke.dataoke.DTKSortEnum;
-import com.quanchong.dataoke.dataoke.entity.DTKActivity;
-import com.quanchong.dataoke.dataoke.entity.DTKCategory;
-import com.quanchong.dataoke.dataoke.entity.DTKGoodResp;
-import com.quanchong.dataoke.dataoke.entity.DTKTopic;
-import com.quanchong.dataoke.entity.DTKGood;
-import com.quanchong.dataoke.entity.DTKGoodCoupon;
 import com.quanchong.dataoke.service.DTKGoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
@@ -39,8 +38,8 @@ public class DTKGoodController {
      * @throws Exception
      */
     @GetMapping("/super_category")
-    public List<DTKCategory> getSuperCategory() throws Exception{
-        return dtkService.getSuperCategory();
+    public List<SuperCategoryResp> getSuperCategory() throws Exception{
+        return dtkService.superCategoryList();
     }
 
     /**
@@ -49,8 +48,8 @@ public class DTKGoodController {
      * @throws Exception
      */
     @GetMapping("/activity")
-    public List<DTKActivity> getActivity() throws Exception{
-        return dtkService.getActivity();
+    public List<ActivityResp> getActivity() throws Exception{
+        return dtkService.activityList();
     }
 
     /**
@@ -59,8 +58,8 @@ public class DTKGoodController {
      * @throws Exception
      */
     @GetMapping("/topic")
-    public List<DTKTopic> getTopic() throws Exception{
-        List<DTKTopic> topicList = dtkService.getTopic();
+    public List<TopicResp> getTopic() throws Exception{
+        List<TopicResp> topicList = dtkService.topicList();
         return topicList.stream().filter(dtkTopic -> dtkTopic.getBanner().size()!=0).collect(Collectors.toList());
     }
 
@@ -71,7 +70,7 @@ public class DTKGoodController {
      */
     @GetMapping("/hotWords")
     public String getHotWords() throws Exception{
-        return dtkService.getHotWords();
+        return dtkService.hotWordsList();
     }
 
     /**
@@ -120,9 +119,9 @@ public class DTKGoodController {
      * @throws Exception
      */
     @GetMapping("/super_search")
-    public DTKGoodResp searchFromSuperList(String type, String pageId, String pageSize,
-                                           String keyWords, String tmall, String haitao, String sort) throws Exception{
-        return dtkService.searchFromSuperList(type, pageId, pageSize, keyWords, tmall, haitao, sort);
+    public GoodResp searchFromSuperList(String type, String pageId, String pageSize,
+                                        String keyWords, String tmall, String haitao, String sort) throws Exception{
+        return dtkService.goodsBySuperSearch(type, pageId, pageSize, keyWords, tmall, haitao, sort);
     }
 
     /**
@@ -134,7 +133,7 @@ public class DTKGoodController {
      */
     @GetMapping("/similer")
     public List<DTKGood> searchFromSimilerList(String itemId, String size) throws Exception{
-        return dtkService.searchSimilerList(itemId, size);
+        return dtkService.goodsBySimiler(itemId, size);
     }
 
     /**
@@ -159,7 +158,7 @@ public class DTKGoodController {
      */
     @GetMapping("/detail")
     public DTKGood queryById(@RequestParam String id) throws Exception{
-        return dtkService.getGoodDetail(id);
+        return dtkService.goodDetail(id);
     }
 
 }

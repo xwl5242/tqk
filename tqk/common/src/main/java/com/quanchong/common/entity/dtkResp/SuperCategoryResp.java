@@ -1,11 +1,11 @@
-package com.quanchong.dataoke.dataoke.entity;
+package com.quanchong.common.entity.dtkResp;
 
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class DTKCategory {
+public class SuperCategoryResp {
 
     private String cid;
     private String cname;

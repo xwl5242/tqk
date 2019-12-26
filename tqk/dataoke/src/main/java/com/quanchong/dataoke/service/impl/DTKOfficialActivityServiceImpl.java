@@ -1,7 +1,7 @@
 package com.quanchong.dataoke.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quanchong.dataoke.entity.DTKOfficialActivity;
+import com.quanchong.common.entity.service.DTKOfficialActivity;
 import com.quanchong.dataoke.mapper.DTKOfficialActivityMapper;
 import com.quanchong.dataoke.service.DTKOfficialActivityService;
 import org.springframework.stereotype.Service;

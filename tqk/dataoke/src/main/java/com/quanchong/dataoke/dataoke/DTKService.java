@@ -1,25 +1,27 @@
 package com.quanchong.dataoke.dataoke;
 
+
 import com.alibaba.fastjson.JSONObject;
-import com.quanchong.dataoke.dataoke.entity.*;
+import com.quanchong.common.entity.dtkResp.ActivityResp;
+import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
+import com.quanchong.common.entity.dtkResp.GoodResp;
+import com.quanchong.common.entity.dtkResp.TopicResp;
+import com.quanchong.common.entity.service.DTKApi;
+import com.quanchong.common.entity.service.DTKGood;
+import com.quanchong.common.entity.service.DTKGoodCoupon;
 import com.quanchong.dataoke.dataoke.util.BeanUtil;
 import com.quanchong.dataoke.dataoke.util.HttpUtils;
 import com.quanchong.dataoke.dataoke.util.SignMD5Util;
-import com.quanchong.dataoke.entity.DTKApi;
-import com.quanchong.dataoke.entity.DTKGood;
-import com.quanchong.dataoke.entity.DTKGoodCoupon;
 import com.quanchong.dataoke.service.DTKApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -35,7 +37,7 @@ public class DTKService {
      * 查询热搜记录
      * @return
      */
-    public String getHotWords() throws Exception{
+    public String hotWordsList() throws Exception{
         String resp = execute(DTKConsts.DTK_API_KEY_HOT_WORDS, null);
         if(!StringUtils.isEmpty(resp)){
             return resp;
@@ -50,7 +52,7 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public List<DTKGood> searchSimilerList(String itemId, String size) throws Exception{
+    public List<DTKGood> goodsBySimiler(String itemId, String size) throws Exception{
         if(StringUtils.isEmpty(itemId)){
             throw new Exception("请填写大淘客商品id(itemId)");
         }
@@ -76,8 +78,8 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public DTKGoodResp searchFromSuperList(String type, String pageId, String pageSize,
-                                      String keyWords, String tmall, String haitao, String sort) throws Exception{
+    public GoodResp goodsBySuperSearch(String type, String pageId, String pageSize,
+                                        String keyWords, String tmall, String haitao, String sort) throws Exception{
         if(StringUtils.isEmpty(keyWords)){
             throw new Exception("请填写搜索关键词");
         }
@@ -93,7 +95,7 @@ public class DTKService {
         param.put("keyWords", keyWords);
         String resp = execute(DTKConsts.DTK_API_KEY_LIST_SUPER_GOODS, param);
         if(!StringUtils.isEmpty(resp)){
-            return BeanUtil.jsonToBean(resp, DTKGoodResp.class);
+            return BeanUtil.jsonToBean(resp, GoodResp.class);
         }
         return null;
     }
@@ -116,9 +118,9 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public DTKGoodResp getGoods(String pageSize, String pageId, String sort, String cids, String subcid,
-                                String juHuaSuan, String taoQiangGou, String tmall, String tchaoshi, String goldSeller,
-                                String haitao, String brand, String brandIds) throws Exception{
+    public GoodResp goods(String pageSize, String pageId, String sort, String cids, String subcid,
+                             String juHuaSuan, String taoQiangGou, String tmall, String tchaoshi, String goldSeller,
+                             String haitao, String brand, String brandIds) throws Exception{
         Map<String,String> param = new HashMap<>();
         param.put("pageSize", StringUtils.isEmpty(pageSize)?"50":pageSize);
         param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
@@ -139,7 +141,7 @@ public class DTKService {
         if(!StringUtils.isEmpty(brandIds)){
             param.put("brandIds", brandIds);
         }
-        return getGoods(param);
+        return goodsByMap(param);
     }
 
     /**
@@ -148,10 +150,10 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public DTKGoodResp getGoods(Map<String,String> param) throws Exception{
+    public GoodResp goodsByMap(Map<String,String> param) throws Exception{
         String resp = execute(DTKConsts.DTK_API_KEY_GOODS_LIST, param);
         if(!StringUtils.isEmpty(resp)){
-            return BeanUtil.jsonToBean(resp, DTKGoodResp.class);
+            return BeanUtil.jsonToBean(resp, GoodResp.class);
         }
         return null;
     }
@@ -161,7 +163,7 @@ public class DTKService {
      * @param id
      * @throws Exception
      */
-    public DTKGood getGoodDetail(String id) throws Exception{
+    public DTKGood goodDetail(String id) throws Exception{
         Map<String,String> param = new HashMap<>();
         param.put("id", id);
         String resp = execute(DTKConsts.DTK_API_KEY_GOODS_DETAILS,param);
@@ -177,7 +179,7 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public DTKGoodCoupon getPrivilegeLink(String goodsId) throws Exception {
+    public DTKGoodCoupon privilegeLinkList(String goodsId) throws Exception {
         Map<String,String> param = new HashMap<>();
         param.put("goodsId", goodsId);
         String resp = execute(DTKConsts.DTK_API_KEY_PRIVILEGE_LINK, param);
@@ -192,10 +194,10 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public List<DTKCategory> getSuperCategory() throws Exception{
+    public List<SuperCategoryResp> superCategoryList() throws Exception{
         String resp = execute(DTKConsts.DTK_API_KEY_SUPER_CATEGORY,null);
         if(!StringUtils.isEmpty(resp)){
-            return BeanUtil.jsonToList(resp, DTKCategory.class);
+            return BeanUtil.jsonToList(resp, SuperCategoryResp.class);
         }
         return null;
     }
@@ -205,23 +207,23 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public List<DTKActivity> getActivity() throws Exception {
+    public List<ActivityResp> activityList() throws Exception {
         String resp = execute(DTKConsts.DTK_API_KEY_ACTIVITY, null);
         if(!StringUtils.isEmpty(resp)){
-            return BeanUtil.jsonToList(resp, DTKActivity.class);
+            return BeanUtil.jsonToList(resp, ActivityResp.class);
         }
         return null;
     }
 
     /**
-     * 精选专辑
+     * 精选专辑列表
      * @return
      * @throws Exception
      */
-    public List<DTKTopic> getTopic() throws Exception{
+    public List<TopicResp> topicList() throws Exception{
         String resp = execute(DTKConsts.DTK_API_KEY_TOPIC, null);
         if(!StringUtils.isEmpty(resp)){
-            return BeanUtil.jsonToList(resp, DTKTopic.class);
+            return BeanUtil.jsonToList(resp, TopicResp.class);
         }
         return null;
     }
@@ -255,11 +257,4 @@ public class DTKService {
         return DTKConsts.DTK_API_RESPONSE_SUCCESS.equals(code)?data:null;
     }
 
-    public static void main(String[] args) throws Exception{
-        DTKService service = new DTKService();
-//        DTKGoodResp resp = service.getGoods(null);
-//        List<DTKGood> list = new DTKGood().transforList(resp.getList(), "desc", "description");
-//        System.out.println(list);
-        System.out.println(service.getPrivilegeLink("545384308841"));
-    }
 }

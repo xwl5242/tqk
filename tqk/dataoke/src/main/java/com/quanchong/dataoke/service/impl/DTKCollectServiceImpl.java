@@ -2,8 +2,8 @@ package com.quanchong.dataoke.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quanchong.dataoke.entity.DTKCollect;
-import com.quanchong.dataoke.entity.DTKGood;
+import com.quanchong.common.entity.service.DTKCollect;
+import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.dataoke.mapper.DTKCollectMapper;
 import com.quanchong.dataoke.service.DTKCollectService;
 import com.quanchong.dataoke.service.DTKGoodService;

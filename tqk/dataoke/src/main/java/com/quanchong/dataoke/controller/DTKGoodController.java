@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * 大淘客controller
  */
 @RestController
-@RequestMapping("/dtk")
+@RequestMapping("/dtk/goods")
 public class DTKGoodController {
 
     @Autowired
@@ -88,7 +88,7 @@ public class DTKGoodController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/goods")
+    @GetMapping("")
     public List<DTKGood> queryByCId(@RequestParam String cid, @RequestParam String sort) throws Exception{
         QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
         wrapper.eq("cid", cid);
@@ -119,7 +119,7 @@ public class DTKGoodController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/goods/super_search")
+    @GetMapping("/super_search")
     public DTKGoodResp searchFromSuperList(String type, String pageId, String pageSize,
                                            String keyWords, String tmall, String haitao, String sort) throws Exception{
         return dtkService.searchFromSuperList(type, pageId, pageSize, keyWords, tmall, haitao, sort);
@@ -132,7 +132,7 @@ public class DTKGoodController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/goods/similer")
+    @GetMapping("/similer")
     public List<DTKGood> searchFromSimilerList(String itemId, String size) throws Exception{
         return dtkService.searchSimilerList(itemId, size);
     }
@@ -143,7 +143,7 @@ public class DTKGoodController {
      * @param pageSize 页大小
      * @return
      */
-    @GetMapping("/goods/page")
+    @GetMapping("/page")
     public List<DTKGood> findPageList(Long pageNo, Long pageSize){
         IPage<DTKGood> page = new Page<>();
         page.setCurrent(ObjectUtils.isEmpty(pageNo)?1L:pageNo);
@@ -157,7 +157,7 @@ public class DTKGoodController {
      * @param id 商品id
      * @return
      */
-    @GetMapping("/goods/detail")
+    @GetMapping("/detail")
     public DTKGood queryById(@RequestParam String id) throws Exception{
         return dtkService.getGoodDetail(id);
     }

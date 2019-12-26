@@ -9,18 +9,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 大淘客收藏
+ */
 @RestController
-@RequestMapping("/dtk")
+@RequestMapping("/dtk/collect")
 public class DTKCollectController {
 
     @Autowired
     private DTKCollectService dtkCollectService;
 
-    @PostMapping("/collect/add")
+    /**
+     * 添加收藏
+     * @param collect
+     * @return
+     */
+    @PostMapping("/add")
     public boolean addCollect(@RequestBody DTKCollect collect){
         QueryWrapper<DTKCollect> wrapper = new QueryWrapper<>();
         wrapper.eq("open_id", collect.getOpenId());
@@ -37,12 +44,22 @@ public class DTKCollectController {
 
     }
 
-    @GetMapping("/collect/list")
+    /**
+     * 查询收藏列表
+     * @param openId
+     * @return
+     */
+    @GetMapping("/list")
     public List<DTKGood> list(String openId){
         return dtkCollectService.selectCollectGoods(openId);
     }
 
-    @PostMapping("/collect/remove")
+    /**
+     * 删除收藏
+     * @param idAttr
+     * @return
+     */
+    @PostMapping("/remove")
     public boolean remove(@RequestBody Map<String,String> idAttr) {
         List<DTKCollect> collects = new ArrayList<>();
         String ids = idAttr.get("idAttr");

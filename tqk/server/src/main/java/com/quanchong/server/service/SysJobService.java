@@ -3,7 +3,7 @@ package com.quanchong.server.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.quanchong.common.entity.SysJob;
+import com.quanchong.common.entity.sys.SysJob;
 import org.quartz.*;
 import org.springframework.util.ObjectUtils;
 

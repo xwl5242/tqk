@@ -1,6 +1,6 @@
 package com.quanchong.server.controller;
 
-import com.quanchong.common.entity.SysJob;
+import com.quanchong.common.entity.sys.SysJob;
 import com.quanchong.server.service.SysJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -3,7 +3,7 @@ package com.quanchong.dataoke.top;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.quanchong.common.entity.Evaluate;
+import com.quanchong.common.entity.top.Evaluate;
 import com.quanchong.common.util.HttpUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;

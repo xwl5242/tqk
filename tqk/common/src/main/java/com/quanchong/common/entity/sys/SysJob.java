@@ -1,4 +1,4 @@
-package com.quanchong.common.entity;
+package com.quanchong.common.entity.sys;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;

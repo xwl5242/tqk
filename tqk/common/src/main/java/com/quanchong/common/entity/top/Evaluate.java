@@ -1,4 +1,4 @@
-package com.quanchong.common.entity;
+package com.quanchong.common.entity.top;
 
 import lombok.Data;
 

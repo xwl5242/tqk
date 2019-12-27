@@ -2,7 +2,7 @@ package com.quanchong.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quanchong.common.entity.SysJob;
+import com.quanchong.common.entity.sys.SysJob;
 import com.quanchong.common.util.DateUtils;
 import com.quanchong.server.mapper.SysJobMapper;
 import com.quanchong.server.service.SysJobService;

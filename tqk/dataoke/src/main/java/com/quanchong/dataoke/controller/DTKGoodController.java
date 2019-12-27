@@ -16,7 +16,9 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -105,6 +107,14 @@ public class DTKGoodController {
         return dtkGoodService.list(wrapper);
     }
 
+    @GetMapping("/brand/test")
+    public List<DTKGood> test() throws Exception{
+        Map<String,String> map = new HashMap<>();
+        map.put("brand", "1");
+        map.put("brandIds", "29504");
+        map.put("pageSize", "2");
+        return dtkService.goodsByMap(map).getList();
+    }
 
     /**
      * 超级搜索

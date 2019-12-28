@@ -9,6 +9,8 @@ public class FFQuanBrand {
     private String brandId;
     private String brandName;
     private String brandLogo;
+    private String backgroundImg;
+    private String longProfit;
     private String recentSale;
     private String brandDes;
     private String brandWenan;

@@ -63,6 +63,7 @@ public class FFQuanApi {
             JSONObject respJson = JSONObject.parseObject(resp);
             String code = respJson.getString("code");
             if("0".equals(code)){
+                System.out.println(respJson);
                 return respJson.getString("data");
             }
         }

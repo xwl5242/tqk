@@ -12,6 +12,7 @@ import com.quanchong.dataoke.dataoke.DTKService;
 import com.quanchong.dataoke.dataoke.DTKSortEnum;
 import com.quanchong.dataoke.service.DTKGoodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -107,12 +108,23 @@ public class DTKGoodController {
         return dtkGoodService.list(wrapper);
     }
 
-    @GetMapping("/brand/test")
-    public List<DTKGood> test() throws Exception{
+    /**
+     * 查询品牌商品
+     * @param pageId 页面
+     * @param pageSize 页大小
+     * @param brandIds 品牌id
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/byBrand")
+    public List<DTKGood> queryByBrandId(@RequestParam String pageId,
+                                        @RequestParam String pageSize, @RequestParam String brandIds) throws Exception{
+        Assert.notNull(brandIds, "请填写品牌id");
         Map<String,String> map = new HashMap<>();
         map.put("brand", "1");
-        map.put("brandIds", "29504");
-        map.put("pageSize", "2");
+        map.put("brandIds", brandIds);
+        map.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
+        map.put("pageSize", StringUtils.isEmpty(pageSize)?"20":pageSize);
         return dtkService.goodsByMap(map).getList();
     }
 

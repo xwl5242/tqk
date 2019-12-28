@@ -14,6 +14,8 @@ public class FFQuanBrandGood {
     private String jiage;
     private String discount;
     private String dtitle;
+    private String xiaoliang;
+    private String sellDear;
     private List<Label> goodsLabels;
 
     @Data

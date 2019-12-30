@@ -65,14 +65,17 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
             System.out.println("添加完所有9.9元商品后:" + goods.size());
             // 所有榜单商品
             for(String rankType: rankTypeList){
-                List<DTKGood> goodList = dtkService.goodsByRanking(rankType);
-                // 设置商品的rank 和 rankType
-                goodList = goodList.stream().map(good-> {
-                    good.setRank("1");
-                    good.setRankType(rankType);
-                    return good;
-                }).collect(Collectors.toList());
-                goods.addAll(goodList);
+                for(String cid: cidList){
+                    List<DTKGood> goodList = dtkService.goodsByRanking(rankType, cid);
+                    // 设置商品的rank 和 rankType
+                    goodList = goodList.stream().map(good-> {
+                        good.setRank("1");
+                        good.setCid(cid);
+                        good.setRankType(rankType);
+                        return good;
+                    }).collect(Collectors.toList());
+                    goods.addAll(goodList);
+                }
             }
             System.out.println("添加完所有商品后:" + goods.size());
             goods = goods.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());

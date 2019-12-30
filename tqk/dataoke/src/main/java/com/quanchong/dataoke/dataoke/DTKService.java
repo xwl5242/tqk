@@ -115,9 +115,12 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public List<DTKGood> goodsByRanking(String rankType) throws Exception{
+    public List<DTKGood> goodsByRanking(String rankType, String cid) throws Exception{
         Map<String, String> param = new HashMap<>();
         param.put("rankType", StringUtils.isEmpty(rankType)?"1":rankType);
+        if(!StringUtils.isEmpty(cid)){
+            param.put("cid", cid);
+        }
         String resp = execute(DTKConsts.DTK_API_KEY_RANKING_LIST, param);
         if(!StringUtils.isEmpty(resp)){
             return BeanUtil.jsonToList(resp, DTKGood.class);

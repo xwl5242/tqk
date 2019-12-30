@@ -163,7 +163,7 @@ public class DTKGoodController {
      */
     @GetMapping("/ranking")
     public List<DTKGood> queryByRanking(Long pageNo, Long pageSize,
-                                        String rankType, String isNewRanking) {
+                                        String rankType, String cid, String isNewRanking) {
         pageNo = null == pageNo ? 0L : pageNo;
         pageSize = null == pageSize ? 20L : pageSize;
         isNewRanking = StringUtils.isEmpty(isNewRanking)?"0":isNewRanking;
@@ -173,6 +173,10 @@ public class DTKGoodController {
         wrapper.eq("rank", "1");
         wrapper.eq("rank_type", rankType);
         wrapper.eq("new_ranking_goods", isNewRanking);
+        if(!StringUtils.isEmpty(cid)){
+            wrapper.eq("cid", cid);
+        }
+        wrapper.orderByAsc("ranking");
         IPage<DTKGood> page = new Page<>();
         page.setCurrent(pageNo);
         page.setSize(pageSize);

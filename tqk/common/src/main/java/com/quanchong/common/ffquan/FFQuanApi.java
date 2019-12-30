@@ -1,20 +1,29 @@
 package com.quanchong.common.ffquan;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONStreamAware;
 import com.quanchong.common.util.HttpUtils;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
+import com.quanchong.common.util.StringUtil;
 import org.springframework.util.StringUtils;
 
 public class FFQuanApi {
 
+    /**
+     * ffquan 品牌相关
+     */
     private static final String BRAND_PIC = "http://cmsjapi.ffquan.cn/api/category/product/model-detail-by-model-id-new?entityId=4&modelId=14451&source=3";
     private static final String BRAND_CATEGORY = "http://cmsjapi.ffquan.cn/api/goods/category-brand-list";
     private static final String BRAND_RECS_LIST = "http://cmsjapi.ffquan.cn/api/tb-service/get-one-data";
     private static final String BRAND_HOTS_LIST = "http://cmsjapi.ffquan.cn/api/tb-service/get-two-data";
     private static final String BRAND_LIST_BY_CATEGORY_ID = "http://cmsjapi.ffquan.cn/api/tb-service/brand-list-by-category-id?typeId=";
     private static final String BRAND_DETAIL = "http://cmsjapi.ffquan.cn/api/tb-service/brand/detail-info?brandId=";
+
+    /**
+     * ffquan discounts相关(折上折)
+     */
+    private static final String DISCOUNT_CATEGORY = "http://cmsjapi.ffquan.cn/api/goods/super-discount/cate-list/v1";
+    private static final String DISCOUNT_GOODS = "http://cmsjapi.ffquan.cn/api/goods/super-discount/goods-list/v1?cId=";
 
 
     /**
@@ -100,6 +109,33 @@ public class FFQuanApi {
     }
 
     /**
+     * 折上折商品菜单类目
+     * @return
+     * @throws Exception
+     */
+    public static JSONArray discountCategoryList() throws Exception {
+        String resp = execute(DISCOUNT_CATEGORY);
+        if(!StringUtils.isEmpty(resp)) {
+            return JSONArray.parseArray(resp);
+        }
+        return null;
+    }
+
+    /**
+     * 折上折商品
+     * @param cId
+     * @return
+     * @throws Exception
+     */
+    public static JSONObject discountGoods(String cId) throws Exception {
+        String resp = execute(DISCOUNT_GOODS + cId);
+        if(!StringUtils.isEmpty(resp)){
+            return JSONObject.parseObject(resp);
+        }
+        return null;
+    }
+
+    /**
      * 调用ffquan api
      * @param apiUrl api url
      * @return
@@ -111,7 +147,6 @@ public class FFQuanApi {
             JSONObject respJson = JSONObject.parseObject(resp);
             String code = respJson.getString("code");
             if("0".equals(code)){
-                System.out.println(respJson);
                 return respJson.getString("data");
             }
         }

@@ -9,6 +9,9 @@ import com.quanchong.common.entity.dtkResp.GoodResp;
 import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
 import com.quanchong.common.entity.dtkResp.TopicResp;
 import com.quanchong.common.entity.service.DTKGood;
+import com.quanchong.common.ffquan.FFQuanApi;
+import com.quanchong.common.ffquan.FFQuanDiscountGood;
+import com.quanchong.common.ffquan.FFQuanDiscountResp;
 import com.quanchong.common.util.DateUtils;
 import com.quanchong.dataoke.dataoke.DTKConsts;
 import com.quanchong.dataoke.dataoke.DTKService;
@@ -175,6 +178,25 @@ public class DTKGoodController {
         page.setSize(pageSize);
         IPage<DTKGood> pageList = dtkGoodService.page(page, wrapper);
         return pageList.getRecords();
+    }
+
+    /**
+     * 查询折上折类目id List
+     */
+    @GetMapping("/ffquan/discount_category")
+    public JSONArray queryFFQuanDiscountCategory() throws Exception{
+        return FFQuanApi.discountCategoryList();
+    }
+
+    /**
+     * ffquan 查询折上折商品
+     * @param cId 折上折类目id
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ffquan/discount")
+    public FFQuanDiscountResp queryFFQuanDiscountGoods(String cId) throws Exception{
+        return FFQuanApi.discountGoods(cId).toJavaObject(FFQuanDiscountResp.class);
     }
 
     /**

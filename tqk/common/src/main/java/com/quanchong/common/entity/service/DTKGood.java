@@ -16,6 +16,8 @@ public class DTKGood extends BaseEntity {
     private String dtitle;
     @JSONField(name = "desc")
     private String description;
+    @TableField(exist = false)
+    private String ddqDesc;
     private String cid;
     private String subcid;
     private String tbcid;

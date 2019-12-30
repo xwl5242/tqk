@@ -8,6 +8,7 @@ import com.quanchong.common.entity.dtkResp.GoodResp;
 import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
 import com.quanchong.common.entity.dtkResp.TopicResp;
 import com.quanchong.common.entity.service.DTKGood;
+import com.quanchong.dataoke.dataoke.DTKConsts;
 import com.quanchong.dataoke.dataoke.DTKService;
 import com.quanchong.dataoke.dataoke.DTKSortEnum;
 import com.quanchong.dataoke.service.DTKGoodService;
@@ -34,6 +35,14 @@ public class DTKGoodController {
 
     @Autowired
     private DTKGoodService dtkGoodService;
+
+    /**
+     * 采集商品
+     */
+    @PostMapping("/gather")
+    public void gather(){
+        dtkGoodService.gather();
+    }
 
     /**
      * 超级分类
@@ -77,21 +86,15 @@ public class DTKGoodController {
     }
 
     /**
-     * 测试新增商品到数据库
-     */
-    @PostMapping("/create_test_data")
-    public void createTestData(){
-        dtkGoodService.createTestData();
-    }
-
-    /**
      * 根据类目id查询商品列表
      * @param cid
      * @return
      * @throws Exception
      */
-    @GetMapping("")
-    public List<DTKGood> queryByCId(@RequestParam String cid, @RequestParam String sort) throws Exception{
+    @GetMapping("/cid")
+    public List<DTKGood> queryByCId(Long pageNo, Long pageSize, String cid, String sort) {
+        pageNo = null == pageNo ? 0L : pageNo;
+        pageSize = null == pageSize ? 20L : pageSize;
         QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
         wrapper.eq("cid", cid);
         sort = StringUtils.isEmpty(sort)? DTKSortEnum.USE_COUPON_DESC.getCode() :sort;
@@ -104,8 +107,61 @@ public class DTKGoodController {
         }else{
             wrapper.orderByDesc("actual_price");
         }
+        wrapper.eq("nine", "0");
+        wrapper.eq("rank", "0");
         wrapper.eq("is_expire", "0");
-        return dtkGoodService.list(wrapper);
+        IPage<DTKGood> page = new Page<>();
+        page.setCurrent(pageNo);
+        page.setSize(pageSize);
+        return dtkGoodService.page(page, wrapper).getRecords();
+    }
+
+    /**
+     * 9.9包邮商品
+     * @param pageNo 页面
+     * @param pageSize 页大小
+     * @param nineCid 9.9包邮商品所属类目id
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/nine")
+    public List<DTKGood> queryByNine(Long pageNo, Long pageSize, String nineCid){
+        pageNo = null == pageNo ? 0L : pageNo;
+        pageSize = null == pageSize ? 20L : pageSize;
+        QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
+        wrapper.eq("is_expire", "0");
+        wrapper.eq("nine", "1");
+        wrapper.eq("nine_cid", nineCid);
+        IPage<DTKGood> page = new Page<>(pageNo, pageSize);
+        IPage<DTKGood> pageList = dtkGoodService.page(page, wrapper);
+        return pageList.getRecords();
+    }
+
+    /**
+     * 获取榜单商品
+     * @param pageNo 页码
+     * @param pageSize 页大小
+     * @param rankType 榜单类型
+     * @param isNewRanking 是否是新上榜商品（12小时内入榜）
+     * @return
+     */
+    @GetMapping("/ranking")
+    public List<DTKGood> queryByRanking(Long pageNo, Long pageSize,
+                                        String rankType, String isNewRanking) {
+        pageNo = null == pageNo ? 0L : pageNo;
+        pageSize = null == pageSize ? 20L : pageSize;
+        isNewRanking = StringUtils.isEmpty(isNewRanking)?"0":isNewRanking;
+        rankType = StringUtils.isEmpty(rankType)? DTKConsts.DTK_RANK_TYPE_NOW :rankType;
+        QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
+        wrapper.eq("is_expire", "0");
+        wrapper.eq("rank", "1");
+        wrapper.eq("rank_type", rankType);
+        wrapper.eq("new_ranking_goods", isNewRanking);
+        IPage<DTKGood> page = new Page<>();
+        page.setCurrent(pageNo);
+        page.setSize(pageSize);
+        IPage<DTKGood> pageList = dtkGoodService.page(page, wrapper);
+        return pageList.getRecords();
     }
 
     /**
@@ -117,8 +173,7 @@ public class DTKGoodController {
      * @throws Exception
      */
     @GetMapping("/byBrand")
-    public List<DTKGood> queryByBrandId(@RequestParam String pageId,
-                                        @RequestParam String pageSize, @RequestParam String brandIds) throws Exception{
+    public List<DTKGood> queryByBrandId(String pageId, String pageSize, String brandIds) throws Exception{
         Assert.notNull(brandIds, "请填写品牌id");
         Map<String,String> map = new HashMap<>();
         map.put("brand", "1");
@@ -156,21 +211,6 @@ public class DTKGoodController {
     @GetMapping("/similer")
     public List<DTKGood> searchFromSimilerList(String itemId, String size) throws Exception{
         return dtkService.goodsBySimiler(itemId, size);
-    }
-
-    /**
-     * 获取商品list
-     * @param pageNo 页面
-     * @param pageSize 页大小
-     * @return
-     */
-    @GetMapping("/page")
-    public List<DTKGood> findPageList(Long pageNo, Long pageSize){
-        IPage<DTKGood> page = new Page<>();
-        page.setCurrent(ObjectUtils.isEmpty(pageNo)?1L:pageNo);
-        page.setSize(ObjectUtils.isEmpty(pageSize)?50L:pageSize);
-        IPage<DTKGood> goodPage = dtkGoodService.page(page);
-        return goodPage.getRecords();
     }
 
     /**

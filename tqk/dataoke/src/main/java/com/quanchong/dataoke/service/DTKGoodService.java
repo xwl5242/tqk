@@ -4,5 +4,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.quanchong.common.entity.service.DTKGood;
 
 public interface DTKGoodService extends IService<DTKGood> {
-    void createTestData();
+    void gather() throws RuntimeException;
 }

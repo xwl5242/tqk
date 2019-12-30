@@ -1,4 +1,4 @@
-package com.quanchong.dataoke.dataoke.util;
+package com.quanchong.common.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

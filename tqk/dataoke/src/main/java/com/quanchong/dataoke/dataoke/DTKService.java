@@ -10,7 +10,7 @@ import com.quanchong.common.entity.service.DTKApi;
 import com.quanchong.common.entity.service.DTKBrand;
 import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.common.entity.service.DTKGoodCoupon;
-import com.quanchong.dataoke.dataoke.util.BeanUtil;
+import com.quanchong.common.util.BeanUtil;
 import com.quanchong.dataoke.dataoke.util.HttpUtils;
 import com.quanchong.dataoke.dataoke.util.SignMD5Util;
 import com.quanchong.dataoke.service.DTKApiService;
@@ -61,6 +61,42 @@ public class DTKService {
         String resp = execute(DTKConsts.DTK_API_KEY_HOT_WORDS, null);
         if(!StringUtils.isEmpty(resp)){
             return resp;
+        }
+        return null;
+    }
+
+    /**
+     * 9.9包邮商品
+     * @param pageId 分页id
+     * @param pageSize 页大小
+     * @param nineCid 9.9包邮商品所属类型id
+     * @return
+     * @throws Exception
+     */
+    public GoodResp goodsByNine(String pageId, String pageSize, String nineCid) throws Exception {
+        Map<String, String> param = new HashMap<>();
+        param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
+        param.put("pageSize", StringUtils.isEmpty(pageSize)?"20":pageSize);
+        param.put("nineCid", StringUtils.isEmpty(nineCid)?"0":nineCid);
+        String resp = execute(DTKConsts.DTK_API_KEY_GOODS_LIST_99, param);
+        if(!StringUtils.isEmpty(resp)){
+            return BeanUtil.jsonToBean(resp, GoodResp.class);
+        }
+        return null;
+    }
+
+    /**
+     * 榜单商品
+     * @param rankType 榜单类型，1：实时榜；2：全天榜
+     * @return
+     * @throws Exception
+     */
+    public List<DTKGood> goodsByRanking(String rankType) throws Exception{
+        Map<String, String> param = new HashMap<>();
+        param.put("rankType", StringUtils.isEmpty(rankType)?"1":rankType);
+        String resp = execute(DTKConsts.DTK_API_KEY_RANKING_LIST, param);
+        if(!StringUtils.isEmpty(resp)){
+            return BeanUtil.jsonToList(resp, DTKGood.class);
         }
         return null;
     }
@@ -122,6 +158,21 @@ public class DTKService {
 
     /**
      * 获取商品
+     * @param pageId 分页id
+     * @param pageSize 页大小
+     * @param sort 排序方式
+     * @param cids 一级类目id
+     * @param subcid 二级类目id
+     * @return
+     * @throws Exception
+     */
+    public GoodResp goods(String pageId, String pageSize, String sort, String cids, String subcid) throws Exception{
+        return goodsByKeys(pageId, pageSize, sort, cids, subcid,
+                "", "", "", "", "", "", "", "");
+    }
+
+    /**
+     * 获取商品
      * @param pageSize 每页条数
      * @param pageId 分页id
      * @param sort 排序方式
@@ -138,7 +189,7 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public GoodResp goods(String pageSize, String pageId, String sort, String cids, String subcid,
+    public GoodResp goodsByKeys(String pageId, String pageSize, String sort, String cids, String subcid,
                              String juHuaSuan, String taoQiangGou, String tmall, String tchaoshi, String goldSeller,
                              String haitao, String brand, String brandIds) throws Exception{
         Map<String,String> param = new HashMap<>();

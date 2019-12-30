@@ -37,6 +37,16 @@ public class DTKBrandController {
     }
 
     /**
+     * ffquan 品牌图片
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ffquan/pic")
+    public JSONArray brandPic() throws Exception {
+        return FFQuanApi.brandPic();
+    }
+
+    /**
      * ffquan 品牌分类导航
      * @return
      * @throws Exception

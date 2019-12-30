@@ -1,7 +1,7 @@
 package com.quanchong.dataoke.miniprogram;
 
 import com.alibaba.fastjson.JSONObject;
-import com.quanchong.dataoke.dataoke.util.BeanUtil;
+import com.quanchong.common.util.BeanUtil;
 import com.quanchong.dataoke.dataoke.util.HttpUtils;
 import com.quanchong.dataoke.miniprogram.entity.AuthResp;
 import org.springframework.beans.factory.annotation.Value;

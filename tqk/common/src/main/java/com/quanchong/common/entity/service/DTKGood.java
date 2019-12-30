@@ -1,5 +1,6 @@
 package com.quanchong.common.entity.service;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.quanchong.common.base.BaseEntity;
@@ -13,8 +14,7 @@ public class DTKGood extends BaseEntity {
     private String itemLink;
     private String title;
     private String dtitle;
-    @TableField(exist = false)
-    private String desc;
+    @JSONField(name = "desc")
     private String description;
     private String cid;
     private String subcid;
@@ -63,6 +63,12 @@ public class DTKGood extends BaseEntity {
     private String hzQuanOver;
     private String yunfeixian;
     private String estimateAmount;
+    private String nine;
+    private String nineCid;
+    private String rank;
+    private String ranking;
+    private String rankType;
+    private String newRankingGoods;
     private String isExpire;
     @TableField(exist = false)
     private String detailPics;

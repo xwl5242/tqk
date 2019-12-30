@@ -1,5 +1,6 @@
 package com.quanchong.dataoke.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,6 +9,7 @@ import com.quanchong.common.entity.dtkResp.GoodResp;
 import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
 import com.quanchong.common.entity.dtkResp.TopicResp;
 import com.quanchong.common.entity.service.DTKGood;
+import com.quanchong.common.util.DateUtils;
 import com.quanchong.dataoke.dataoke.DTKConsts;
 import com.quanchong.dataoke.dataoke.DTKService;
 import com.quanchong.dataoke.dataoke.DTKSortEnum;
@@ -114,6 +116,17 @@ public class DTKGoodController {
         page.setCurrent(pageNo);
         page.setSize(pageSize);
         return dtkGoodService.page(page, wrapper).getRecords();
+    }
+
+    /**
+     * 查询咚咚抢商品
+     * @param roundTime 场次时间 时间戳，到秒
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ddq")
+    public List<DTKGood> queryByDDQ(Long roundTime) throws Exception{
+        return dtkService.goodsByDDQ(roundTime);
     }
 
     /**

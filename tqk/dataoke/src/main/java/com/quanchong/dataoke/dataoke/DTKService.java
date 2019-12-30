@@ -1,6 +1,7 @@
 package com.quanchong.dataoke.dataoke;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.quanchong.common.entity.dtkResp.ActivityResp;
 import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
@@ -11,6 +12,7 @@ import com.quanchong.common.entity.service.DTKBrand;
 import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.common.entity.service.DTKGoodCoupon;
 import com.quanchong.common.util.BeanUtil;
+import com.quanchong.common.util.DateUtils;
 import com.quanchong.dataoke.dataoke.util.HttpUtils;
 import com.quanchong.dataoke.dataoke.util.SignMD5Util;
 import com.quanchong.dataoke.service.DTKApiService;
@@ -61,6 +63,28 @@ public class DTKService {
         String resp = execute(DTKConsts.DTK_API_KEY_HOT_WORDS, null);
         if(!StringUtils.isEmpty(resp)){
             return resp;
+        }
+        return null;
+    }
+
+    /**
+     * 咚咚抢商品
+     * @param roundTime 场次时间（默认为当前场次，场次时间输入方式：yyyy-mm-dd hh:mm:ss）
+     * @return
+     * @throws Exception
+     */
+    public List<DTKGood> goodsByDDQ(Long roundTime) throws Exception{
+        Map<String, String> param = new HashMap<>();
+        if(null!=roundTime){
+            String rDateTime = DateUtils.formatDateTime(roundTime);
+            // 将空格转为url编码 %20
+            rDateTime = rDateTime.replace(" ", "%20");
+            param.put("roundTime", rDateTime);
+        }
+        String resp = execute(DTKConsts.DTK_API_KEY_GOODS_LIST_DDQ, param);
+        if(!StringUtils.isEmpty(resp)){
+            JSONArray jsonArray = JSONObject.parseObject(resp).getJSONArray("goodsList");
+            return BeanUtil.jsonToList(jsonArray.toJSONString(), DTKGood.class);
         }
         return null;
     }

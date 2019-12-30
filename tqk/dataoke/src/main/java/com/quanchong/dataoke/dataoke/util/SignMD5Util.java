@@ -30,7 +30,11 @@ public class SignMD5Util {
         Iterator<String> iter = keySet.iterator();
         while (iter.hasNext()) {
             String key = iter.next();
-            sb.append("&"+ key + "=" + map.get(key));
+            String value = map.get(key);
+            if(value.contains("%20")){
+                value = value.replace("%20", " ");
+            }
+            sb.append("&"+ key + "=" + value);
         }
         sb.deleteCharAt(0);
         return sign(sb.toString(), secretKey);

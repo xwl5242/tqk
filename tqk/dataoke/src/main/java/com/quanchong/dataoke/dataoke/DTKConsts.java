@@ -28,6 +28,9 @@ public class DTKConsts {
     public static final String DTK_API_KEY_SUGGESTION = "suggestion";
     public static final String DTK_API_KEY_GOODS_LIST_DDQ = "goods-list-ddq";
     public static final String DTK_API_KEY_BRAND_LIST = "brand-list";
+    public static final String DTK_API_KEY_GOODS_LIST_NEWEST = "goods-list-newest";
+    public static final String DTK_API_KEY_GOODS_PULL = "pull-goods-by-time";
+    public static final String DTK_API_KEY_GOODS_LIST_STALE = "goods-list-stale";
 
     /**
      * 大淘客榜单类型相关

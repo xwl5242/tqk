@@ -3,10 +3,7 @@ package com.quanchong.dataoke.dataoke;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.quanchong.common.entity.dtkResp.ActivityResp;
-import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
-import com.quanchong.common.entity.dtkResp.GoodResp;
-import com.quanchong.common.entity.dtkResp.TopicResp;
+import com.quanchong.common.entity.dtkResp.*;
 import com.quanchong.common.entity.service.DTKApi;
 import com.quanchong.common.entity.service.DTKBrand;
 import com.quanchong.common.entity.service.DTKGood;
@@ -267,6 +264,87 @@ public class DTKService {
         String resp = execute(DTKConsts.DTK_API_KEY_GOODS_DETAILS,param);
         if(!StringUtils.isEmpty(resp)){
             return  BeanUtil.jsonToBean(resp, DTKGood.class);
+        }
+        return null;
+    }
+
+    /**
+     * 商品更新
+     * @param pageId 分页id
+     * @param pageSize 页大小
+     * @param cids 类目id
+     * @param subcid 子类目id
+     * @param brand 是否品牌商品
+     * @param brandIds 品牌ids
+     * @return
+     * @throws Exception
+     */
+    public GoodResp goodsByNewest(String pageId, String pageSize, String cids,
+                                  String subcid, String brand, String brandIds) throws Exception{
+        Map<String,String> param = new HashMap<>();
+        param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
+        param.put("pageSize", StringUtils.isEmpty(pageSize)?"200":pageSize);
+        if(!StringUtils.isEmpty(cids)){
+            param.put("cids", cids);
+        }
+        if(!StringUtils.isEmpty(subcid)){
+            param.put("subcid", subcid);
+        }
+        param.put("brand", StringUtils.isEmpty(brand)?"0":brand);
+        if(!StringUtils.isEmpty(brandIds)){
+            param.put("brandIds", brandIds);
+        }
+        String resp = execute(DTKConsts.DTK_API_KEY_GOODS_LIST_NEWEST, param);
+        if(!StringUtils.isEmpty(resp)){
+            return BeanUtil.jsonToBean(resp, GoodResp.class);
+        }
+        return null;
+    }
+
+    /**
+     * 定时拉取商品
+     * @param pageId 分页id
+     * @param pageSize 页大小
+     * @param cid 类目id
+     * @param subcid 子类目id
+     * @param startTime 开始时间
+     * @return
+     * @throws Exception
+     */
+    public GoodResp goodsByPull(String pageId, String pageSize, String cid, String subcid, String startTime) throws Exception{
+        Map<String,String> param = new HashMap<>();
+        param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
+        param.put("pageSize", StringUtils.isEmpty(pageSize)?"200":pageSize);
+        if(!StringUtils.isEmpty(cid)){
+            param.put("cid", cid);
+        }
+        if(!StringUtils.isEmpty(subcid)){
+            param.put("subcid", subcid);
+        }
+        if(!StringUtils.isEmpty(startTime)){
+            param.put("startTime", startTime);
+        }
+        String resp = execute(DTKConsts.DTK_API_KEY_GOODS_PULL, param);
+        if(!StringUtils.isEmpty(resp)){
+            return BeanUtil.jsonToBean(resp, GoodResp.class);
+        }
+        return null;
+    }
+
+    /**
+     * 查询失效商品
+     * @param pageId
+     * @param pageSize
+     * @return
+     * @throws Exception
+     */
+    public GoodStaleResp goodsByStale(String pageId, String pageSize) throws Exception{
+        Map<String,String> param = new HashMap<>();
+        param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
+        param.put("pageSize", StringUtils.isEmpty(pageSize)?"200":pageSize);
+        String resp = execute(DTKConsts.DTK_API_KEY_GOODS_LIST_STALE, param);
+        if(!StringUtils.isEmpty(resp)){
+            return BeanUtil.jsonToBean(resp, GoodStaleResp.class);
         }
         return null;
     }

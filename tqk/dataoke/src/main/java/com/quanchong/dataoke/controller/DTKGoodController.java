@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.quanchong.common.entity.dtkResp.ActivityResp;
-import com.quanchong.common.entity.dtkResp.GoodResp;
-import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
-import com.quanchong.common.entity.dtkResp.TopicResp;
+import com.quanchong.common.entity.dtkResp.*;
 import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.common.ffquan.FFQuanApi;
 import com.quanchong.common.ffquan.FFQuanDiscountGood;
@@ -262,4 +259,8 @@ public class DTKGoodController {
         return dtkService.goodDetail(id);
     }
 
+    @GetMapping("/stale")
+    public GoodStaleResp queryStale() throws Exception{
+        return dtkService.goodsByStale(null, null);
+    }
 }

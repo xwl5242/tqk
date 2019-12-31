@@ -1,15 +1,28 @@
+# 使用eureka和config配置中心时的配置
+#spring:
+#  application:
+#    name: tqk-web
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        service-id: tqk-config
+#      profile: 'dev'
+#eureka:
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://tqk-eureka:8761/eureka/
+
 spring:
-  application:
-    name: tqk-web
-  cloud:
-    config:
-      discovery:
-        enabled: true
-        service-id: tqk-config
-      profile: 'dev'
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://tqk-eureka:8761/eureka/
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/tqk?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 20

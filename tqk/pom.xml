@@ -25,10 +25,9 @@
     </properties>
 
     <modules>
-        <module>server</module>
+<!--        <module>server</module>-->
         <module>common</module>
         <module>config</module>
-        <module>coupon</module>
         <module>eureka</module>
         <module>dataoke</module>
     </modules>
@@ -67,5 +66,4 @@
             </properties>
         </profile>
     </profiles>
-
 </project>

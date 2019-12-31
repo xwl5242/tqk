@@ -1,17 +1,7 @@
 spring:
-  application:
-    name: tqk-web
-  cloud:
-    config:
-      discovery:
-        enabled: true
-        service-id: tqk-config
-      profile: '@spring.profile@'
-  #    alibaba:
-  #      seata:
-  #        tx-service-group: my_tqk_group
   profiles:
     include: dataoke
+    active: '@spring.profile@'
 eureka:
   client:
     fetch-registry: true

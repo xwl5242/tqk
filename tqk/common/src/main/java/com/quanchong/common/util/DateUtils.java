@@ -135,8 +135,4 @@ public class DateUtils {
         }
         return padTime;
     }
-
-    public static void main(String[] args) throws Exception{
-        System.out.println(pad("909adjgflaj"));
-    }
 }

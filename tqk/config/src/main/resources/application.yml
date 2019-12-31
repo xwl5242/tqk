@@ -8,12 +8,4 @@ spring:
           uri: https://github.com/xwl5242/tqk-config
   application:
     name: tqk-config
-eureka:
-  instance:
-    prefer-ip-address: true
-    hostname: tqk-config
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://tqk-eureka:8761/eureka/
+

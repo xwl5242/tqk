@@ -3,6 +3,6 @@ eureka:
     fetch-registry: false
     register-with-eureka: false
     service-url:
-      defaultZone: http://${spring.application.name}:${server.port}/eureka/
+      defaultZone: http://172.17.0.2:${server.port}/eureka/
   instance:
     prefer-ip-address: true

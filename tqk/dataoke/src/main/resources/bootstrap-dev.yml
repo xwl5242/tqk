@@ -7,3 +7,9 @@ spring:
         enabled: true
         service-id: tqk-config
       profile: 'dev'
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://tqk-eureka:8761/eureka/

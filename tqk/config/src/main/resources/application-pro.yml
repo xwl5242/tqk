@@ -1,0 +1,9 @@
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: tqk-config
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://172.17.0.2:8761/eureka/

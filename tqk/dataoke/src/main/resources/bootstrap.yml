@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: dataoke
+    include: dataoke,quartz
     active: '@spring.profile@'
 server:
   port: 8087

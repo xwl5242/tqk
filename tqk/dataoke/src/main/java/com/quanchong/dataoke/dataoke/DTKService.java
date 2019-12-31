@@ -345,9 +345,7 @@ public class DTKService {
         paraMap.putAll(paramMap);
         log.info("sign前："+paraMap);
         paraMap.put("sign", SignMD5Util.getSignStr(paraMap, dtkConfig.getAppSecret()));
-        log.info("大淘客api请求参数：{}", paraMap);
         String resp = HttpUtils.sendGet(dtkApi.getApiUrl(), paraMap);
-        log.info("大淘客api响应结果：{}", resp);
         // 处理响应结果
         JSONObject jsonObject = JSONObject.parseObject(resp);
         String code = jsonObject.getString(DTKConsts.DTK_API_RESPONSE_CODE);

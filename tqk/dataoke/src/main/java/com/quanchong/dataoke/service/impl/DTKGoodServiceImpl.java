@@ -223,7 +223,6 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     private void gatherGoodsByNineLoop(List<DTKGood> goods, String cid, String pageId) throws Exception{
         if(!StringUtils.isEmpty(pageId)){
             GoodResp goodResp = dtkService.goodsByNine(pageId, "", cid);
-            System.out.println(goodResp);
             if(null!=goodResp && !goodResp.getList().isEmpty()){
                 List<DTKGood> tmpList = goodResp.getList();
                 // 设置商品9.9相关字段值

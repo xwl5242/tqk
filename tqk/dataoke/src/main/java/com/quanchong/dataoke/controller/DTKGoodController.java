@@ -152,7 +152,10 @@ public class DTKGoodController {
      */
     @GetMapping("/ranking")
     public List<DTKGood> queryByRanking(Long pageNo, Long pageSize,
-                                        String rankType, String cid, String isNewRanking) {
+                                        String rankType, String cid, String isNewRanking) throws Exception{
+        if("1".equals(rankType)){
+            return dtkService.goodsByRanking("1", cid);
+        }
         pageNo = null == pageNo ? 0L : pageNo;
         pageSize = null == pageSize ? 20L : pageSize;
         isNewRanking = StringUtils.isEmpty(isNewRanking)?"0":isNewRanking;

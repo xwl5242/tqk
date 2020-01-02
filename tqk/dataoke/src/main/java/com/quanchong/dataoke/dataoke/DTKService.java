@@ -97,7 +97,7 @@ public class DTKService {
     public GoodResp goodsByNine(String pageId, String pageSize, String nineCid) throws Exception {
         Map<String, String> param = new HashMap<>();
         param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
-        param.put("pageSize", StringUtils.isEmpty(pageSize)?"20":pageSize);
+        param.put("pageSize", StringUtils.isEmpty(pageSize)?"200":pageSize);
         param.put("nineCid", StringUtils.isEmpty(nineCid)?"0":nineCid);
         String resp = execute(DTKConsts.DTK_API_KEY_GOODS_LIST_99, param);
         if(!StringUtils.isEmpty(resp)){

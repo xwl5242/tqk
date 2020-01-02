@@ -40,8 +40,6 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     @Autowired
     private DTKFunctionService dtkFunctionService;
 
-    private List<String> rankTypeList;
-
     private List<String> cidList;
 
     private List<String> nineCidList;
@@ -57,7 +55,6 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     public void init() {
         log.info("DTKService init...");
         try{
-            rankTypeList = Stream.of("1", "2").collect(Collectors.toList());
             nineCidList = Stream.of("-1","1","2","3","4","5","6","7","8","9","10").collect(Collectors.toList());
             cidList = dtkService.superCategoryList().stream()
                     .map(SuperCategoryResp::getCid).collect(Collectors.toList());
@@ -72,7 +69,7 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     }
 
     /**
-     * 采集各个类目商品500条
+     * 采集各个类目商品
      * @throws RuntimeException
      */
     @Override
@@ -114,17 +111,15 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     @Override
     public List<DTKGood> gatherGoodsByRanking() throws Exception{
         List<DTKGood> goodList = new ArrayList<>();
-        for(String rankType: rankTypeList){
-            for(String cid: cidList){
-                List<DTKGood> tmpList = dtkService.goodsByRanking(rankType, cid);
-                // 设置商品榜单相关字段值
-                tmpList = tmpList.parallelStream().map(dtkGood -> {
-                    dtkGood.setRank("1");
-                    dtkGood.setRankType(rankType);
-                    return dtkGood;
-                }).collect(Collectors.toList());
-                goodList.addAll(tmpList);
-            }
+        for(String cid: cidList){
+            List<DTKGood> tmpList = dtkService.goodsByRanking("2", cid);
+            // 设置商品榜单相关字段值
+            tmpList = tmpList.parallelStream().map(dtkGood -> {
+                dtkGood.setRank("1");
+                dtkGood.setRankType("2");
+                return dtkGood;
+            }).collect(Collectors.toList());
+            goodList.addAll(tmpList);
         }
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         log.info("定时采集榜单商品数据记录:{}条", goodList.size());
@@ -228,6 +223,7 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     private void gatherGoodsByNineLoop(List<DTKGood> goods, String cid, String pageId) throws Exception{
         if(!StringUtils.isEmpty(pageId)){
             GoodResp goodResp = dtkService.goodsByNine(pageId, "", cid);
+            System.out.println(goodResp);
             if(null!=goodResp && !goodResp.getList().isEmpty()){
                 List<DTKGood> tmpList = goodResp.getList();
                 // 设置商品9.9相关字段值

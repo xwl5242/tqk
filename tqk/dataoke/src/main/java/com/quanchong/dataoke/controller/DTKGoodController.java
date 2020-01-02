@@ -253,5 +253,4 @@ public class DTKGoodController {
     public DTKGood queryById(@RequestParam String id) throws Exception{
         return dtkService.goodDetail(id);
     }
-
 }

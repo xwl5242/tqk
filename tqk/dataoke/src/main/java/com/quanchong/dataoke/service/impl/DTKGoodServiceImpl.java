@@ -98,7 +98,8 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     public List<DTKGood> gatherGoodsByNine() throws Exception{
         List<DTKGood> goodList = new ArrayList<>();
         for(String nineCid: nineCidList){
-            gatherGoodsByNineLoop(goodList, nineCid, "1");
+            int gatherTimes = 0;
+            gatherGoodsByNineLoop(goodList, nineCid, gatherTimes);
         }
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         log.info("定时采集9.9商品数据记录:{}条", goodList.size());
@@ -217,12 +218,12 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
      * 采集9.9商品递归调用
      * @param goods
      * @param cid
-     * @param pageId
+     * @param gatherTimes 请求次数，也是页码
      * @throws Exception
      */
-    private void gatherGoodsByNineLoop(List<DTKGood> goods, String cid, String pageId) throws Exception{
-        if(!StringUtils.isEmpty(pageId)){
-            GoodResp goodResp = dtkService.goodsByNine(pageId, "", cid);
+    private void gatherGoodsByNineLoop(List<DTKGood> goods, String cid, int gatherTimes) throws Exception{
+        if(gatherTimes<3){
+            GoodResp goodResp = dtkService.goodsByNine(gatherTimes+"", "", cid);
             if(null!=goodResp && !goodResp.getList().isEmpty()){
                 List<DTKGood> tmpList = goodResp.getList();
                 // 设置商品9.9相关字段值
@@ -232,7 +233,8 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
                     return dtkGood;
                 }).collect(Collectors.toList());
                 goods.addAll(tmpList);
-                gatherGoodsByNineLoop(goods, cid, goodResp.getPageId());
+                gatherTimes += 1;
+                gatherGoodsByNineLoop(goods, cid, gatherTimes);
             }
         }
     }

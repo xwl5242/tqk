@@ -38,7 +38,7 @@ public class DTKGoodsJob{
      * 每10分钟拉取一次失效商品数据
      * @throws Exception
      */
-    @Scheduled(initialDelay = 2*60*1000, fixedDelay=10*60*1000)
+    @Scheduled(initialDelay = 1*60*1000, fixedDelay=10*60*1000)
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByStale() throws Exception{
         List<GoodStaleResp.GoodStale> list = dtkGoodService.gatherGoodsByStale();
@@ -55,11 +55,33 @@ public class DTKGoodsJob{
      * 每1个小时拉取一次商品变更数据
      * @throws Exception
      */
-    @Scheduled(initialDelay = 8*60*1000, fixedDelay=60*60*1000)
+    @Scheduled(initialDelay = 9*60*1000, fixedDelay=60*60*1000)
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByNewest() throws Exception{
         List<DTKGood> list = dtkGoodService.gatherGoodsByNewest();
         dtkGoodService.updateBatchById(list);
+    }
+
+    /**
+     * 每13分钟更新一次9.9包邮商品
+     * @throws Exception
+     */
+    @Scheduled(initialDelay = 13*60*1000, fixedDelay=13*60*1000)
+    @Transactional(rollbackFor = Exception.class)
+    public void gatherGoodsByNine() throws Exception{
+        List<DTKGood> list = dtkGoodService.gatherGoodsByNine();
+        dtkGoodService.saveOrUpdateBatch(list);
+    }
+
+    /**
+     * 17分钟更新一次榜单商品
+     * @throws Exception
+     */
+    @Scheduled(initialDelay = 17*60*1000, fixedDelay=17*60*1000)
+    @Transactional(rollbackFor = Exception.class)
+    public void gatherGoodsByRanking() throws Exception{
+        List<DTKGood> list = dtkGoodService.gatherGoodsByRanking();
+        dtkGoodService.saveOrUpdateBatch(list);
     }
 
     /**

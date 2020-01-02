@@ -1,5 +1,6 @@
 package com.quanchong.dataoke.job;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.quanchong.common.entity.dtkResp.GoodStaleResp;
 import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.dataoke.service.DTKGoodService;
@@ -60,4 +61,14 @@ public class DTKGoodsJob{
         dtkGoodService.updateBatchById(list);
     }
 
+    /**
+     * 每天凌晨1点清除失效的商品（物理删除）
+     */
+    @Scheduled(cron = "0 0 1 * * ?")
+    @Transactional(rollbackFor = Exception.class)
+    public void removeIsExpireGoods() throws Exception{
+        QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
+        wrapper.eq("is_expire", "1");
+        dtkGoodService.remove(wrapper);
+    }
 }

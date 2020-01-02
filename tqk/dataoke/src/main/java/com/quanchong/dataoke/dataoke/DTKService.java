@@ -426,7 +426,6 @@ public class DTKService {
         paraMap.put("version",dtkApi.getApiVersion());
         paraMap.put("appKey",dtkConfig.getAppKey());
         paraMap.putAll(paramMap);
-        log.info("sign前："+paraMap);
         paraMap.put("sign", SignMD5Util.getSignStr(paraMap, dtkConfig.getAppSecret()));
         String resp = HttpUtils.sendGet(dtkApi.getApiUrl(), paraMap);
         // 处理响应结果

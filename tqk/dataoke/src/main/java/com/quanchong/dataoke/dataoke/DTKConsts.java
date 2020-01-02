@@ -43,4 +43,11 @@ public class DTKConsts {
     public static final String DTK_RANK_TYPE_HOT_WORD_RNAK = "6"; // 热词排行榜
     public static final String DTK_RANK_TYPE_HOT_SEARCH = "7"; // 综合热搜榜
 
+    /**
+     * 大淘客功能模块开关相关
+     */
+    public static final String DTK_FUNCTION_STARTUP_RUNNER_GATHER_GOODS = "startup_runner_gather_goods";
+    public static final String DTK_FUNCTION_INDEX_BRAND = "index_brand";
+    public static final String DTK_FUNCTION_GATHER_GOODS_PULL_TIME = "gather_goods_pull_time";
+    public static final String DTK_FUNCTION_GATHER_GOODS_STALE_TIME = "gather_goods_stale_time";
 }

@@ -6,8 +6,10 @@ import com.quanchong.common.entity.dtkResp.GoodStaleResp;
 import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
 import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.common.util.DateUtils;
+import com.quanchong.dataoke.dataoke.DTKConsts;
 import com.quanchong.dataoke.dataoke.DTKService;
 import com.quanchong.dataoke.mapper.DTKGoodMapper;
+import com.quanchong.dataoke.service.DTKFunctionService;
 import com.quanchong.dataoke.service.DTKGoodService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     @Autowired
     private DTKService dtkService;
 
+    @Autowired
+    private DTKFunctionService dtkFunctionService;
+
     private List<String> cidList;
 
     private String lastPullGatherTime;
@@ -48,6 +53,10 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
             cidList = dtkService.superCategoryList().stream()
                     .map(SuperCategoryResp::getCid).collect(Collectors.toList());
             log.info("DTKService SuperCategoryList:{}", cidList);
+            lastPullGatherTime = dtkFunctionService.getFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_PULL_TIME);
+            lastStaleGatherTime = dtkFunctionService.getFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_STALE_TIME);
+            log.info("DTKService lastPullGatherTime:{}", lastPullGatherTime);
+            log.info("DTKService lastStaleGatherTime:{}", lastStaleGatherTime);
         }catch(Exception e){
             log.error(e.getMessage());
         }
@@ -60,11 +69,14 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     @Override
     public List<DTKGood> gatherGoods() throws Exception{
         List<DTKGood> goodList = new ArrayList<>();
+        String now = DateUtils.now();
+        lastPullGatherTime = now;
+        lastStaleGatherTime = now;
+        dtkFunctionService.setFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_PULL_TIME, now);
+        dtkFunctionService.setFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_STALE_TIME, now);
         for(String cid: cidList){
             gatherGoodsLoop(goodList, cid, "1");
         }
-        lastPullGatherTime = DateUtils.now();
-        lastStaleGatherTime = DateUtils.now();
         //过滤重复数据
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         log.info("项目启动采集商品数据记录:{}条", goodList.size());
@@ -82,7 +94,9 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         for(String cid: cidList){
             gatherGoodsByPullLoop(goodList, cid, "1");
         }
-        lastPullGatherTime = DateUtils.now();
+        String now = DateUtils.now();
+        lastPullGatherTime = now;
+        dtkFunctionService.setFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_PULL_TIME, now);
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         log.info("定时拉取商品数据记录:{}条", goodList.size());
         return goodList;
@@ -113,7 +127,9 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     public List<GoodStaleResp.GoodStale> gatherGoodsByStale() throws Exception {
         List<GoodStaleResp.GoodStale> list = new ArrayList<>();
         gatherGoodsByStaleLoop(list, "1");
-        lastStaleGatherTime = DateUtils.now();
+        String now = DateUtils.now();
+        lastStaleGatherTime = now;
+        dtkFunctionService.setFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_STALE_TIME, now);
         list = list.parallelStream().filter(distinctByKey(GoodStaleResp.GoodStale::getId)).collect(Collectors.toList());
         log.info("定时拉取失效商品数据记录:{}条", list.size());
         return list;

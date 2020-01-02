@@ -280,7 +280,7 @@ public class DTKService {
      * @throws Exception
      */
     public GoodResp goodsByNewest(String pageId, String pageSize, String cids,
-                                  String subcid, String brand, String brandIds) throws Exception{
+                                  String subcid, String brand, String brandIds, String startTime, String endTime) throws Exception{
         Map<String,String> param = new HashMap<>();
         param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
         param.put("pageSize", StringUtils.isEmpty(pageSize)?"200":pageSize);
@@ -293,6 +293,14 @@ public class DTKService {
         param.put("brand", StringUtils.isEmpty(brand)?"0":brand);
         if(!StringUtils.isEmpty(brandIds)){
             param.put("brandIds", brandIds);
+        }
+        if(!StringUtils.isEmpty(startTime)){
+            startTime = startTime.replace(" ", "%20");
+            param.put("startTime", startTime);
+        }
+        if(!StringUtils.isEmpty(endTime)){
+            endTime = endTime.replace(" ", "%20");
+            param.put("endTime", endTime);
         }
         String resp = execute(DTKConsts.DTK_API_KEY_GOODS_LIST_NEWEST, param);
         if(!StringUtils.isEmpty(resp)){

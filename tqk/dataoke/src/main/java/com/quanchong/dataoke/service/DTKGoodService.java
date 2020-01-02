@@ -11,4 +11,5 @@ public interface DTKGoodService extends IService<DTKGood> {
     List<DTKGood> gatherGoodsByPull() throws Exception;
     List<DTKGood> gatherGoodsByNewest() throws Exception;
     List<GoodStaleResp.GoodStale> gatherGoodsByStale() throws Exception;
+    String getOldestGoodStartTime();
 }

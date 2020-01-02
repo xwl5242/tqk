@@ -1,5 +1,6 @@
 package com.quanchong.dataoke.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quanchong.common.entity.dtkResp.GoodResp;
 import com.quanchong.common.entity.dtkResp.GoodStaleResp;
@@ -110,8 +111,9 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
     @Override
     public List<DTKGood> gatherGoodsByNewest() throws Exception {
         List<DTKGood> goodList = new ArrayList<>();
+        String createTime = getOldestGoodStartTime();
         for(String cid: cidList){
-            gatherGoodsByNewestLoop(goodList, cid, "1");
+            gatherGoodsByNewestLoop(goodList, cid, "1", createTime);
         }
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         log.info("定时拉取更新商品数据记录:{}条", goodList.size());
@@ -133,6 +135,23 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         list = list.parallelStream().filter(distinctByKey(GoodStaleResp.GoodStale::getId)).collect(Collectors.toList());
         log.info("定时拉取失效商品数据记录:{}条", list.size());
         return list;
+    }
+
+    /**
+     * 查询商品上架时间的最小值
+     * @return
+     */
+    @Override
+    public String getOldestGoodStartTime() {
+        QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
+        wrapper.eq("is_expire", "0");
+        wrapper.orderByDesc("create_time");
+        wrapper.last("limit 1");
+        List<DTKGood> list = list(wrapper);
+        if(null!=list && !list.isEmpty()){
+            return list.get(0).getCreateTime();
+        }
+        return null;
     }
 
     /**
@@ -176,12 +195,12 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
      * @param pageId
      * @throws Exception
      */
-    private void gatherGoodsByNewestLoop(List<DTKGood> goods, String cid, String pageId) throws Exception{
+    private void gatherGoodsByNewestLoop(List<DTKGood> goods, String cid, String pageId, String createTime) throws Exception{
         if(!StringUtils.isEmpty(pageId)){
-            GoodResp goodResp = dtkService.goodsByNewest(pageId, "", cid, "", "0", "");
+            GoodResp goodResp = dtkService.goodsByNewest(pageId, "", cid, "", "0", "", createTime, "");
             if(null!=goodResp && !goodResp.getList().isEmpty()){
                 goods.addAll(goodResp.getList());
-                gatherGoodsByNewestLoop(goods, cid, goodResp.getPageId());
+                gatherGoodsByNewestLoop(goods, cid, goodResp.getPageId(), createTime);
             }
         }
     }

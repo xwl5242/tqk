@@ -34,7 +34,7 @@ docker run --name=eureka -d -p 8761:8761 -v /home/app/eureka/eureka-1.0-SNAPSHOT
 
 docker run --name=config -d -p 8083:8083 -v /home/app/config/config-1.0-SNAPSHOT.jar:/config.jar  --privileged=true -e tZ="Asia/Shanghai" config:v1
 
-docker run --name=dataoke -d -p 8087:8087 -v /home/app/dataoke/dataoke-1.0-SNAPSHOT.jar:/dataoke.jar -v /home/app/dataoke/common-1.0-SNAPSHOT.jar:/common-1.0-SNAPSHOT.jar  --privileged=true -e tZ="Asia/Shanghai" dataoke:v1
+docker run --name=dataoke -d -p 8087:8087 -v /home/app/dataoke/dataoke-1.0-SNAPSHOT.jar:/dataoke.jar -v /home/app/dataoke/common-1.0-SNAPSHOT.jar:/common-1.0-SNAPSHOT.jar -v /etc/localtime:/etc/localtime:ro  --privileged=true -e tZ="Asia/Shanghai" dataoke:v1
 
 ### 注意事项
 服务器默认docker的网关为 172.17.0.1

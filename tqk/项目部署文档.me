@@ -40,7 +40,10 @@ docker run --name=config -d -p 8083:8083 -v /home/app/config/config-1.0-SNAPSHOT
 docker run --name=dataoke -d -p 8087:8087 -v /home/app/dataoke/dataoke-1.0-SNAPSHOT.jar:/dataoke.jar -v /home/app/dataoke/common-1.0-SNAPSHOT.jar:/common-1.0-SNAPSHOT.jar -v /etc/localtime:/etc/localtime:ro  --privileged=true -e tZ="Asia/Shanghai" dataoke:v1
 
 ### 注意事项
-服务器默认docker的网关为 172.17.0.1
+1.服务器默认docker的网关为 172.17.0.1
 docker下的启动的容器的网络ip地址和启动顺序有关，第一个启动的ip地址为：172.17.0.2，后面以此类推。
 当前部署时的启动顺序为：eureka, config, dataoke, mysql.
 所以部署项目中关于eureka地址的配置和启动顺序相关，请留意正确配置。
+
+2.程序时间差8小时解决方法
+echo "Asia/Shanghai" > /etc/timezone

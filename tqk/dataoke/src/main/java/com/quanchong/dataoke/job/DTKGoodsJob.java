@@ -3,6 +3,7 @@ package com.quanchong.dataoke.job;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.quanchong.common.entity.dtkResp.GoodStaleResp;
 import com.quanchong.common.entity.service.DTKGood;
+import com.quanchong.common.util.DateUtils;
 import com.quanchong.dataoke.service.DTKGoodService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,13 +63,31 @@ public class DTKGoodsJob{
     }
 
     /**
-     * 每天凌晨1点清除失效的商品（物理删除）
+     * 每天凌晨2点清除失效的商品（物理删除）
      */
-    @Scheduled(cron = "0 0 1 * * ?")
+    @Scheduled(cron = "0 0 2 * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void removeIsExpireGoods() throws Exception{
         QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
         wrapper.eq("is_expire", "1");
         dtkGoodService.remove(wrapper);
+    }
+
+    /**
+     * 每天凌晨1点将优惠券到期的商品置为失效
+     * @throws Exception
+     */
+    @Scheduled(cron = "0 0 1 * * ?")
+    public void setExpireGoodsByCouponEndTime() throws Exception{
+        String now = DateUtils.now();
+        QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
+        wrapper.eq("is_expire", "0");
+        wrapper.lt("coupon_end_time", now);
+        List<DTKGood> expireGoods = dtkGoodService.list(wrapper);
+        expireGoods = expireGoods.stream().map(dtkGood -> {
+            dtkGood.setIsExpire("1");
+            return dtkGood;
+        }).collect(Collectors.toList());
+        dtkGoodService.updateBatchById(expireGoods);
     }
 }

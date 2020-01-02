@@ -1,8 +1,14 @@
 package com.quanchong.dataoke.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.quanchong.common.entity.dtkResp.GoodStaleResp;
 import com.quanchong.common.entity.service.DTKGood;
 
+import java.util.List;
+
 public interface DTKGoodService extends IService<DTKGood> {
-    void gather() throws RuntimeException;
+    List<DTKGood> gatherGoods() throws Exception;
+    List<DTKGood> gatherGoodsByPull() throws Exception;
+    List<DTKGood> gatherGoodsByNewest() throws Exception;
+    List<GoodStaleResp.GoodStale> gatherGoodsByStale() throws Exception;
 }

@@ -43,7 +43,7 @@ public class DTKService {
     public List<DTKBrand> brandList(String pageId, String pageSize) throws Exception{
         Map<String,String> param = new HashMap<>();
         param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
-        param.put("pageSize", StringUtils.isEmpty(pageSize)?"20":pageSize);
+        param.put("pageSize", StringUtils.isEmpty(pageSize)?"200":pageSize);
         String resp = execute(DTKConsts.DTK_API_KEY_BRAND_LIST,param);
         if(!StringUtils.isEmpty(resp)){
             return BeanUtil.jsonToList(resp, DTKBrand.class);
@@ -217,7 +217,7 @@ public class DTKService {
                              String juHuaSuan, String taoQiangGou, String tmall, String tchaoshi, String goldSeller,
                              String haitao, String brand, String brandIds) throws Exception{
         Map<String,String> param = new HashMap<>();
-        param.put("pageSize", StringUtils.isEmpty(pageSize)?"50":pageSize);
+        param.put("pageSize", StringUtils.isEmpty(pageSize)?"200":pageSize);
         param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
         param.put("sort", StringUtils.isEmpty(sort)?DTKSortEnum.ALL.getCode():sort);
         if(!StringUtils.isEmpty(cids)){
@@ -322,6 +322,7 @@ public class DTKService {
             param.put("subcid", subcid);
         }
         if(!StringUtils.isEmpty(startTime)){
+            startTime = startTime.replace(" ", "%20");
             param.put("startTime", startTime);
         }
         String resp = execute(DTKConsts.DTK_API_KEY_GOODS_PULL, param);
@@ -338,10 +339,14 @@ public class DTKService {
      * @return
      * @throws Exception
      */
-    public GoodStaleResp goodsByStale(String pageId, String pageSize) throws Exception{
+    public GoodStaleResp goodsByStale(String pageId, String pageSize, String startTime) throws Exception{
         Map<String,String> param = new HashMap<>();
         param.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
         param.put("pageSize", StringUtils.isEmpty(pageSize)?"200":pageSize);
+        if(!StringUtils.isEmpty(startTime)){
+            startTime = startTime.replace(" ", "%20");
+            param.put("startTime", startTime);
+        }
         String resp = execute(DTKConsts.DTK_API_KEY_GOODS_LIST_STALE, param);
         if(!StringUtils.isEmpty(resp)){
             return BeanUtil.jsonToBean(resp, GoodStaleResp.class);
@@ -430,5 +435,4 @@ public class DTKService {
         String data = jsonObject.getString(DTKConsts.DTK_API_RESPONSE_DATA);
         return DTKConsts.DTK_API_RESPONSE_SUCCESS.equals(code)?data:null;
     }
-
 }

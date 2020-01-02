@@ -1,9 +1,9 @@
 spring:
   profiles:
-    include: dataoke,quartz
+    include: dataoke
     active: '@spring.profile@'
 server:
   port: 8087
-logging:
-  level:
-    com.quanchong.dataoke.mapper: debug
+#logging:
+#  level:
+#    com.quanchong.dataoke.mapper: debug

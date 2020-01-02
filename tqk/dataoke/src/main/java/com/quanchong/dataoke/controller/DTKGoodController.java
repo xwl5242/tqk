@@ -39,14 +39,6 @@ public class DTKGoodController {
     private DTKGoodService dtkGoodService;
 
     /**
-     * 采集商品
-     */
-    @PostMapping("/gather")
-    public void gather(){
-        dtkGoodService.gather();
-    }
-
-    /**
      * 超级分类
      * @return
      * @throws Exception
@@ -259,8 +251,4 @@ public class DTKGoodController {
         return dtkService.goodDetail(id);
     }
 
-    @GetMapping("/stale")
-    public GoodStaleResp queryStale() throws Exception{
-        return dtkService.goodsByStale(null, null);
-    }
 }

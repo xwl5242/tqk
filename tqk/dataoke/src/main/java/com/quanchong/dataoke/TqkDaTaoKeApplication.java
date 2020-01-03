@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 //@EnableEurekaClient
-@MapperScan("com.quanchong.dataoke.mapper")
+@MapperScan("com.quanchong.dataoke.mapper.**")
 @ComponentScan({"com.quanchong.common.config", "com.quanchong.dataoke"})
 public class TqkDaTaoKeApplication
 {

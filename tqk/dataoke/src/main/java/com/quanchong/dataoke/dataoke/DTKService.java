@@ -12,7 +12,7 @@ import com.quanchong.common.util.BeanUtil;
 import com.quanchong.common.util.DateUtils;
 import com.quanchong.dataoke.dataoke.util.HttpUtils;
 import com.quanchong.dataoke.dataoke.util.SignMD5Util;
-import com.quanchong.dataoke.service.DTKApiService;
+import com.quanchong.dataoke.service.sys.DTKApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

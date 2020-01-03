@@ -3,8 +3,14 @@ package com.quanchong.dataoke.job;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.quanchong.common.entity.dtkResp.GoodStaleResp;
 import com.quanchong.common.entity.service.DTKGood;
+import com.quanchong.common.ffquan.FFQuanBrand;
+import com.quanchong.common.ffquan.FFQuanBrandGood;
+import com.quanchong.common.ffquan.FFQuanDiscountGood;
 import com.quanchong.common.util.DateUtils;
-import com.quanchong.dataoke.service.DTKGoodService;
+import com.quanchong.dataoke.service.brand.DTKFFQBrandGoodService;
+import com.quanchong.dataoke.service.brand.DTKFFQBrandService;
+import com.quanchong.dataoke.service.good.DTKFFQDiscountGoodService;
+import com.quanchong.dataoke.service.good.DTKGoodService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -12,7 +18,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -22,6 +31,15 @@ public class DTKGoodsJob{
 
     @Autowired
     private DTKGoodService dtkGoodService;
+
+    @Autowired
+    private DTKFFQBrandService dtkffqBrandService;
+
+    @Autowired
+    private DTKFFQBrandGoodService dtkffqBrandGoodService;
+
+    @Autowired
+    private DTKFFQDiscountGoodService dtkffqDiscountGoodService;
 
     /**
      * 每30分钟拉取一次商品数据
@@ -98,6 +116,56 @@ public class DTKGoodsJob{
             dtkGoodService.saveOrUpdateBatch(list);
         }
     }
+
+    /**
+     * 每2个小时采集一下ffquan 品牌和品牌商品信息
+     * @throws Exception
+     */
+    @Scheduled(initialDelay = 3*60*1000, fixedDelay=2*60*60*1000)
+    @Transactional(rollbackFor = Exception.class)
+    public void gatherGoodsByFFQBrand() throws Exception{
+        Map<String,Object> result = dtkffqBrandService.gather();
+        if(null!=result){
+            List<FFQuanBrand> brands = (List<FFQuanBrand>) result.get("brands");
+            List<FFQuanBrandGood> goods = (List<FFQuanBrandGood>) result.get("goods");
+            if(null!=brands && !brands.isEmpty()){
+                List<FFQuanBrand> brandList = dtkffqBrandService.list();
+                boolean save = dtkffqBrandService.saveBatch(brands);
+                if(save && null!=brandList && !brandList.isEmpty()) {
+                    dtkffqBrandService.removeByIds(brandList.stream()
+                            .map(FFQuanBrand::getBrandId).collect(Collectors.toList()));
+                }
+            }
+            if(null!=goods && !goods.isEmpty()) {
+                List<FFQuanBrandGood> goodList = dtkffqBrandGoodService.list();
+                boolean save = dtkffqBrandGoodService.saveBatch(goods);
+                if(save && null!=goodList && !goodList.isEmpty()) {
+                    dtkffqBrandGoodService.removeByIds(goodList.stream()
+                            .map(FFQuanBrandGood::getId).collect(Collectors.toList()));
+                }
+            }
+        }
+    }
+
+    /**
+     * 每2个小时采集一下ffquan 品牌和品牌商品信息
+     * @throws Exception
+     */
+    @Scheduled(initialDelay = 6*60*1000, fixedDelay=2*61*60*1000)
+    @Transactional(rollbackFor = Exception.class)
+    public void gatherGoodsByDiscount() throws Exception{
+        List<FFQuanDiscountGood> goods = dtkffqDiscountGoodService.gather();
+        if(null!=goods && !goods.isEmpty()){
+            List<FFQuanDiscountGood> goodList = dtkffqDiscountGoodService.list();
+            boolean save = dtkffqDiscountGoodService.saveBatch(goods);
+            if(save && null!=goodList && !goodList.isEmpty()) {
+                dtkffqDiscountGoodService.removeByIds(goodList.stream()
+                        .map(FFQuanDiscountGood::getId).collect(Collectors.toList()));
+            }
+        }
+    }
+
+
 
     /**
      * 每天凌晨2点清除失效的商品（物理删除）

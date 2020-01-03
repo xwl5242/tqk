@@ -63,7 +63,7 @@ ADD pip.conf pip.conf
 ADD requirements.txt /usr/requirements.txt
 ADD imageCompress.py /usr/imageCompress.py
 RUN mkdir /usr/local/images
-RUN pip install -r requirements.txt
+RUN pip install -r /usr/requirements.txt
 CMD ["python", "/usr/imageCompress.py"]
 
 ##### pip.conf

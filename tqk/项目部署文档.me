@@ -56,10 +56,6 @@ docker pull python:lastest
 
 ##### 编写python Dockerfile
 FROM python:latest
-RUN cd ~
-RUN mkdir .pip
-RUN cd .pip
-ADD pip.conf pip.conf
 ADD requirements.txt /usr/requirements.txt
 ADD imageCompress.py /usr/imageCompress.py
 RUN mkdir /usr/local/images

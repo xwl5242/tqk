@@ -128,6 +128,8 @@ public class DTKGoodsJob{
         if(null!=result){
             List<FFQuanBrand> brands = (List<FFQuanBrand>) result.get("brands");
             List<FFQuanBrandGood> goods = (List<FFQuanBrandGood>) result.get("goods");
+            log.info("每120分钟定时拉取品牌数据,拉取记录条数:{}", null!=brands?brands.size():0);
+            log.info("每120分钟定时拉取品牌商品数据,拉取记录条数:{}", null!=goods?goods.size():0);
             if(null!=brands && !brands.isEmpty()){
                 List<FFQuanBrand> brandList = dtkffqBrandService.list();
                 boolean save = dtkffqBrandService.saveBatch(brands);
@@ -148,13 +150,14 @@ public class DTKGoodsJob{
     }
 
     /**
-     * 每2个小时采集一下ffquan 品牌和品牌商品信息
+     * 每2个小时采集一下ffquan 折扣商品信息
      * @throws Exception
      */
-    @Scheduled(initialDelay = 6*60*1000, fixedDelay=2*61*60*1000)
+    @Scheduled(initialDelay = 4*60*1000, fixedDelay=2*61*60*1000)
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByDiscount() throws Exception{
         List<FFQuanDiscountGood> goods = dtkffqDiscountGoodService.gather();
+        log.info("每122分钟定时拉取折扣商品数据,拉取记录条数:{}", null!=goods?goods.size():0);
         if(null!=goods && !goods.isEmpty()){
             List<FFQuanDiscountGood> goodList = dtkffqDiscountGoodService.list();
             boolean save = dtkffqDiscountGoodService.saveBatch(goods);

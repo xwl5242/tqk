@@ -11,6 +11,7 @@ import com.quanchong.dataoke.mapper.good.DTKFFQDiscountGoodMapper;
 import com.quanchong.dataoke.service.good.DTKFFQDiscountGoodService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,15 @@ public class DTKFFQDiscountGoodServiceImpl extends ServiceImpl<DTKFFQDiscountGoo
         List<FFQuanDiscountGood> result = new ArrayList<>();
         JSONArray jsonArray = FFQuanApi.discountCategoryList();
         if(null!=jsonArray && !jsonArray.isEmpty()){
-           List<String> cIds = jsonArray.toJavaList(String.class);
-           for(String cid: cIds){
-               JSONObject jsonObject = FFQuanApi.discountGoods(cid);
-               if(null!=jsonObject){
-                   FFQuanDiscountResp resp = jsonObject.toJavaObject(FFQuanDiscountResp.class);
-                   if(null!=resp && !resp.getList().isEmpty()){
-                       result.addAll(resp.getList());
+           for(int i=0;i<jsonArray.size();i++){
+               String cid = jsonArray.getJSONObject(i).getString("id");
+               if(!StringUtils.isEmpty(cid)){
+                   JSONObject jsonObject = FFQuanApi.discountGoods(cid);
+                   if(null!=jsonObject){
+                       FFQuanDiscountResp resp = jsonObject.toJavaObject(FFQuanDiscountResp.class);
+                       if(null!=resp && !resp.getList().isEmpty()){
+                           result.addAll(resp.getList());
+                       }
                    }
                }
            }

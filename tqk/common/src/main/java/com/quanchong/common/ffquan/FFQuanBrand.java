@@ -19,14 +19,9 @@ public class FFQuanBrand {
     private String brandWenan;
     private String label;
     private String fansNum;
-    private Label brandLabelOne;
-    private Label brandLabelTwo;
+    private String brandLabelOne;
+    private String brandLabelTwo;
     private String brandType;
     @TableField(exist = false)
     private List<FFQuanBrandGood> hotPush;
-
-    @Data
-    public static class Label{
-        private String val;
-    }
 }

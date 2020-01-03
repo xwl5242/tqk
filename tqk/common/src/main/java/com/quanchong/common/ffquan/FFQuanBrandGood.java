@@ -11,7 +11,7 @@ import java.util.List;
 public class FFQuanBrandGood {
     private String id;
     private String brandId;
-    private String lableTwo;
+    private String labelTwo;
     private String huodongType; // 1:无;3:聚划算
     private String pic;
     private String yuanjia;
@@ -20,10 +20,5 @@ public class FFQuanBrandGood {
     private String dtitle;
     private String xiaoliang;
     private String sellDear;
-    private List<Label> goodsLabels;
-
-    @Data
-    public static class Label{
-        private String val;
-    }
+    private String goodsLabels;
 }

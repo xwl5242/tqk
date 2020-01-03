@@ -56,26 +56,22 @@ docker pull python:lastest
 
 ##### 编写python Dockerfile
 FROM python:lastest
+ADD pip.conf ~/.pip/pip.conf
 ADD requirements.txt /usr/requirements.txt
 ADD imageCompress.py /usr/imageCompress.py
 RUN mkdir /usr/local/images
 RUN pip install -r requirements.txt
-或者
-RUN pip install pillow -i http://mirrors.aliyun.com/pypi/simple/
-RUN pip install requests -i http://mirrors.aliyun.com/pypi/simple/
-RUN pip install pymysql -i http://mirrors.aliyun.com/pypi/simple/
-RUN pip install schedule -i http://mirrors.aliyun.com/pypi/simple/
 CMD ["python", "/usr/imageCompress.py"]
+
+##### pip.conf
+[global]
+index-url = http://mirrors.aliyun.com/pypi/simple
 
 ##### requirements.txt
 pillow
 requests
 pymysql
 schedule
-
-##### 或者使用国内pip安装源头
-不再使用requirements.txt
-直接运行 pip install xxx -i http://mirrors.aliyun.com/pypi/simple/
 
 ##### 构建镜像
 docker build -t python:v1 .

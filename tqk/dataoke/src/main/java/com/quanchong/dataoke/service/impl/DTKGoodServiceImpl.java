@@ -85,7 +85,6 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         }
         //过滤重复数据
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
-        log.info("项目启动采集商品数据记录:{}条", goodList.size());
         return goodList;
     }
 
@@ -102,7 +101,6 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
             gatherGoodsByNineLoop(goodList, nineCid, gatherTimes);
         }
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
-        log.info("定时采集9.9商品数据记录:{}条", goodList.size());
         return goodList;
     }
 
@@ -123,7 +121,6 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
             goodList.addAll(tmpList);
         }
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
-        log.info("定时采集榜单商品数据记录:{}条", goodList.size());
         return goodList;
     }
 
@@ -142,7 +139,6 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         lastPullGatherTime = now;
         dtkFunctionService.setFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_PULL_TIME, now);
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
-        log.info("定时拉取商品数据记录:{}条", goodList.size());
         return goodList;
     }
 
@@ -159,7 +155,6 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
             gatherGoodsByNewestLoop(goodList, cid, "1", createTime);
         }
         goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
-        log.info("定时拉取更新商品数据记录:{}条", goodList.size());
         return goodList;
     }
 
@@ -176,7 +171,6 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         lastStaleGatherTime = now;
         dtkFunctionService.setFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_STALE_TIME, now);
         list = list.parallelStream().filter(distinctByKey(GoodStaleResp.GoodStale::getId)).collect(Collectors.toList());
-        log.info("定时拉取失效商品数据记录:{}条", list.size());
         return list;
     }
 

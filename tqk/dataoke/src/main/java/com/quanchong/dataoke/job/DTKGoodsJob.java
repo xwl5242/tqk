@@ -31,7 +31,10 @@ public class DTKGoodsJob{
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByPull() throws Exception{
         List<DTKGood> list = dtkGoodService.gatherGoodsByPull();
-        dtkGoodService.saveOrUpdateBatch(list);
+        log.info("每30分钟定时拉取商品数据,拉取记录条数:{}", null!=list?list.size():0);
+        if(null!=list && !list.isEmpty()){
+            dtkGoodService.saveOrUpdateBatch(list);
+        }
     }
 
     /**
@@ -42,13 +45,16 @@ public class DTKGoodsJob{
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByStale() throws Exception{
         List<GoodStaleResp.GoodStale> list = dtkGoodService.gatherGoodsByStale();
-        List<DTKGood> goodList = list.stream().map(goodStale -> {
-            DTKGood good = new DTKGood();
-            good.setId(goodStale.getId());
-            good.setIsExpire("1");
-            return good;
-        }).collect(Collectors.toList());
-        dtkGoodService.updateBatchById(goodList);
+        log.info("每10分钟定时拉取失效商品数据,拉取记录条数:{}", null!=list?list.size():0);
+        if(null!=list && !list.isEmpty()){
+            List<DTKGood> goodList = list.stream().map(goodStale -> {
+                DTKGood good = new DTKGood();
+                good.setId(goodStale.getId());
+                good.setIsExpire("1");
+                return good;
+            }).collect(Collectors.toList());
+            dtkGoodService.updateBatchById(goodList);
+        }
     }
 
     /**
@@ -59,7 +65,10 @@ public class DTKGoodsJob{
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByNewest() throws Exception{
         List<DTKGood> list = dtkGoodService.gatherGoodsByNewest();
-        dtkGoodService.updateBatchById(list);
+        log.info("每小时定时拉取最新商品数据,拉取记录条数:{}", null!=list?list.size():0);
+        if(null!=list && !list.isEmpty()) {
+            dtkGoodService.updateBatchById(list);
+        }
     }
 
     /**
@@ -70,7 +79,10 @@ public class DTKGoodsJob{
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByNine() throws Exception{
         List<DTKGood> list = dtkGoodService.gatherGoodsByNine();
-        dtkGoodService.saveOrUpdateBatch(list);
+        log.info("每13分钟定时拉取9.9商品数据,拉取记录条数:{}", null!=list?list.size():0);
+        if(null!=list && !list.isEmpty()) {
+            dtkGoodService.saveOrUpdateBatch(list);
+        }
     }
 
     /**
@@ -81,7 +93,10 @@ public class DTKGoodsJob{
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByRanking() throws Exception{
         List<DTKGood> list = dtkGoodService.gatherGoodsByRanking();
-        dtkGoodService.saveOrUpdateBatch(list);
+        log.info("每17分钟定时拉取榜单商品数据,拉取记录条数:{}", null!=list?list.size():0);
+        if(null!=list && !list.isEmpty()) {
+            dtkGoodService.saveOrUpdateBatch(list);
+        }
     }
 
     /**
@@ -90,6 +105,7 @@ public class DTKGoodsJob{
     @Scheduled(cron = "0 0 2 * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void removeIsExpireGoods() throws Exception{
+        log.info("每天凌晨2点清除失效商品");
         QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
         wrapper.eq("is_expire", "1");
         dtkGoodService.remove(wrapper);
@@ -106,10 +122,13 @@ public class DTKGoodsJob{
         wrapper.eq("is_expire", "0");
         wrapper.lt("coupon_end_time", now);
         List<DTKGood> expireGoods = dtkGoodService.list(wrapper);
-        expireGoods = expireGoods.stream().map(dtkGood -> {
-            dtkGood.setIsExpire("1");
-            return dtkGood;
-        }).collect(Collectors.toList());
-        dtkGoodService.updateBatchById(expireGoods);
+        log.info("每天凌晨1点将优惠券到期商品置为失效,失效记录条数:{}", null!=expireGoods?expireGoods.size():0);
+        if(null!=expireGoods && !expireGoods.isEmpty()){
+            expireGoods = expireGoods.stream().map(dtkGood -> {
+                dtkGood.setIsExpire("1");
+                return dtkGood;
+            }).collect(Collectors.toList());
+            dtkGoodService.updateBatchById(expireGoods);
+        }
     }
 }

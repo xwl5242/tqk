@@ -1,13 +1,16 @@
-### 服务器docker安装
+================================= 项目部署说明书 =================================
+##### 服务器docker安装
 yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install docker-ce
+
+##### 服务器启动docker服务
 systemctl start docker
 
 ### mysql5.7 镜像
 docker pull mysql:5.7
 
-### 启动mysql服务器
+##### 启动mysql服务器
 docker run -p 3306:3306 --name mysql \
 -v /usr/local/docker/mysql/conf:/etc/mysql \
 -v /usr/local/docker/mysql/logs:/var/log/mysql \
@@ -18,18 +21,18 @@ docker run -p 3306:3306 --name mysql \
 -e MYSQL_ROOT_PASSWORD=tqk840339280 \
 -d mysql:5.7
 
-### java8镜像
+##### java8镜像
 docker pull openjdk:8
 
-### 编写Dockfile
+##### 编写Dockerfile
 FROM openjdk:8
 ADD common-1.0-SNAPSHOT.jar common-1.0-SNAPSHOT.jar
 ADD dataoke-1.0-SNAPSHOT.jar dataoke.jar
 RUN sh -c 'touch /common-1.0-SNAPSHOT.jar'
 RUN sh -c 'touch /dataoke.jar'
-ENTRYPOINT ["java","-jar","/dataoke.jar"]  
+ENTRYPOINT ["java","-jar","/dataoke.jar", "--spring.profiles.active=pro"]
 
-### 构建镜像
+##### 构建镜像
 docker build -t dataoke:v1 .
 
 ### 运行镜像
@@ -39,7 +42,7 @@ docker run --name=config -d -p 8083:8083 -v /home/app/config/config-1.0-SNAPSHOT
 
 docker run --name=dataoke -d -p 8087:8087 -v /home/app/dataoke/dataoke-1.0-SNAPSHOT.jar:/dataoke.jar -v /home/app/dataoke/common-1.0-SNAPSHOT.jar:/common-1.0-SNAPSHOT.jar -v /etc/localtime:/etc/localtime:ro  --privileged=true -e tZ="Asia/Shanghai" dataoke:v1
 
-### 注意事项
+##### 注意事项
 1.服务器默认docker的网关为 172.17.0.1
 docker下的启动的容器的网络ip地址和启动顺序有关，第一个启动的ip地址为：172.17.0.2，后面以此类推。
 当前部署时的启动顺序为：eureka, config, dataoke, mysql.
@@ -47,3 +50,20 @@ docker下的启动的容器的网络ip地址和启动顺序有关，第一个启
 
 2.程序时间差8小时解决方法
 echo "Asia/Shanghai" > /etc/timezone
+
+##### python镜像
+docker pull python:lastest
+
+##### 编写python Dockerfile
+FROM python:lastest
+ADD requirements.txt /usr/requirements.txt
+ADD imageCompress.py /usr/imageCompress.py
+RUN mkdir /usr/local/images
+RUN pip install -r requirements.txt
+CMD ["python", "/usr/imageCompress.py"]
+
+##### 构建镜像
+docker build -t python:v1 .
+
+##### 运行镜像
+docker run --name=imageCompress -d -v /home/app/python/imageCompress.py:/usr/imageCompress.py -v /usr/local/images/:/usr/local/images/ --privileged=true python:v1

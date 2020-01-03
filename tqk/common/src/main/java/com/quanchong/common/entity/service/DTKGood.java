@@ -72,6 +72,7 @@ public class DTKGood extends BaseEntity {
     private String rankType;
     private String newRankingGoods;
     private String isExpire;
+    private String isImgCompress;
     @TableField(exist = false)
     private String detailPics;
     @TableField(exist = false)

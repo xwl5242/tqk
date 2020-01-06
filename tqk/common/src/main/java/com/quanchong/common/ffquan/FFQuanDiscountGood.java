@@ -1,11 +1,12 @@
 package com.quanchong.common.ffquan;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.quanchong.common.base.BaseGood;
 import lombok.Data;
 
 @Data
 @TableName("dtk_ffq_discount_good")
-public class FFQuanDiscountGood {
+public class FFQuanDiscountGood extends BaseGood {
     private String id;
     private String yuanjia;
     private String jiage;

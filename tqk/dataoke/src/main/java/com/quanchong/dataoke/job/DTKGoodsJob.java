@@ -7,6 +7,7 @@ import com.quanchong.common.ffquan.FFQuanBrand;
 import com.quanchong.common.ffquan.FFQuanBrandGood;
 import com.quanchong.common.ffquan.FFQuanDiscountGood;
 import com.quanchong.common.util.DateUtils;
+import com.quanchong.dataoke.dataoke.util.GoodUtils;
 import com.quanchong.dataoke.service.brand.DTKFFQBrandGoodService;
 import com.quanchong.dataoke.service.brand.DTKFFQBrandService;
 import com.quanchong.dataoke.service.good.DTKFFQDiscountGoodService;
@@ -50,6 +51,7 @@ public class DTKGoodsJob{
         log.info("每30分钟定时拉取商品数据,拉取记录条数:{}", null!=list?list.size():0);
         if(null!=list && !list.isEmpty()){
             dtkGoodService.saveOrUpdateBatch(list);
+//            GoodUtils.uploadImage(list);
         }
     }
 
@@ -98,6 +100,7 @@ public class DTKGoodsJob{
         log.info("每13分钟定时拉取9.9商品数据,拉取记录条数:{}", null!=list?list.size():0);
         if(null!=list && !list.isEmpty()) {
             dtkGoodService.saveOrUpdateBatch(list);
+//            GoodUtils.uploadImage(list);
         }
     }
 
@@ -112,6 +115,7 @@ public class DTKGoodsJob{
         log.info("每17分钟定时拉取榜单商品数据,拉取记录条数:{}", null!=list?list.size():0);
         if(null!=list && !list.isEmpty()) {
             dtkGoodService.saveOrUpdateBatch(list);
+//            GoodUtils.uploadImage(list);
         }
     }
 
@@ -130,19 +134,23 @@ public class DTKGoodsJob{
             log.info("每120分钟定时拉取品牌商品数据,拉取记录条数:{}", null!=goods?goods.size():0);
             if(null!=brands && !brands.isEmpty()){
                 List<FFQuanBrand> brandList = dtkffqBrandService.list();
-                boolean save = dtkffqBrandService.saveBatch(brands);
-                if(save && null!=brandList && !brandList.isEmpty()) {
-                    dtkffqBrandService.removeByIds(brandList.stream()
-                            .map(FFQuanBrand::getBrandId).collect(Collectors.toList()));
+                if(null!=brandList && !brandList.isEmpty()) {
+                    QueryWrapper wrapper = new QueryWrapper();
+                    wrapper.isNotNull("id");
+                    dtkffqBrandService.remove(wrapper);
                 }
+                dtkffqBrandService.saveBatch(brands);
             }
             if(null!=goods && !goods.isEmpty()) {
                 List<FFQuanBrandGood> goodList = dtkffqBrandGoodService.list();
-                boolean save = dtkffqBrandGoodService.saveBatch(goods);
-                if(save && null!=goodList && !goodList.isEmpty()) {
-                    dtkffqBrandGoodService.removeByIds(goodList.stream()
-                            .map(FFQuanBrandGood::getId).collect(Collectors.toList()));
+                if(null!=goodList && !goodList.isEmpty()) {
+                    QueryWrapper wrapper = new QueryWrapper();
+                    wrapper.isNotNull("id");
+                    dtkffqBrandGoodService.remove(wrapper);
+                    GoodUtils.removeImage(goodList);
                 }
+                dtkffqBrandGoodService.saveBatch(goods);
+//                GoodUtils.uploadImage(goods);
             }
         }
     }
@@ -151,22 +159,23 @@ public class DTKGoodsJob{
      * 每2个小时采集一下ffquan 折扣商品信息
      * @throws Exception
      */
-    @Scheduled(initialDelay = 2*60*1000, fixedDelay=2*65*60*1000)
+    @Scheduled(initialDelay = 2*1000, fixedDelay=2*65*60*1000)
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByDiscount() throws Exception{
         List<FFQuanDiscountGood> goods = dtkffqDiscountGoodService.gather();
         log.info("每122分钟定时拉取折扣商品数据,拉取记录条数:{}", null!=goods?goods.size():0);
         if(null!=goods && !goods.isEmpty()){
             List<FFQuanDiscountGood> goodList = dtkffqDiscountGoodService.list();
-            boolean save = dtkffqDiscountGoodService.saveBatch(goods);
-            if(save && null!=goodList && !goodList.isEmpty()) {
-                dtkffqDiscountGoodService.removeByIds(goodList.stream()
-                        .map(FFQuanDiscountGood::getId).collect(Collectors.toList()));
+            if(null!=goodList && !goodList.isEmpty()) {
+                QueryWrapper wrapper = new QueryWrapper();
+                wrapper.isNotNull("id");
+                dtkffqDiscountGoodService.remove(wrapper);
+                GoodUtils.removeImage(goodList);
             }
+            boolean save = dtkffqDiscountGoodService.saveBatch(goods);
+//            GoodUtils.uploadImage(goods);
         }
     }
-
-
 
     /**
      * 每天凌晨2点清除失效的商品（物理删除）
@@ -177,7 +186,9 @@ public class DTKGoodsJob{
         log.info("每天凌晨2点清除失效商品");
         QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
         wrapper.eq("is_expire", "1");
+        List<DTKGood> list = dtkGoodService.list(wrapper);
         dtkGoodService.remove(wrapper);
+//        GoodUtils.uploadImage(list);
     }
 
     /**

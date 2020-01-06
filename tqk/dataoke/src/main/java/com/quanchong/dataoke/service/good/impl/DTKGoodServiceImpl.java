@@ -7,11 +7,14 @@ import com.quanchong.common.entity.dtkResp.GoodStaleResp;
 import com.quanchong.common.entity.dtkResp.SuperCategoryResp;
 import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.common.util.DateUtils;
+import com.quanchong.common.util.ImageUtils;
+import com.quanchong.common.util.QiNiuCloudUtils;
 import com.quanchong.dataoke.dataoke.DTKConsts;
 import com.quanchong.dataoke.dataoke.DTKService;
+import com.quanchong.dataoke.dataoke.util.GoodUtils;
 import com.quanchong.dataoke.mapper.good.DTKGoodMapper;
-import com.quanchong.dataoke.service.sys.DTKFunctionService;
 import com.quanchong.dataoke.service.good.DTKGoodService;
+import com.quanchong.dataoke.service.sys.DTKFunctionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +24,6 @@ import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -83,7 +82,7 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
             gatherGoodsLoop(goodList, cid, "1");
         }
         //过滤重复数据
-        goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
+        goodList = goodList.parallelStream().filter(GoodUtils.distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         return goodList;
     }
 
@@ -99,7 +98,7 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
             int gatherTimes = 0;
             gatherGoodsByNineLoop(goodList, nineCid, gatherTimes);
         }
-        goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
+        goodList = goodList.parallelStream().filter(GoodUtils.distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         return goodList;
     }
 
@@ -119,7 +118,7 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
             }).collect(Collectors.toList());
             goodList.addAll(tmpList);
         }
-        goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
+        goodList = goodList.parallelStream().filter(GoodUtils.distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         return goodList;
     }
 
@@ -137,7 +136,7 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         String now = DateUtils.now();
         lastPullGatherTime = now;
         dtkFunctionService.setFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_PULL_TIME, now);
-        goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
+        goodList = goodList.parallelStream().filter(GoodUtils.distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         return goodList;
     }
 
@@ -153,7 +152,7 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         for(String cid: cidList){
             gatherGoodsByNewestLoop(goodList, cid, "1", createTime);
         }
-        goodList = goodList.parallelStream().filter(distinctByKey(DTKGood::getId)).collect(Collectors.toList());
+        goodList = goodList.parallelStream().filter(GoodUtils.distinctByKey(DTKGood::getId)).collect(Collectors.toList());
         return goodList;
     }
 
@@ -169,7 +168,7 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         String now = DateUtils.now();
         lastStaleGatherTime = now;
         dtkFunctionService.setFunctionValue(DTKConsts.DTK_FUNCTION_GATHER_GOODS_STALE_TIME, now);
-        list = list.parallelStream().filter(distinctByKey(GoodStaleResp.GoodStale::getId)).collect(Collectors.toList());
+        list = list.parallelStream().filter(GoodUtils.distinctByKey(GoodStaleResp.GoodStale::getId)).collect(Collectors.toList());
         return list;
     }
 
@@ -282,14 +281,9 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         }
     }
 
-    /**
-     * 去重操作
-     * @param keyExtractor
-     * @param <T>
-     * @return
-     */
-    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
-        Set<Object> seen = ConcurrentHashMap.newKeySet();
-        return t -> seen.add(keyExtractor.apply(t));
+    private List<String> getMainPicFileName(List<DTKGood> goodList) {
+        return goodList.parallelStream()
+                .map(dtkGood -> GoodUtils.genImageFileName(dtkGood.getMainPic(), dtkGood.getId()))
+                .collect(Collectors.toList());
     }
 }

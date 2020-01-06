@@ -15,17 +15,11 @@ public class ImageUtils {
      * @param scale
      * @return
      */
-    public static byte[] compressImage(String url, float scale) {
-        byte[] smallImage = null;
-        try{
-            String fileType = url.substring(url.lastIndexOf(".")+1);
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            Thumbnails.of(new URL(url)).scale(scale).outputFormat(fileType).toOutputStream(out);
-            smallImage = out.toByteArray();
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-        return smallImage;
+    public static byte[] compressImage(String url, float scale) throws Exception{
+        String fileType = url.substring(url.lastIndexOf(".")+1);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Thumbnails.of(new URL(url)).scale(scale).outputFormat(fileType).toOutputStream(out);
+        return out.toByteArray();
     }
 
     /**
@@ -34,17 +28,11 @@ public class ImageUtils {
      * @param ppi
      * @return
      */
-    public static byte[] compressImage(String url, int ppi) {
-        byte[] smallImage = null;
-        try{
-            String fileType = url.substring(url.lastIndexOf(".")+1);
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            Thumbnails.of(new URL(url)).size(ppi, ppi).outputFormat(fileType).toOutputStream(out);
-            smallImage = out.toByteArray();
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-        return smallImage;
+    public static byte[] compressImage(String url, int ppi) throws Exception{
+        String fileType = url.substring(url.lastIndexOf(".")+1);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Thumbnails.of(new URL(url)).size(ppi, ppi).outputFormat(fileType).toOutputStream(out);
+        return out.toByteArray();
     }
 
 }

@@ -2,13 +2,14 @@ package com.quanchong.common.ffquan;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.quanchong.common.base.BaseGood;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @TableName("dtk_ffq_brand_good")
-public class FFQuanBrandGood {
+public class FFQuanBrandGood extends BaseGood {
     private String id;
     private String brandId;
     private String labelTwo;

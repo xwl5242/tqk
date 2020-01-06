@@ -6,7 +6,7 @@ import com.quanchong.common.entity.service.DTKGood;
 
 import java.util.List;
 
-public interface DTKGoodService extends IService<DTKGood> {
+public interface DTKGoodService extends IService<DTKGood>{
     List<DTKGood> gatherGoods() throws Exception;
     List<DTKGood> gatherGoodsByNine() throws Exception;
     List<DTKGood> gatherGoodsByRanking() throws Exception;

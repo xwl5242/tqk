@@ -22,6 +22,7 @@ public class FFQuanBrand {
     private String brandLabelOne;
     private String brandLabelTwo;
     private String brandType;
+    private String categoryId;
     @TableField(exist = false)
     private List<FFQuanBrandGood> hotPush;
 }

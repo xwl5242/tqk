@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/dtk/brand")
@@ -72,12 +73,7 @@ public class DTKBrandController {
      */
     @GetMapping("/ffquan/hots")
     public List<FFQuanBrand> brandHotsList(Long pageNo, Long pageSize) {
-        pageNo = null == pageNo? 0L: pageNo;
-        pageSize = null == pageSize? 0L: pageSize;
-        QueryWrapper<FFQuanBrand> wrapper = new QueryWrapper<>();
-        wrapper.eq("brand_type", "hots");
-        IPage<FFQuanBrand> pageList = dtkffqBrandService.page(new Page<>(pageNo, pageSize), wrapper);
-        return pageList.getRecords();
+        return dtkffqBrandService.listByTypeOrCategory("hots", pageNo, pageSize);
     }
 
     /**
@@ -88,8 +84,7 @@ public class DTKBrandController {
      */
     @GetMapping("/ffquan/list")
     public List<FFQuanBrand> brandListByCategoryId(String typeId, Long pageNo, Long pageSize) throws Exception{
-        JSONArray jsonArray = FFQuanApi.brandListByCategoryId(typeId);
-        return jsonArray.toJavaList(FFQuanBrand.class);
+        return dtkffqBrandService.listByTypeOrCategory(typeId, pageNo, pageSize);
     }
 
     /**
@@ -104,4 +99,5 @@ public class DTKBrandController {
         JSONObject jsonObject = FFQuanApi.brandDetail(brandId);
         return jsonObject.toJavaObject(FFQuanBrand.class);
     }
+
 }

@@ -50,6 +50,7 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/lib/taobao.jar</systemPath>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>

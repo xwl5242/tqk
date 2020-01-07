@@ -136,7 +136,7 @@ public class DTKGoodsJob{
                 List<FFQuanBrand> brandList = dtkffqBrandService.list();
                 if(null!=brandList && !brandList.isEmpty()) {
                     QueryWrapper wrapper = new QueryWrapper();
-                    wrapper.isNotNull("id");
+                    wrapper.isNotNull("brand_id");
                     dtkffqBrandService.remove(wrapper);
                 }
                 dtkffqBrandService.saveBatch(brands);

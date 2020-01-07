@@ -123,7 +123,7 @@ public class DTKGoodsJob{
      * 每2个小时采集一下ffquan 品牌和品牌商品信息
      * @throws Exception
      */
-    @Scheduled(initialDelay = 3*1000, fixedDelay=2*60*60*1000)
+    @Scheduled(initialDelay = 3*60*1000, fixedDelay=2*60*60*1000)
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByFFQBrand() throws Exception{
         Map<String,Object> result = dtkffqBrandService.gather();
@@ -159,7 +159,7 @@ public class DTKGoodsJob{
      * 每2个小时采集一下ffquan 折扣商品信息
      * @throws Exception
      */
-    @Scheduled(initialDelay = 2*1000, fixedDelay=2*65*60*1000)
+    @Scheduled(initialDelay = 2*60*1000, fixedDelay=2*65*60*1000)
     @Transactional(rollbackFor = Exception.class)
     public void gatherGoodsByDiscount() throws Exception{
         List<FFQuanDiscountGood> goods = dtkffqDiscountGoodService.gather();

@@ -22,4 +22,5 @@ public class FFQuanBrandGood extends BaseGood {
     private String xiaoliang;
     private String sellDear;
     private String goodsLabels;
+    private String isImgCompress;
 }

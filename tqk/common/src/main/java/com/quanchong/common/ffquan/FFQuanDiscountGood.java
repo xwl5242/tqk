@@ -17,4 +17,5 @@ public class FFQuanDiscountGood extends BaseGood {
     private String pic;
     private String activityEndTime;
     private String dtitle;
+    private String isImgCompress;
 }

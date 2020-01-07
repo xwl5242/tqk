@@ -30,6 +30,7 @@ ADD common-1.0-SNAPSHOT.jar common-1.0-SNAPSHOT.jar
 ADD dataoke-1.0-SNAPSHOT.jar dataoke.jar
 RUN sh -c 'touch /common-1.0-SNAPSHOT.jar'
 RUN sh -c 'touch /dataoke.jar'
+CMD ["bash", "-c", "echo 'Asia/Shanghai' > /etc/timezone"]
 ENTRYPOINT ["java","-jar","/dataoke.jar", "--spring.profiles.active=pro"]
 
 ##### 构建镜像

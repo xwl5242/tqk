@@ -60,9 +60,7 @@ public class DTKBrandController {
      */
     @GetMapping("/ffquan/recs")
     public List<FFQuanBrand> brandRecsList() {
-        QueryWrapper<FFQuanBrand> wrapper = new QueryWrapper<>();
-        wrapper.eq("brand_type", "recs");
-        return dtkffqBrandService.list(wrapper);
+        return dtkffqBrandService.listByTypeOrCategory("recs", 0L, 30L);
     }
 
     /**

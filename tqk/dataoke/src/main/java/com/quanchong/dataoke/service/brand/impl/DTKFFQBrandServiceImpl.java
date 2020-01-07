@@ -80,7 +80,7 @@ public class DTKFFQBrandServiceImpl extends ServiceImpl<DTKFFQBrandMapper, FFQua
             QueryWrapper<FFQuanBrandGood> wrapper1 =  new QueryWrapper<>();
             wrapper1.eq("brand_id", brandId);
             List<FFQuanBrandGood> ffqBrandGoods = dtkffqBrandGoodService.list(wrapper1);
-            ffQuanBrand.setHotPush(ffqBrandGoods);
+            ffQuanBrand.setHotPush(ffqBrandGoods.subList(0,3));
             return ffQuanBrand;
         }).collect(Collectors.toList());
     }

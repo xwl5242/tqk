@@ -51,6 +51,23 @@ public class DTKService {
         return null;
     }
 
+    /**
+     * 联想词
+     * @return
+     * @throws Exception
+     */
+    public JSONArray suggestion(String keyWords) throws Exception{
+        if(!StringUtils.isEmpty(keyWords)){
+            Map<String, String> param = new HashMap<>();
+            param.put("keyWords", keyWords);
+            param.put("type", "3");
+            String resp = execute(DTKConsts.DTK_API_KEY_SUGGESTION, param);
+            if(!StringUtils.isEmpty(resp)){
+                return JSONArray.parseArray(resp);
+            }
+        }
+        return null;
+    }
 
     /**
      * 查询热搜记录

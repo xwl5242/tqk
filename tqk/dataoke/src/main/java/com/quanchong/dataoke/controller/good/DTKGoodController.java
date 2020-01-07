@@ -77,6 +77,17 @@ public class DTKGoodController {
     }
 
     /**
+     * 获取联想词
+     * @param hotWords
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/suggestion")
+    public JSONArray getSuggestion(@RequestParam String hotWords) throws Exception{
+        return dtkService.suggestion(hotWords);
+    }
+
+    /**
      * 根据类目id查询商品列表
      * @param cid
      * @return

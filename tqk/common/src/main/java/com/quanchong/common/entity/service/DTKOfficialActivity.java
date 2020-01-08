@@ -1,6 +1,7 @@
 package com.quanchong.common.entity.service;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -16,4 +17,6 @@ public class DTKOfficialActivity {
     private String activityStartTime;
     private String activityEndTime;
     private String activityPlatform;
+    @TableField(exist = false)
+    private String mainColor;
 }

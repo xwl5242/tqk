@@ -2,6 +2,7 @@ package com.quanchong.dataoke.controller.sys;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.quanchong.common.entity.service.DTKOfficialActivity;
+import com.quanchong.common.util.ColorThief;
 import com.quanchong.common.util.DateUtils;
 import com.quanchong.dataoke.service.sys.DTKOfficialActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/dtk/activity")
@@ -24,7 +26,13 @@ public class DTKOfficialActivityController {
      */
     @GetMapping("/list/wifi")
     public List<DTKOfficialActivity> getWifiList(){
-        return dtkOfficialActivityService.list(getListQueryWrapper("wifi"));
+        QueryWrapper<DTKOfficialActivity> wrapper = getListQueryWrapper("wifi");
+        return dtkOfficialActivityService.list(wrapper).stream().map(dtkOfficialActivity -> {
+            String url = dtkOfficialActivity.getActivityImgUrl();
+            String color = ColorThief.getImagePixelFromUrl(url);
+            dtkOfficialActivity.setMainColor(color);
+            return dtkOfficialActivity;
+        }).collect(Collectors.toList());
     }
 
     /**
@@ -36,7 +44,7 @@ public class DTKOfficialActivityController {
         return dtkOfficialActivityService.list(getListQueryWrapper("pc"));
     }
 
-    private QueryWrapper getListQueryWrapper(String platform){
+    private QueryWrapper<DTKOfficialActivity> getListQueryWrapper(String platform){
         String nowDate = DateUtils.nowDate();
         QueryWrapper<DTKOfficialActivity> wrapper = new QueryWrapper<>();
         wrapper.eq("activity_platform", platform);

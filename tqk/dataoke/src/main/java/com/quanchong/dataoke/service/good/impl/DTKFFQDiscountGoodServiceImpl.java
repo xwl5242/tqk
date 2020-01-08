@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -33,7 +34,12 @@ public class DTKFFQDiscountGoodServiceImpl extends ServiceImpl<DTKFFQDiscountGoo
                    if(null!=jsonObject){
                        FFQuanDiscountResp resp = jsonObject.toJavaObject(FFQuanDiscountResp.class);
                        if(null!=resp && !resp.getList().isEmpty()){
-                           result.addAll(resp.getList());
+                           List<FFQuanDiscountGood> goods = resp.getList();
+                           goods = goods.parallelStream().map(ffQuanDiscountGood -> {
+                               ffQuanDiscountGood.setCId(cid);
+                               return ffQuanDiscountGood;
+                           }).collect(Collectors.toList());
+                           result.addAll(goods);
                        }
                    }
                }

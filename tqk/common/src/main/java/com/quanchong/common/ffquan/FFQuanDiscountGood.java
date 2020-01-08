@@ -8,6 +8,7 @@ import lombok.Data;
 @TableName("dtk_ffq_discount_good")
 public class FFQuanDiscountGood extends BaseGood {
     private String id;
+    private String cId;
     private String yuanjia;
     private String jiage;
     private String xiaoliang;

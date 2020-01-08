@@ -185,25 +185,6 @@ public class DTKGoodController {
     }
 
     /**
-     * 查询折上折类目id List
-     */
-    @GetMapping("/ffquan/discount_category")
-    public JSONArray queryFFQuanDiscountCategory() throws Exception{
-        return FFQuanApi.discountCategoryList();
-    }
-
-    /**
-     * ffquan 查询折上折商品
-     * @param cId 折上折类目id
-     * @return
-     * @throws Exception
-     */
-    @GetMapping("/ffquan/discount")
-    public FFQuanDiscountResp queryFFQuanDiscountGoods(String cId) throws Exception{
-        return FFQuanApi.discountGoods(cId).toJavaObject(FFQuanDiscountResp.class);
-    }
-
-    /**
      * 查询品牌商品
      * @param pageId 页面
      * @param pageSize 页大小

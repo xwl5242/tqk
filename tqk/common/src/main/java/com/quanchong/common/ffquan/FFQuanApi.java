@@ -116,7 +116,11 @@ public class FFQuanApi {
     public static JSONArray discountCategoryList() throws Exception {
         String resp = execute(DISCOUNT_CATEGORY);
         if(!StringUtils.isEmpty(resp)) {
-            return JSONArray.parseArray(resp);
+            String jx = "{\"id\":0,\"title\":\"精选\"}";
+            JSONObject jsonObject = JSONObject.parseObject(jx);
+            JSONArray jsonArray = JSONArray.parseArray(resp);
+            jsonArray.add(0, jsonObject);
+            return jsonArray;
         }
         return null;
     }

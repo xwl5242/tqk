@@ -17,6 +17,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -217,7 +218,11 @@ public class DTKGoodController {
         map.put("brandIds", brandIds);
         map.put("pageId", StringUtils.isEmpty(pageId)?"1":pageId);
         map.put("pageSize", StringUtils.isEmpty(pageSize)?"20":pageSize);
-        return dtkService.goodsByMap(map).getList();
+        GoodResp resp = dtkService.goodsByMap(map);
+        if(null!=resp){
+            return resp.getList();
+        }
+        return new ArrayList<>();
     }
 
     /**

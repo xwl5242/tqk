@@ -27,7 +27,6 @@ public class DTKFFQDiscountGoodServiceImpl extends ServiceImpl<DTKFFQDiscountGoo
     public List<FFQuanDiscountGood> gather() throws Exception {
         List<FFQuanDiscountGood> result = new ArrayList<>();
         JSONArray jsonArray = FFQuanApi.discountCategoryList();
-        System.out.println(jsonArray);
         if(null!=jsonArray && !jsonArray.isEmpty()){
            for(int i=0;i<jsonArray.size();i++){
                String cid = jsonArray.getJSONObject(i).getString("id");

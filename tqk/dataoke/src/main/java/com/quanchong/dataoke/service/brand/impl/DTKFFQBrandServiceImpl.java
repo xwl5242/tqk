@@ -8,9 +8,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quanchong.common.ffquan.FFQuanApi;
 import com.quanchong.common.ffquan.FFQuanBrand;
 import com.quanchong.common.ffquan.FFQuanBrandGood;
+import com.quanchong.dataoke.dataoke.util.GoodUtils;
 import com.quanchong.dataoke.mapper.brand.DTKFFQBrandMapper;
 import com.quanchong.dataoke.service.brand.DTKFFQBrandGoodService;
 import com.quanchong.dataoke.service.brand.DTKFFQBrandService;
+import org.bouncycastle.crypto.digests.GOST3411Digest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,9 +57,9 @@ public class DTKFFQBrandServiceImpl extends ServiceImpl<DTKFFQBrandMapper, FFQua
             }
         }
         brandList = brandList.parallelStream()
-                .filter(distinctByKey(FFQuanBrand::getBrandId)).collect(Collectors.toList());
+                .filter(GoodUtils.distinctByKey(FFQuanBrand::getBrandId)).collect(Collectors.toList());
         goodList = goodList.parallelStream()
-                .filter(distinctByKey(FFQuanBrandGood::getId)).collect(Collectors.toList());
+                .filter(GoodUtils.distinctByKey(FFQuanBrandGood::getId)).collect(Collectors.toList());
         result.put("brands", brandList);
         result.put("goods", goodList);
         return result;
@@ -112,14 +114,4 @@ public class DTKFFQBrandServiceImpl extends ServiceImpl<DTKFFQBrandMapper, FFQua
         }
     }
 
-    /**
-     * 去重操作
-     * @param keyExtractor
-     * @param <T>
-     * @return
-     */
-    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
-        Set<Object> seen = ConcurrentHashMap.newKeySet();
-        return t -> seen.add(keyExtractor.apply(t));
-    }
 }

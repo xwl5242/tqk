@@ -7,6 +7,7 @@ import com.quanchong.common.ffquan.FFQuanApi;
 import com.quanchong.common.ffquan.FFQuanDiscountGood;
 import com.quanchong.common.ffquan.FFQuanDiscountResp;
 import com.quanchong.common.util.BeanUtil;
+import com.quanchong.dataoke.dataoke.util.GoodUtils;
 import com.quanchong.dataoke.mapper.good.DTKFFQDiscountGoodMapper;
 import com.quanchong.dataoke.service.good.DTKFFQDiscountGoodService;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class DTKFFQDiscountGoodServiceImpl extends ServiceImpl<DTKFFQDiscountGoo
     public List<FFQuanDiscountGood> gather() throws Exception {
         List<FFQuanDiscountGood> result = new ArrayList<>();
         JSONArray jsonArray = FFQuanApi.discountCategoryList();
+        System.out.println(jsonArray);
         if(null!=jsonArray && !jsonArray.isEmpty()){
            for(int i=0;i<jsonArray.size();i++){
                String cid = jsonArray.getJSONObject(i).getString("id");
@@ -45,6 +47,8 @@ public class DTKFFQDiscountGoodServiceImpl extends ServiceImpl<DTKFFQDiscountGoo
                }
            }
         }
+        result = result.parallelStream()
+                .filter(GoodUtils.distinctByKey(FFQuanDiscountGood::getId)).collect(Collectors.toList());
         return result;
     }
 }

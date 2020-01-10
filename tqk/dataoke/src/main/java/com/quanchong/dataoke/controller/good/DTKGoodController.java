@@ -88,6 +88,23 @@ public class DTKGoodController {
     }
 
     /**
+     * 首页好货精选
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/list")
+    public List<DTKGood> queryList(Long pageNo, Long pageSize) {
+        pageNo = null == pageNo ? 1L : pageNo;
+        pageSize = null == pageSize ? 20L : pageSize;
+        QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
+        wrapper.eq("is_expire", "0");
+        wrapper.orderByDesc("daily_sales");
+        wrapper.orderByDesc("commission_rate");
+        return dtkGoodService.page(new Page<>(pageNo, pageSize), wrapper).getRecords();
+    }
+
+    /**
      * 根据类目id查询商品列表
      * @param cid
      * @return
@@ -95,7 +112,7 @@ public class DTKGoodController {
      */
     @GetMapping("/cid")
     public List<DTKGood> queryByCId(Long pageNo, Long pageSize, String cid, String sort) {
-        pageNo = null == pageNo ? 0L : pageNo;
+        pageNo = null == pageNo ? 1L : pageNo;
         pageSize = null == pageSize ? 20L : pageSize;
         QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
         wrapper.eq("cid", cid);
@@ -139,7 +156,7 @@ public class DTKGoodController {
      */
     @GetMapping("/nine")
     public List<DTKGood> queryByNine(Long pageNo, Long pageSize, String nineCid){
-        pageNo = null == pageNo ? 0L : pageNo;
+        pageNo = null == pageNo ? 1L : pageNo;
         pageSize = null == pageSize ? 20L : pageSize;
         QueryWrapper<DTKGood> wrapper = new QueryWrapper<>();
         wrapper.eq("is_expire", "0");
@@ -164,7 +181,7 @@ public class DTKGoodController {
         if("1".equals(rankType)){
             return dtkService.goodsByRanking("1", cid);
         }
-        pageNo = null == pageNo ? 0L : pageNo;
+        pageNo = null == pageNo ? 1L : pageNo;
         pageSize = null == pageSize ? 20L : pageSize;
         isNewRanking = StringUtils.isEmpty(isNewRanking)?"0":isNewRanking;
         rankType = StringUtils.isEmpty(rankType)? DTKConsts.DTK_RANK_TYPE_NOW :rankType;

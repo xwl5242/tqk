@@ -71,8 +71,8 @@ public class DTKFFQBrandServiceImpl extends ServiceImpl<DTKFFQBrandMapper, FFQua
      */
     @Override
     public List<FFQuanBrand> listByTypeOrCategory(String typeOrCategory, Long pageNo, Long pageSize) {
-        pageNo = null == pageNo? 0L: pageNo;
-        pageSize = null == pageSize? 0L: pageSize;
+        pageNo = null == pageNo? 1L: pageNo;
+        pageSize = null == pageSize? 20L: pageSize;
         QueryWrapper<FFQuanBrand> wrapper = new QueryWrapper<>();
         wrapper.eq("category_id", typeOrCategory);
         IPage<FFQuanBrand> pageList = page(new Page<>(pageNo, pageSize), wrapper);

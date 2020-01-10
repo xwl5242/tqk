@@ -40,7 +40,7 @@ public class DTKDiscountGoodController {
     @GetMapping("/ffquan/discount")
     public List<FFQuanDiscountGood> queryFFQuanDiscountGoods(@RequestParam String cId,
                                                              @RequestParam Long pageNo, @RequestParam Long pageSize) throws Exception{
-        pageNo = null == pageNo? 0L: pageNo;
+        pageNo = null == pageNo? 1L: pageNo;
         pageSize = null == pageSize? 20L: pageSize;
         QueryWrapper<FFQuanDiscountGood> wrapper = new QueryWrapper<>();
         wrapper.eq("c_id", cId);

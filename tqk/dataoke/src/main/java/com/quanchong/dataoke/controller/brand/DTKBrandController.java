@@ -60,7 +60,7 @@ public class DTKBrandController {
      */
     @GetMapping("/ffquan/recs")
     public List<FFQuanBrand> brandRecsList() {
-        return dtkffqBrandService.listByTypeOrCategory("recs", 0L, 30L);
+        return dtkffqBrandService.listByTypeOrCategory("recs", 1L, 30L);
     }
 
     /**

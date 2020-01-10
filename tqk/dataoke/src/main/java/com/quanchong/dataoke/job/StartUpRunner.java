@@ -3,23 +3,14 @@ package com.quanchong.dataoke.job;
 import com.quanchong.common.entity.service.DTKFunction;
 import com.quanchong.common.entity.service.DTKGood;
 import com.quanchong.dataoke.dataoke.DTKConsts;
-import com.quanchong.dataoke.service.sys.DTKFunctionService;
 import com.quanchong.dataoke.service.good.DTKGoodService;
-import jdk.internal.org.objectweb.asm.*;
+import com.quanchong.dataoke.service.sys.DTKFunctionService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
-
-import static jdk.internal.org.objectweb.asm.ClassReader.EXPAND_FRAMES;
-import static jdk.internal.org.objectweb.asm.ClassWriter.COMPUTE_MAXS;
-import static jdk.internal.org.objectweb.asm.Opcodes.ASM5;
 
 @Slf4j
 @Component

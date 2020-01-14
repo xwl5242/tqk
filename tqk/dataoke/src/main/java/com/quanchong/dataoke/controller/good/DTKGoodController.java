@@ -137,6 +137,23 @@ public class DTKGoodController {
     }
 
     /**
+     * 获取子类目商品
+     * @param pageId 页码
+     * @param pageSize 页大小
+     * @param subCid 子类目id
+     * @param sort 排序
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/subCid")
+    public GoodResp queryBySubCid(String pageId, String pageSize, String subCid, String sort) throws Exception{
+        pageId = StringUtils.isEmpty(pageId)?"1":pageId;
+        pageSize = StringUtils.isEmpty(pageSize)?"10":pageSize;
+        sort = StringUtils.isEmpty(sort)? DTKSortEnum.USE_COUPON_DESC.getCode() :sort;
+        return dtkService.goods(pageId, pageSize, sort, "", subCid);
+    }
+
+    /**
      * 查询咚咚抢商品
      * @param roundTime 场次时间 时间戳，到秒
      * @return

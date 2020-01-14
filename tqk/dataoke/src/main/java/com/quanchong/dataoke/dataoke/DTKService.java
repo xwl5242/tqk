@@ -271,13 +271,43 @@ public class DTKService {
     }
 
     /**
-     * 获取商品详情
+     * 查询商品详情
+     * @param id 大淘客商品id
+     * @param goodsId 淘宝商品id
+     * @return
+     */
+    public DTKGood goodDetail(String id, String goodsId) throws Exception{
+        DTKGood good = goodDetailById(id);
+        if(null == good) {
+            good = goodDetailByGoodsId(goodsId);
+        }
+        return good;
+    }
+
+    /**
+     * 根据大淘客商品id查询商品详情
      * @param id
      * @throws Exception
      */
-    public DTKGood goodDetail(String id) throws Exception{
+    public DTKGood goodDetailById(String id) throws Exception{
         Map<String,String> param = new HashMap<>();
         param.put("id", id);
+        String resp = execute(DTKConsts.DTK_API_KEY_GOODS_DETAILS,param);
+        if(!StringUtils.isEmpty(resp)){
+            return  BeanUtil.jsonToBean(resp, DTKGood.class);
+        }
+        return null;
+    }
+
+    /**
+     * 根据淘宝商品id查询商品详情
+     * @param goodsId
+     * @return
+     * @throws Exception
+     */
+    public DTKGood goodDetailByGoodsId(String goodsId) throws Exception{
+        Map<String,String> param = new HashMap<>();
+        param.put("goodsId", goodsId);
         String resp = execute(DTKConsts.DTK_API_KEY_GOODS_DETAILS,param);
         if(!StringUtils.isEmpty(resp)){
             return  BeanUtil.jsonToBean(resp, DTKGood.class);

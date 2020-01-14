@@ -261,7 +261,7 @@ public class DTKGoodController {
      * @return
      */
     @GetMapping("/detail")
-    public DTKGood queryById(@RequestParam String id) throws Exception{
-        return dtkService.goodDetail(id);
+    public DTKGood queryById(@RequestParam String id, @RequestParam String goodsId) throws Exception{
+        return dtkService.goodDetail(id, goodsId);
     }
 }

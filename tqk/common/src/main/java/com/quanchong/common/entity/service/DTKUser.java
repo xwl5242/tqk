@@ -21,6 +21,5 @@ public class DTKUser {
     private String city;
     private String language;
     private String createTime;
-    @TableField(exist = false)
-    private String code;
+    private String updateTime;
 }

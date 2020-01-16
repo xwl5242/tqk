@@ -21,7 +21,7 @@ public class JwtUtils {
 	/**
 	 * token expire 有效期，单位秒，默认值7200s(2个小时)
 	 */
-	public static final long JWT_EXPIRE = 120L;
+	public static final long JWT_EXPIRE = 30*24*60*60L;
 	/**
 	 * token appId,简单防止伪造token
 	 */
@@ -64,7 +64,9 @@ public class JwtUtils {
 			if(!StringUtils.isEmpty(subject)){
 				String jwt_appid = subject.split("&")[0];
 				if(JWT_APPID.equals(jwt_appid.split(":")[0])){
-					return JwtEnum.TOKEN;
+					JwtEnum success = JwtEnum.TOKEN;
+					success.setMsg(subject);
+					return success;
 				}
 			}
 		}catch(ExpiredJwtException e){

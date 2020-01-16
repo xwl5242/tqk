@@ -27,7 +27,6 @@ public class MiniProgramService {
         AUTH = AUTH.replace("SECRET", config.getSecret());
         AUTH = AUTH.replace("JSCODE", jsCode);
         String resp  = HttpUtils.sendGet(AUTH, null);
-        System.out.println(resp);
         if(resp.contains("errcode")&&!"0".equals(JSONObject.parseObject(resp).getString("errcode"))){
             return null;
         }else{

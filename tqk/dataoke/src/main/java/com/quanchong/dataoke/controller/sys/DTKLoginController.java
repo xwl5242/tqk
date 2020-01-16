@@ -65,7 +65,7 @@ public class DTKLoginController {
                 if(null == u){
                     user.setOpenId(openId);
                     user.setCreateTime(DateUtils.now());
-                    saveOrUpdate = dtkUserService.save(u);
+                    saveOrUpdate = dtkUserService.save(user);
                 }else{
                     u.setUpdateTime(DateUtils.now());
                     saveOrUpdate = dtkUserService.updateById(u);

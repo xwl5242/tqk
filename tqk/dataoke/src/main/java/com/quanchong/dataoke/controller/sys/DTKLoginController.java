@@ -1,6 +1,8 @@
 package com.quanchong.dataoke.controller.sys;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.gson.JsonObject;
 import com.quanchong.common.entity.service.DTKUser;
 import com.quanchong.common.util.AESUtils;
 import com.quanchong.common.util.DateUtils;
@@ -28,7 +30,7 @@ public class DTKLoginController {
     @Autowired
     private DTKUserService dtkUserService;
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public MiniProgramResp login(String code){
         MiniProgramResp resp;
         try{
@@ -45,8 +47,10 @@ public class DTKLoginController {
     }
 
     @PostMapping("/save_user")
-    public MiniProgramResp saveUser(DTKUser user, JwtUtils.Token token) {
+    public MiniProgramResp saveUser(@RequestBody JSONObject userJson) {
         MiniProgramResp resp = null;
+        DTKUser user = userJson.getJSONObject("user").toJavaObject(DTKUser.class);
+        JwtUtils.Token token = userJson.getJSONObject("token").toJavaObject(JwtUtils.Token.class);
         JwtEnum je = JwtUtils.validateToken(token.getToken());
         if(JwtEnum.TOKEN.getCode().equals(je.getCode())){
             String tokenStr = je.getMsg();
@@ -57,8 +61,9 @@ public class DTKLoginController {
                 QueryWrapper<DTKUser> wrapper = new QueryWrapper<>();
                 wrapper.eq("open_id", openId);
                 DTKUser u = dtkUserService.getOne(wrapper);
-                boolean saveOrUpdate = false;
+                boolean saveOrUpdate;
                 if(null == u){
+                    user.setOpenId(openId);
                     user.setCreateTime(DateUtils.now());
                     saveOrUpdate = dtkUserService.save(u);
                 }else{

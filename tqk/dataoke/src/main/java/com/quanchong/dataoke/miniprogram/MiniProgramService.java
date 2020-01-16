@@ -14,7 +14,7 @@ public class MiniProgramService {
     @Autowired
     private MiniProgramConfig config;
 
-    private static String AUTH = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code";
+    private String AUTH = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code";
 
 
     /**

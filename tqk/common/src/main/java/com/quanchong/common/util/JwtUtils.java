@@ -61,9 +61,10 @@ public class JwtUtils {
 			Claims claims = parseToken(token);
 			log.info("token expiration:"+claims.getExpiration());
 			String subject = claims.getSubject();
+			log.info("token subject:"+claims.getSubject());
 			if(!StringUtils.isEmpty(subject)){
 				String jwt_appid = subject.split("&")[0];
-				if(JWT_APPID.equals(jwt_appid.split(":")[0])){
+				if(JWT_APPID.equals(jwt_appid.split(":")[1])){
 					JwtEnum success = JwtEnum.TOKEN;
 					success.setMsg(subject);
 					return success;
@@ -101,5 +102,9 @@ public class JwtUtils {
 		private String token;
 		private long expire;
 	}
-	
+
+	public static void main(String[] args) {
+		String token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ4d2wiLCJpYXQiOjE1NzkxNTY2NTgsInN1YiI6Imp3dF9hcHBJZDptbnBfZTVmN2NhZTQwY2I1Jm9wZW5JZDpvVGdSbzVNbVlxVWVzR3YtczduSnNuNDZqTHN3IiwiZXhwIjoxNTgxNzQ4NjU4fQ.DS-kM3BFJcsY8jFN7xPit8oxSLCaSFpuCbGysMrZlXY";
+		System.out.println(validateToken(token));
+	}
 }

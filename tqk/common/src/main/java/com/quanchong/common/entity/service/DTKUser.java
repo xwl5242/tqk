@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.quanchong.common.util.JwtUtils;
 import lombok.Data;
 
 @Data
@@ -22,4 +23,6 @@ public class DTKUser {
     private String language;
     private String createTime;
     private String updateTime;
+    @TableField(exist = false)
+    private JwtUtils.Token token;
 }

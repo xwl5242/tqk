@@ -51,6 +51,16 @@ public class JwtUtils {
 		return token;
 	}
 
+	public static String parseOpenIdFromTokenSubject(String subject) {
+		int index = subject.indexOf("openId:");
+		if(index > 0){
+			// token中存在openId
+			return subject.substring(index+7);
+
+		}
+		return null;
+	}
+
 	/**
 	 * 验证token
 	 * @param token

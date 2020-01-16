@@ -53,11 +53,8 @@ public class DTKLoginController {
         JwtUtils.Token token = userJson.getJSONObject("token").toJavaObject(JwtUtils.Token.class);
         JwtEnum je = JwtUtils.validateToken(token.getToken());
         if(JwtEnum.TOKEN.getCode().equals(je.getCode())){
-            String tokenStr = je.getMsg();
-            int index = tokenStr.indexOf("openId:");
-            if(index > 0){
-                // token中存在openId
-                String openId = tokenStr.substring(index+7);
+            String openId = JwtUtils.parseOpenIdFromTokenSubject(je.getMsg());
+            if(!StringUtils.isEmpty(openId)){
                 QueryWrapper<DTKUser> wrapper = new QueryWrapper<>();
                 wrapper.eq("open_id", openId);
                 DTKUser u = dtkUserService.getOne(wrapper);

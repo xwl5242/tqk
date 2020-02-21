@@ -12,6 +12,9 @@ import com.quanchong.dataoke.dataoke.DTKConsts;
 import com.quanchong.dataoke.dataoke.DTKService;
 import com.quanchong.dataoke.dataoke.DTKSortEnum;
 import com.quanchong.dataoke.service.good.DTKGoodService;
+import com.quanchong.dataoke.top.TbkService;
+import com.quanchong.dataoke.top.TbkUtil;
+import com.taobao.api.response.TbkItemInfoGetResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -32,6 +35,9 @@ public class DTKGoodController {
 
     @Autowired
     private DTKService dtkService;
+
+    @Autowired
+    private TbkService tbkService;
 
     @Autowired
     private DTKGoodService dtkGoodService;
@@ -279,6 +285,22 @@ public class DTKGoodController {
      */
     @GetMapping("/detail")
     public DTKGood queryById(@RequestParam String id, @RequestParam String goodsId) throws Exception{
-        return dtkService.goodDetail(id, goodsId);
+        DTKGood dtkGood = dtkService.goodDetail(id, goodsId);
+        try{
+            if(null == dtkGood) {
+                dtkGood = dtkGoodService.getById(id);
+                if(null!=dtkGood){
+                    Map<String,Object> extra = TbkUtil.getTbkGoodDetail(goodsId);
+                    dtkGood.setDetailPics(extra.get("imgs").toString());
+                    List<TbkItemInfoGetResponse.NTbkItem> items = tbkService.getTBKGoodDetail(goodsId);
+                    if(null!=items && !items.isEmpty()){
+                        dtkGood.setImgs(items.get(0).getSmallImages().toString());
+                    }
+                }
+            }
+        }catch(Exception e){
+            dtkGood = null;
+        }
+        return dtkGood;
     }
 }

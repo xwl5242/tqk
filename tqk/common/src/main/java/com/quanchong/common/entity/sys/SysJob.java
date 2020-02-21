@@ -3,9 +3,7 @@ package com.quanchong.common.entity.sys;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.quanchong.common.base.BaseEntity;
-
-public class SysJob extends BaseEntity {
+public class SysJob{
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String groupName;

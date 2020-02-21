@@ -3,13 +3,11 @@ package com.quanchong.common.entity.service;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.quanchong.common.base.BaseEntity;
-import com.quanchong.common.base.BaseGood;
 import lombok.Data;
 
 @Data
 @TableName("dtk_good")
-public class DTKGood extends BaseGood {
+public class DTKGood {
     private String id;
     private String goodsId;
     private String itemLink;

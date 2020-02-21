@@ -181,7 +181,6 @@ public class DTKGoodsJob {
                         QueryWrapper wrapper = new QueryWrapper();
                         wrapper.isNotNull("id");
                         dtkffqBrandGoodService.remove(wrapper);
-                        GoodUtils.removeImage(goodList);
                     }
                     dtkffqBrandGoodService.saveBatch(goods);
                 }
@@ -206,7 +205,6 @@ public class DTKGoodsJob {
                     QueryWrapper wrapper = new QueryWrapper();
                     wrapper.isNotNull("id");
                     dtkffqDiscountGoodService.remove(wrapper);
-                    GoodUtils.removeImage(goodList);
                 }
                 boolean save = dtkffqDiscountGoodService.saveBatch(goods);
             }

@@ -281,9 +281,4 @@ public class DTKGoodServiceImpl extends ServiceImpl<DTKGoodMapper, DTKGood> impl
         }
     }
 
-    private List<String> getMainPicFileName(List<DTKGood> goodList) {
-        return goodList.parallelStream()
-                .map(dtkGood -> GoodUtils.genImageFileName(dtkGood.getMainPic(), dtkGood.getId()))
-                .collect(Collectors.toList());
-    }
 }

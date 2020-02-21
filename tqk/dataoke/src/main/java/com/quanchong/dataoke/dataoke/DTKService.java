@@ -13,6 +13,7 @@ import com.quanchong.common.util.DateUtils;
 import com.quanchong.dataoke.dataoke.util.HttpUtils;
 import com.quanchong.dataoke.dataoke.util.SignMD5Util;
 import com.quanchong.dataoke.service.sys.DTKApiService;
+import com.quanchong.dataoke.top.TbkService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,9 @@ public class DTKService {
 
     @Autowired
     private DTKConfig dtkConfig;
+
+    @Autowired
+    private TbkService tbkService;
 
     @Autowired
     private DTKApiService dtkApiService;
@@ -420,7 +424,11 @@ public class DTKService {
         param.put("goodsId", goodsId);
         String resp = execute(DTKConsts.DTK_API_KEY_PRIVILEGE_LINK, param);
         if(!StringUtils.isEmpty(resp)){
-            return BeanUtil.jsonToBean(resp, DTKGoodCoupon.class);
+            DTKGoodCoupon goodCoupon = BeanUtil.jsonToBean(resp, DTKGoodCoupon.class);
+            if(StringUtils.isEmpty(goodCoupon.getCouponClickUrl())){
+                tbkService.createTPwd(goodCoupon.getCouponClickUrl());
+                tbkService.getShortUrls(goodCoupon.getCouponClickUrl());
+            }
         }
         return null;
     }

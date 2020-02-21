@@ -303,4 +303,14 @@ public class DTKGoodController {
         }
         return dtkGood;
     }
+
+    /**
+     * 根据商品id置为失效状态
+     * @param dtkGood
+     */
+    @PostMapping("/expire")
+    public void expireGood(@RequestBody DTKGood dtkGood) {
+        dtkGood.setIsExpire("1");
+        dtkGoodService.updateById(dtkGood);
+    }
 }
